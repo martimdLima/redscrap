@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.core.scrapper.comment_scrapper API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.core.scrapper.comment_scrapper</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from loguru import logger  # type: ignore
+import validators  # type: ignore
+
+from common.logging.logging_setup import LoggingSetup  # type: ignore
+from common.constants import ConstantsNamespace  # type: ignore
+from common.image_downloader import ImageDownloader  # type: ignore
+from common.logging.utils.loguru_wrappers import logger_wraps  # type: ignore
+from common.validations.url_validations import UrlValidations  # type: ignore
+from core.scrapper.scraper_helper import ScraperHelper
+
+
+class CommentScrapper:
+    &#34;&#34;&#34;
+    A class for scraping comments and replies from a given HTML element.
+
+    Attributes:
+        logging_funcs (LoggingSetup): An instance of LoggingSetup for logging purposes.
+        constants (ConstantsNamespace): An instance of ConstantsNamespace for constants.
+        validations (UrlValidations): An instance of UrlValidations for validating URLs.
+        image_downloader (ImageDownloader): An instance of ImageDownloader for downloading images.
+        scraper_helper (ScraperHelper): An instance of ScraperHelper for helper methods.
+
+    Methods:
+        scrape_comments(soup): Scrape comments from the given comments&#39; element.
+        scrape_replies(reply_divs): Scrapes the replies from the given reply divs and returns a list of dictionaries
+        representing each reply.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.logging_funcs = LoggingSetup()
+        self.constants = ConstantsNamespace()
+        self.validations = UrlValidations()
+        self.image_downloader = ImageDownloader()
+        self.scraper_helper = ScraperHelper()
+        self.processed_comments = []
+
+    @logger_wraps()
+    def scrape_comments(self, soup):
+        &#34;&#34;&#34;
+        Scrape comments from the given comments&#39; element.
+
+        Args:
+            soup:
+
+        Returns:
+            A list of dictionaries representing each comment, where each dictionary contains the following keys:
+            - &#39;text&#39;: A string representing the text content of the comment.
+            - &#39;author&#39;: A string representing the author of the comment.
+            - &#39;rating&#39;: A dictionary representing the rating of the comment, where each key is a rating category
+               (e.g. &#39;score_likes&#39;) and the value is the score for that category.
+            - &#39;datetime&#39;: A dictionary representing the datetime information of the comment, where each key is a
+               datetime category (e.g. &#39;time_since_posting&#39;) and the value is the corresponding datetime information.
+            - &#39;numChildren&#39;: An integer representing the number of children replies for the given reply.
+            - &#39;hasChildren&#39;: A boolean indicating whether the given reply has children replies or not.
+            - &#39;urls&#39;: A list of strings representing the URLs found in the given comment.
+            - &#39;replies&#39;: A list of nested dictionaries representing the children replies for the given reply.
+        &#34;&#34;&#34;
+        comments = []
+        img_urls = []
+        self.processed_comments = []
+
+        comment_area = soup.find(&#34;div&#34;, attrs={&#34;class&#34;: &#34;commentarea&#34;})
+        link_listing = comment_area.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;sitetable&#34;}).children
+
+        comments_link_listing = comment_area.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;sitetable&#34;})
+
+        for element in comments_link_listing:
+            if &#34;thing&#34; in element.attrs[&#34;class&#34;]:
+                if element.attrs[&#34;data-permalink&#34;] not in self.processed_comments:
+                    comment = {&#34;text&#34;: element.find(&#34;div&#34;, class_=&#34;md&#34;).text.strip(),
+                               &#34;author&#34;: self.scraper_helper.construct_author_dict(element),
+                               &#34;rating&#34;: self.scraper_helper.construct_rating_dict(element),
+                               &#34;datetime&#34;: self.scraper_helper.construct_time_dict(element),
+                               &#34;url&#34;: element.attrs[&#34;data-permalink&#34;]
+                               }
+
+                    comment_has_children, comment_num_children = self.scraper_helper.define_children_fields(element)
+
+                    comment[&#34;hasChildren&#34;] = comment_has_children
+                    comment[&#34;numChildren&#34;] = comment_num_children
+
+                    urls = self.scraper_helper.construct_urls_list(element)
+                    img_urls = img_urls + urls
+                    comment[&#34;urls&#34;] = urls
+
+                    comment[&#34;replies&#34;] = []
+                    child_div = element.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;child&#34;})
+                    reply_divs = child_div.find_all(&#34;div&#34;, attrs={&#34;class&#34;, &#34;comment&#34;})
+
+                    self.processed_comments.append(element.attrs[&#34;data-permalink&#34;])
+
+                    if reply_divs:
+                        replies = self.scrape_replies(reply_divs)
+                        replies = self.scraper_helper.remove_empty_lists(replies)
+                        comment[&#34;replies&#34;] = replies
+                    comments.append(comment)
+
+        logger.debug(&#34;Processed Replies: {}&#34;.format(len(self.processed_comments)))
+
+        return comments, list(set(img_urls))
+
+    @logger_wraps()
+    def scrape_replies(self, reply_divs):
+        &#34;&#34;&#34;
+        Scrapes the replies from the given reply divs and returns a list of dictionaries representing each reply.
+
+        Args:
+        reply_divs: A list of reply divs to scrape from.
+
+        Returns:
+        A list of dictionaries representing each reply, where each dictionary contains the following keys:
+        - &#39;text&#39;: A string representing the text content of the reply.
+        - &#39;author&#39;: A string representing the author of the reply.
+        - &#39;rating&#39;: A dictionary representing the rating of the reply, where each key is a rating category
+           (e.g. &#39;score_likes&#39;) and the value is the score for that category.
+        - &#39;datetime&#39;: A dictionary representing the datetime information of the reply, where each key is a
+           datetime category (e.g. &#39;time_since_posting&#39;) and the value is the corresponding datetime information.
+        - &#39;numChildren&#39;: An integer representing the number of children replies for the given reply.
+        - &#39;hasChildren&#39;: A boolean indicating whether the given reply has children replies or not.
+        - &#39;urls&#39;: A list of strings representing the URLs found in the given reply.
+        - &#39;replies&#39;: A list of nested dictionaries representing the children replies for the given reply.
+
+        Raises:
+        None
+        &#34;&#34;&#34;
+
+        replies = []
+        img_urls = []
+
+        for reply_div in reply_divs:
+            if reply_div.attrs[&#34;data-permalink&#34;] not in self.processed_comments:
+                reply = {&#34;text&#34;: reply_div.find(&#34;div&#34;, class_=&#34;md&#34;).text.strip(),
+                         &#34;author&#34;: self.scraper_helper.construct_author_dict(reply_div),
+                         &#34;rating&#34;: self.scraper_helper.construct_rating_dict(reply_div),
+                         &#34;datetime&#34;: self.scraper_helper.construct_time_dict(reply_div),
+                         &#34;url&#34;: reply_div.attrs[&#34;data-permalink&#34;]}
+
+                reply_has_children, reply_num_children = self.scraper_helper.define_children_fields(reply_div)
+                reply[&#34;hasChildren&#34;] = reply_has_children
+                reply[&#34;numChildren&#34;] = reply_num_children
+
+                urls = self.scraper_helper.construct_urls_list(reply_div)
+                reply[&#34;urls&#34;] = urls
+                img_urls = img_urls + urls
+                reply[&#34;replies&#34;] = []
+
+                self.processed_comments.append(reply_div.attrs[&#34;data-permalink&#34;])
+
+                nested_reply_divs = reply_div.find_all(&#39;div&#39;, class_=&#39;comment&#39;)
+                if nested_reply_divs:
+                    processed_replies = self.scrape_replies(nested_reply_divs)
+                    processed_replies = self.scraper_helper.remove_empty_lists(processed_replies)
+                    reply[&#39;replies&#39;] = processed_replies
+
+                replies.append(reply)
+
+        return replies, list(set(img_urls))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.core.scrapper.comment_scrapper.CommentScrapper"><code class="flex name class">
+<span>class <span class="ident">CommentScrapper</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class for scraping comments and replies from a given HTML element.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>logging_funcs</code></strong> :&ensp;<code>LoggingSetup</code></dt>
+<dd>An instance of LoggingSetup for logging purposes.</dd>
+<dt><strong><code>constants</code></strong> :&ensp;<code>ConstantsNamespace</code></dt>
+<dd>An instance of ConstantsNamespace for constants.</dd>
+<dt><strong><code>validations</code></strong> :&ensp;<code>UrlValidations</code></dt>
+<dd>An instance of UrlValidations for validating URLs.</dd>
+<dt><strong><code>image_downloader</code></strong> :&ensp;<code>ImageDownloader</code></dt>
+<dd>An instance of ImageDownloader for downloading images.</dd>
+<dt><strong><code>scraper_helper</code></strong> :&ensp;<code>ScraperHelper</code></dt>
+<dd>An instance of ScraperHelper for helper methods.</dd>
+</dl>
+<h2 id="methods">Methods</h2>
+<p>scrape_comments(soup): Scrape comments from the given comments' element.
+scrape_replies(reply_divs): Scrapes the replies from the given reply divs and returns a list of dictionaries
+representing each reply.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CommentScrapper:
+    &#34;&#34;&#34;
+    A class for scraping comments and replies from a given HTML element.
+
+    Attributes:
+        logging_funcs (LoggingSetup): An instance of LoggingSetup for logging purposes.
+        constants (ConstantsNamespace): An instance of ConstantsNamespace for constants.
+        validations (UrlValidations): An instance of UrlValidations for validating URLs.
+        image_downloader (ImageDownloader): An instance of ImageDownloader for downloading images.
+        scraper_helper (ScraperHelper): An instance of ScraperHelper for helper methods.
+
+    Methods:
+        scrape_comments(soup): Scrape comments from the given comments&#39; element.
+        scrape_replies(reply_divs): Scrapes the replies from the given reply divs and returns a list of dictionaries
+        representing each reply.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.logging_funcs = LoggingSetup()
+        self.constants = ConstantsNamespace()
+        self.validations = UrlValidations()
+        self.image_downloader = ImageDownloader()
+        self.scraper_helper = ScraperHelper()
+        self.processed_comments = []
+
+    @logger_wraps()
+    def scrape_comments(self, soup):
+        &#34;&#34;&#34;
+        Scrape comments from the given comments&#39; element.
+
+        Args:
+            soup:
+
+        Returns:
+            A list of dictionaries representing each comment, where each dictionary contains the following keys:
+            - &#39;text&#39;: A string representing the text content of the comment.
+            - &#39;author&#39;: A string representing the author of the comment.
+            - &#39;rating&#39;: A dictionary representing the rating of the comment, where each key is a rating category
+               (e.g. &#39;score_likes&#39;) and the value is the score for that category.
+            - &#39;datetime&#39;: A dictionary representing the datetime information of the comment, where each key is a
+               datetime category (e.g. &#39;time_since_posting&#39;) and the value is the corresponding datetime information.
+            - &#39;numChildren&#39;: An integer representing the number of children replies for the given reply.
+            - &#39;hasChildren&#39;: A boolean indicating whether the given reply has children replies or not.
+            - &#39;urls&#39;: A list of strings representing the URLs found in the given comment.
+            - &#39;replies&#39;: A list of nested dictionaries representing the children replies for the given reply.
+        &#34;&#34;&#34;
+        comments = []
+        img_urls = []
+        self.processed_comments = []
+
+        comment_area = soup.find(&#34;div&#34;, attrs={&#34;class&#34;: &#34;commentarea&#34;})
+        link_listing = comment_area.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;sitetable&#34;}).children
+
+        comments_link_listing = comment_area.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;sitetable&#34;})
+
+        for element in comments_link_listing:
+            if &#34;thing&#34; in element.attrs[&#34;class&#34;]:
+                if element.attrs[&#34;data-permalink&#34;] not in self.processed_comments:
+                    comment = {&#34;text&#34;: element.find(&#34;div&#34;, class_=&#34;md&#34;).text.strip(),
+                               &#34;author&#34;: self.scraper_helper.construct_author_dict(element),
+                               &#34;rating&#34;: self.scraper_helper.construct_rating_dict(element),
+                               &#34;datetime&#34;: self.scraper_helper.construct_time_dict(element),
+                               &#34;url&#34;: element.attrs[&#34;data-permalink&#34;]
+                               }
+
+                    comment_has_children, comment_num_children = self.scraper_helper.define_children_fields(element)
+
+                    comment[&#34;hasChildren&#34;] = comment_has_children
+                    comment[&#34;numChildren&#34;] = comment_num_children
+
+                    urls = self.scraper_helper.construct_urls_list(element)
+                    img_urls = img_urls + urls
+                    comment[&#34;urls&#34;] = urls
+
+                    comment[&#34;replies&#34;] = []
+                    child_div = element.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;child&#34;})
+                    reply_divs = child_div.find_all(&#34;div&#34;, attrs={&#34;class&#34;, &#34;comment&#34;})
+
+                    self.processed_comments.append(element.attrs[&#34;data-permalink&#34;])
+
+                    if reply_divs:
+                        replies = self.scrape_replies(reply_divs)
+                        replies = self.scraper_helper.remove_empty_lists(replies)
+                        comment[&#34;replies&#34;] = replies
+                    comments.append(comment)
+
+        logger.debug(&#34;Processed Replies: {}&#34;.format(len(self.processed_comments)))
+
+        return comments, list(set(img_urls))
+
+    @logger_wraps()
+    def scrape_replies(self, reply_divs):
+        &#34;&#34;&#34;
+        Scrapes the replies from the given reply divs and returns a list of dictionaries representing each reply.
+
+        Args:
+        reply_divs: A list of reply divs to scrape from.
+
+        Returns:
+        A list of dictionaries representing each reply, where each dictionary contains the following keys:
+        - &#39;text&#39;: A string representing the text content of the reply.
+        - &#39;author&#39;: A string representing the author of the reply.
+        - &#39;rating&#39;: A dictionary representing the rating of the reply, where each key is a rating category
+           (e.g. &#39;score_likes&#39;) and the value is the score for that category.
+        - &#39;datetime&#39;: A dictionary representing the datetime information of the reply, where each key is a
+           datetime category (e.g. &#39;time_since_posting&#39;) and the value is the corresponding datetime information.
+        - &#39;numChildren&#39;: An integer representing the number of children replies for the given reply.
+        - &#39;hasChildren&#39;: A boolean indicating whether the given reply has children replies or not.
+        - &#39;urls&#39;: A list of strings representing the URLs found in the given reply.
+        - &#39;replies&#39;: A list of nested dictionaries representing the children replies for the given reply.
+
+        Raises:
+        None
+        &#34;&#34;&#34;
+
+        replies = []
+        img_urls = []
+
+        for reply_div in reply_divs:
+            if reply_div.attrs[&#34;data-permalink&#34;] not in self.processed_comments:
+                reply = {&#34;text&#34;: reply_div.find(&#34;div&#34;, class_=&#34;md&#34;).text.strip(),
+                         &#34;author&#34;: self.scraper_helper.construct_author_dict(reply_div),
+                         &#34;rating&#34;: self.scraper_helper.construct_rating_dict(reply_div),
+                         &#34;datetime&#34;: self.scraper_helper.construct_time_dict(reply_div),
+                         &#34;url&#34;: reply_div.attrs[&#34;data-permalink&#34;]}
+
+                reply_has_children, reply_num_children = self.scraper_helper.define_children_fields(reply_div)
+                reply[&#34;hasChildren&#34;] = reply_has_children
+                reply[&#34;numChildren&#34;] = reply_num_children
+
+                urls = self.scraper_helper.construct_urls_list(reply_div)
+                reply[&#34;urls&#34;] = urls
+                img_urls = img_urls + urls
+                reply[&#34;replies&#34;] = []
+
+                self.processed_comments.append(reply_div.attrs[&#34;data-permalink&#34;])
+
+                nested_reply_divs = reply_div.find_all(&#39;div&#39;, class_=&#39;comment&#39;)
+                if nested_reply_divs:
+                    processed_replies = self.scrape_replies(nested_reply_divs)
+                    processed_replies = self.scraper_helper.remove_empty_lists(processed_replies)
+                    reply[&#39;replies&#39;] = processed_replies
+
+                replies.append(reply)
+
+        return replies, list(set(img_urls))</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="src.core.scrapper.comment_scrapper.CommentScrapper.scrape_comments"><code class="name flex">
+<span>def <span class="ident">scrape_comments</span></span>(<span>self, soup)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scrape comments from the given comments' element.</p>
+<h2 id="args">Args</h2>
+<p>soup:</p>
+<h2 id="returns">Returns</h2>
+<p>A list of dictionaries representing each comment, where each dictionary contains the following keys:
+- 'text': A string representing the text content of the comment.
+- 'author': A string representing the author of the comment.
+- 'rating': A dictionary representing the rating of the comment, where each key is a rating category
+(e.g. 'score_likes') and the value is the score for that category.
+- 'datetime': A dictionary representing the datetime information of the comment, where each key is a
+datetime category (e.g. 'time_since_posting') and the value is the corresponding datetime information.
+- 'numChildren': An integer representing the number of children replies for the given reply.
+- 'hasChildren': A boolean indicating whether the given reply has children replies or not.
+- 'urls': A list of strings representing the URLs found in the given comment.
+- 'replies': A list of nested dictionaries representing the children replies for the given reply.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@logger_wraps()
+def scrape_comments(self, soup):
+    &#34;&#34;&#34;
+    Scrape comments from the given comments&#39; element.
+
+    Args:
+        soup:
+
+    Returns:
+        A list of dictionaries representing each comment, where each dictionary contains the following keys:
+        - &#39;text&#39;: A string representing the text content of the comment.
+        - &#39;author&#39;: A string representing the author of the comment.
+        - &#39;rating&#39;: A dictionary representing the rating of the comment, where each key is a rating category
+           (e.g. &#39;score_likes&#39;) and the value is the score for that category.
+        - &#39;datetime&#39;: A dictionary representing the datetime information of the comment, where each key is a
+           datetime category (e.g. &#39;time_since_posting&#39;) and the value is the corresponding datetime information.
+        - &#39;numChildren&#39;: An integer representing the number of children replies for the given reply.
+        - &#39;hasChildren&#39;: A boolean indicating whether the given reply has children replies or not.
+        - &#39;urls&#39;: A list of strings representing the URLs found in the given comment.
+        - &#39;replies&#39;: A list of nested dictionaries representing the children replies for the given reply.
+    &#34;&#34;&#34;
+    comments = []
+    img_urls = []
+    self.processed_comments = []
+
+    comment_area = soup.find(&#34;div&#34;, attrs={&#34;class&#34;: &#34;commentarea&#34;})
+    link_listing = comment_area.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;sitetable&#34;}).children
+
+    comments_link_listing = comment_area.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;sitetable&#34;})
+
+    for element in comments_link_listing:
+        if &#34;thing&#34; in element.attrs[&#34;class&#34;]:
+            if element.attrs[&#34;data-permalink&#34;] not in self.processed_comments:
+                comment = {&#34;text&#34;: element.find(&#34;div&#34;, class_=&#34;md&#34;).text.strip(),
+                           &#34;author&#34;: self.scraper_helper.construct_author_dict(element),
+                           &#34;rating&#34;: self.scraper_helper.construct_rating_dict(element),
+                           &#34;datetime&#34;: self.scraper_helper.construct_time_dict(element),
+                           &#34;url&#34;: element.attrs[&#34;data-permalink&#34;]
+                           }
+
+                comment_has_children, comment_num_children = self.scraper_helper.define_children_fields(element)
+
+                comment[&#34;hasChildren&#34;] = comment_has_children
+                comment[&#34;numChildren&#34;] = comment_num_children
+
+                urls = self.scraper_helper.construct_urls_list(element)
+                img_urls = img_urls + urls
+                comment[&#34;urls&#34;] = urls
+
+                comment[&#34;replies&#34;] = []
+                child_div = element.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;child&#34;})
+                reply_divs = child_div.find_all(&#34;div&#34;, attrs={&#34;class&#34;, &#34;comment&#34;})
+
+                self.processed_comments.append(element.attrs[&#34;data-permalink&#34;])
+
+                if reply_divs:
+                    replies = self.scrape_replies(reply_divs)
+                    replies = self.scraper_helper.remove_empty_lists(replies)
+                    comment[&#34;replies&#34;] = replies
+                comments.append(comment)
+
+    logger.debug(&#34;Processed Replies: {}&#34;.format(len(self.processed_comments)))
+
+    return comments, list(set(img_urls))</code></pre>
+</details>
+</dd>
+<dt id="src.core.scrapper.comment_scrapper.CommentScrapper.scrape_replies"><code class="name flex">
+<span>def <span class="ident">scrape_replies</span></span>(<span>self, reply_divs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scrapes the replies from the given reply divs and returns a list of dictionaries representing each reply.</p>
+<p>Args:
+reply_divs: A list of reply divs to scrape from.</p>
+<p>Returns:
+A list of dictionaries representing each reply, where each dictionary contains the following keys:
+- 'text': A string representing the text content of the reply.
+- 'author': A string representing the author of the reply.
+- 'rating': A dictionary representing the rating of the reply, where each key is a rating category
+(e.g. 'score_likes') and the value is the score for that category.
+- 'datetime': A dictionary representing the datetime information of the reply, where each key is a
+datetime category (e.g. 'time_since_posting') and the value is the corresponding datetime information.
+- 'numChildren': An integer representing the number of children replies for the given reply.
+- 'hasChildren': A boolean indicating whether the given reply has children replies or not.
+- 'urls': A list of strings representing the URLs found in the given reply.
+- 'replies': A list of nested dictionaries representing the children replies for the given reply.</p>
+<p>Raises:
+None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@logger_wraps()
+def scrape_replies(self, reply_divs):
+    &#34;&#34;&#34;
+    Scrapes the replies from the given reply divs and returns a list of dictionaries representing each reply.
+
+    Args:
+    reply_divs: A list of reply divs to scrape from.
+
+    Returns:
+    A list of dictionaries representing each reply, where each dictionary contains the following keys:
+    - &#39;text&#39;: A string representing the text content of the reply.
+    - &#39;author&#39;: A string representing the author of the reply.
+    - &#39;rating&#39;: A dictionary representing the rating of the reply, where each key is a rating category
+       (e.g. &#39;score_likes&#39;) and the value is the score for that category.
+    - &#39;datetime&#39;: A dictionary representing the datetime information of the reply, where each key is a
+       datetime category (e.g. &#39;time_since_posting&#39;) and the value is the corresponding datetime information.
+    - &#39;numChildren&#39;: An integer representing the number of children replies for the given reply.
+    - &#39;hasChildren&#39;: A boolean indicating whether the given reply has children replies or not.
+    - &#39;urls&#39;: A list of strings representing the URLs found in the given reply.
+    - &#39;replies&#39;: A list of nested dictionaries representing the children replies for the given reply.
+
+    Raises:
+    None
+    &#34;&#34;&#34;
+
+    replies = []
+    img_urls = []
+
+    for reply_div in reply_divs:
+        if reply_div.attrs[&#34;data-permalink&#34;] not in self.processed_comments:
+            reply = {&#34;text&#34;: reply_div.find(&#34;div&#34;, class_=&#34;md&#34;).text.strip(),
+                     &#34;author&#34;: self.scraper_helper.construct_author_dict(reply_div),
+                     &#34;rating&#34;: self.scraper_helper.construct_rating_dict(reply_div),
+                     &#34;datetime&#34;: self.scraper_helper.construct_time_dict(reply_div),
+                     &#34;url&#34;: reply_div.attrs[&#34;data-permalink&#34;]}
+
+            reply_has_children, reply_num_children = self.scraper_helper.define_children_fields(reply_div)
+            reply[&#34;hasChildren&#34;] = reply_has_children
+            reply[&#34;numChildren&#34;] = reply_num_children
+
+            urls = self.scraper_helper.construct_urls_list(reply_div)
+            reply[&#34;urls&#34;] = urls
+            img_urls = img_urls + urls
+            reply[&#34;replies&#34;] = []
+
+            self.processed_comments.append(reply_div.attrs[&#34;data-permalink&#34;])
+
+            nested_reply_divs = reply_div.find_all(&#39;div&#39;, class_=&#39;comment&#39;)
+            if nested_reply_divs:
+                processed_replies = self.scrape_replies(nested_reply_divs)
+                processed_replies = self.scraper_helper.remove_empty_lists(processed_replies)
+                reply[&#39;replies&#39;] = processed_replies
+
+            replies.append(reply)
+
+    return replies, list(set(img_urls))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.core.scrapper" href="index.html">src.core.scrapper</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.core.scrapper.comment_scrapper.CommentScrapper" href="#src.core.scrapper.comment_scrapper.CommentScrapper">CommentScrapper</a></code></h4>
+<ul class="">
+<li><code><a title="src.core.scrapper.comment_scrapper.CommentScrapper.scrape_comments" href="#src.core.scrapper.comment_scrapper.CommentScrapper.scrape_comments">scrape_comments</a></code></li>
+<li><code><a title="src.core.scrapper.comment_scrapper.CommentScrapper.scrape_replies" href="#src.core.scrapper.comment_scrapper.CommentScrapper.scrape_replies">scrape_replies</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

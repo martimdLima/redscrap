@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.common.constants API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.common.constants</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import datetime
+from collections import defaultdict
+from pathlib import Path
+import os
+
+
+class ConstantsNamespace:
+    &#34;&#34;&#34;A class that contains constants used throughout the application.
+
+    Attributes:
+        old_reddit_url (str): Old reddit base url.
+        reddit_api_base_url (str): Reddit API base url.
+        resolutions (defaultdict): Resolutions for the most popular resolutions.
+        default_logger_format (str): Default logger format.
+        default_logger_date_format (str): Default logger date format.
+        attrs (dict): Default attributes for scraping reddit posts.
+        possible_urls (list): Valid possible url prefixes that may appear during scraping.
+        invalid_urls (list): Invalid possible url prefixes that may appear during scraping.
+        match_url (str): Regex that match urls in the format https://subdomain.domain.
+        domain_regex (str): Regex for validating domains.
+    &#34;&#34;&#34;
+
+    @property
+    def client_id(self):
+        &#34;&#34;&#34;
+        Returns: str - User API KEY
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_API_KEY&#34;)
+
+    @property
+    def secret_token(self):
+        &#34;&#34;&#34;
+        Returns: str - User API secret
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_API_SECRET&#34;)
+
+    @property
+    def username(self):
+        &#34;&#34;&#34;
+        Returns: str - User reddit username
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_USERNAME&#34;)
+
+    @property
+    def password(self):
+        &#34;&#34;&#34;
+        Returns: str - User reddit password
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_PASSWORD&#34;)
+
+    @property
+    def user_subreddits_list(self):
+        &#34;&#34;&#34;
+        Returns: str - subreddit user list. A string of comma separated subreddits
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;SUBREDDIT_USER_LIST&#34;)
+
+    @property
+    def user_subreddits_sort_method(self):
+        &#34;&#34;&#34;
+        Returns: str - subreddit user list. A string of comma separated subreddits
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;SUBREDDIT_SORT_METHOD&#34;)
+
+    @property
+    def subreddit_directory(self):
+        return &#34;output/subreddit&#34;
+
+    @property
+    def user_directory(self):
+        return &#34;output/user&#34;
+
+    @property
+    def reddit_headers(self):
+        &#34;&#34;&#34;
+        Sets up the header info, which gives reddit a brief description of the app
+        @return:
+        &#34;&#34;&#34;
+        return {
+            &#34;User-Agent&#34;: &#34;Mozilla/5.0:com.martimdlima.redscrappy:v0.0.1 (by /u/mdlima__)&#34;
+        }
+
+    @property
+    def check_mark_symbol(self):
+        &#34;&#34;&#34;
+        Returns: str - check mark symbol
+
+        &#34;&#34;&#34;
+        return &#34;\N{CHECK MARK}&#34;
+
+    @property
+    def cross_symbol(self):
+        &#34;&#34;&#34;
+        Returns: str - cross symbol
+
+        &#34;&#34;&#34;
+        return &#34;\N{BALLOT X}&#34;
+
+    @property
+    def reddit_url(self):
+        &#34;&#34;&#34;
+         New reddit base url
+        &#34;&#34;&#34;
+        return &#34;https://www.reddit.com&#34;
+
+    @property
+    def old_reddit_url(self):
+        &#34;&#34;&#34;
+        Old reddit base url
+        &#34;&#34;&#34;
+        return &#34;https://old.reddit.com&#34;
+
+    @property
+    def reddit_api_base_url(self):
+        &#34;&#34;&#34;
+        reddit API base url
+        &#34;&#34;&#34;
+        return &#34;https://oauth.reddit.com&#34;
+
+    @property
+    def output_path(self):
+        return Path(&#34;./subreddit/&#34;)
+
+    @property
+    def resolutions(self):
+        &#34;&#34;&#34;
+        Resolutions for the most popular resolutions
+        &#34;&#34;&#34;
+        return defaultdict(
+            lambda: &#34;other&#34;,
+            {
+                (0, 0, 1280, 720): &#34;720p&#34;,
+                (1281, 721, 1920, 1080): &#34;1080p&#34;,
+                (1921, 1081, 2560, 1440): &#34;1440p&#34;,
+                (2561, 1441, 3840, 2160): &#34;2160p&#34;,
+                (3841, 2161, 7680, 4320): &#34;4k&#34;,
+                (7681, 4321, float(&#34;inf&#34;), float(&#34;inf&#34;)): &#34;8k&#34;,
+            },
+        )
+
+    @property
+    def user_agent(self):
+        return {&#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;}
+
+    @property
+    def attrs(self):
+        &#34;&#34;&#34;
+        Default attrs for scrapping reddit posts
+        &#34;&#34;&#34;
+        return {&#34;class&#34;: &#34;thing&#34;}
+
+    @property
+    def possible_urls(self):
+        &#34;&#34;&#34;
+        Valid possible url prefixes that may appear during scraping
+        &#34;&#34;&#34;
+        return [
+            &#34;ze-robot.com/dl/&#34;,
+            &#34;preview.redd.it&#34;,
+            &#34;i.redd.it/&#34;,
+            &#34;static.greatbigcanvas.com&#34;,
+            &#34;external-preview.redd.it/&#34;
+            #&#34;https://preview.redd.it/&#34;,
+            #&#34;https://ze-robot.com&#34;,
+            #&#34;https://i.redd.it/&#34;,
+            #&#34;https://old.reddit.com/r/&#34;,
+            #&#34;https://static.greatbigcanvas.com&#34;,
+            #&#34;https://external-preview.redd.it/&#34;
+        ]
+
+    @property
+    def invalid_url_prefixes(self):
+        &#34;&#34;&#34;
+        Invalid possible url prefixes that may appear during scraping
+        &#34;&#34;&#34;
+        return [
+            &#34;/u/ze-robot/&#34;,
+            &#34;https://ze-robot.com/#faq&#34;,
+            &#34;https://www.wallpaperflare.com/&#34;,
+            &#34;https://www.reddit.com/message/compose/&#34;,
+            &#34;https://old.reddit.com/user&#34;,
+        ]
+
+    @property
+    def match_url(self):
+        &#34;&#34;&#34;
+        Regex that match urls in the format https://subdomain.domain
+        &#34;&#34;&#34;
+        reg = r&#34;https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+/[-\w./?%&amp;=]*&#34;
+        return reg
+
+    @property
+    def domain_regex(self):
+        &#34;&#34;&#34;
+        Regex for validating domains
+        The first regular expression uses a positive lookahead to assert that the string contains between 1 and 254
+        characters ((?=^.{1,254}$)). Then it uses a capturing group to match one or more repetitions of a subpattern
+        that consists of one or more characters that are not a digit followed by an optional dot.
+        Finally, it uses a non-capturing group to match two or more
+        alphabetical characters ((?:[a-zA-Z]{2,})$). In summary, this regex matches a string that consists of one
+        or more non-digit characters followed by an optional dot, and ends with two or more alphabetical
+        characters. This would match a domain name such as &#34;example.com&#34;.
+
+        The second regular expression is a simplified version of the first one, and it only matches domain names
+        that consist of one or more subdomains separated by dots, followed by a top-level domain.
+        The regex starts by using a capturing group to match one or more repetitions of a subpattern that consists
+         of a letter or digit ([a-zA-Z0-9]), followed by an optional subpattern that consists of between 0 and 61
+         characters that are either a letter, digit, or a hyphen (([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?),
+         followed by a dot. This pattern is repeated one or more times, followed by a subpattern that matches
+        two or more alphabetical characters ([a-zA-Z]{2,}). In summary, this regex matches a string that consists
+        of one or more subdomains separated by dots, followed by a top-level domain. This would match a domain
+        name such as &#34;sub.example.com&#34;.
+        &#34;&#34;&#34;
+        # reg&#34;(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)&#34;
+        reg = r&#34;^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$&#34;
+        return reg
+
+    @property
+    def path_regex(self):
+        &#34;&#34;&#34;
+        Regex for validating paths
+        &#34;&#34;&#34;
+        return r&#34;^\/[\/\.a-zA-Z0-9\-]+$&#34;
+
+    @property
+    def path_regex_with_query_params(self):
+        &#34;&#34;&#34;
+        Regex for validating paths with query params
+        &#34;&#34;&#34;
+        reg = r&#34;^(\/\w+)+(\.)?\w+(\?(\w+=[\w\d]+(&amp;\w+=[\w\d]+)*)+){0,1}$&#34;
+        return reg
+
+    @property
+    def validate_and_split_string_regex(self):
+        &#34;&#34;&#34;
+        validate if a string is composed of values separated by commas or semicolons and only contains plus signs,
+        underscores, and alphanumeric characters
+        &#34;&#34;&#34;
+        # pattern = r&#39;[^\w\s,;]+&#39;
+        # pattern = r&#34;^[a-zA-Z0-9+\s]*([,;][a-zA-Z0-9+\s]*)*$&#34;
+        # pattern = ^[a-zA-Z0-9+\s]*([,;][a-zA-Z0-9+\s]*)*$
+
+        # Check if the string contains any special characters besides commas and semicolons
+        pattern = r&#34;^[a-zA-Z0-9+_]*([,;][a-zA-Z0-9+_]*)*$&#34;
+        return pattern
+
+    @property
+    def extract_num_children(self):
+        pattern = r&#34;\d+\.\d+|\d+&#34;
+        return pattern
+
+    @property
+    def current_date(self):
+        now = datetime.datetime.now()
+        formatted_date = now.strftime(&#34;%d_%m_%Y_%H_%M_%S&#34;)
+        return formatted_date</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.common.constants.ConstantsNamespace"><code class="flex name class">
+<span>class <span class="ident">ConstantsNamespace</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class that contains constants used throughout the application.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>old_reddit_url</code></strong> :&ensp;<code>str</code></dt>
+<dd>Old reddit base url.</dd>
+<dt><strong><code>reddit_api_base_url</code></strong> :&ensp;<code>str</code></dt>
+<dd>Reddit API base url.</dd>
+<dt><strong><code>resolutions</code></strong> :&ensp;<code>defaultdict</code></dt>
+<dd>Resolutions for the most popular resolutions.</dd>
+<dt><strong><code>default_logger_format</code></strong> :&ensp;<code>str</code></dt>
+<dd>Default logger format.</dd>
+<dt><strong><code>default_logger_date_format</code></strong> :&ensp;<code>str</code></dt>
+<dd>Default logger date format.</dd>
+<dt><strong><code>attrs</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Default attributes for scraping reddit posts.</dd>
+<dt><strong><code>possible_urls</code></strong> :&ensp;<code>list</code></dt>
+<dd>Valid possible url prefixes that may appear during scraping.</dd>
+<dt><strong><code>invalid_urls</code></strong> :&ensp;<code>list</code></dt>
+<dd>Invalid possible url prefixes that may appear during scraping.</dd>
+<dt><strong><code>match_url</code></strong> :&ensp;<code>str</code></dt>
+<dd>Regex that match urls in the format <a href="https://subdomain.domain.">https://subdomain.domain.</a></dd>
+<dt><strong><code>domain_regex</code></strong> :&ensp;<code>str</code></dt>
+<dd>Regex for validating domains.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConstantsNamespace:
+    &#34;&#34;&#34;A class that contains constants used throughout the application.
+
+    Attributes:
+        old_reddit_url (str): Old reddit base url.
+        reddit_api_base_url (str): Reddit API base url.
+        resolutions (defaultdict): Resolutions for the most popular resolutions.
+        default_logger_format (str): Default logger format.
+        default_logger_date_format (str): Default logger date format.
+        attrs (dict): Default attributes for scraping reddit posts.
+        possible_urls (list): Valid possible url prefixes that may appear during scraping.
+        invalid_urls (list): Invalid possible url prefixes that may appear during scraping.
+        match_url (str): Regex that match urls in the format https://subdomain.domain.
+        domain_regex (str): Regex for validating domains.
+    &#34;&#34;&#34;
+
+    @property
+    def client_id(self):
+        &#34;&#34;&#34;
+        Returns: str - User API KEY
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_API_KEY&#34;)
+
+    @property
+    def secret_token(self):
+        &#34;&#34;&#34;
+        Returns: str - User API secret
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_API_SECRET&#34;)
+
+    @property
+    def username(self):
+        &#34;&#34;&#34;
+        Returns: str - User reddit username
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_USERNAME&#34;)
+
+    @property
+    def password(self):
+        &#34;&#34;&#34;
+        Returns: str - User reddit password
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;REDDIT_PASSWORD&#34;)
+
+    @property
+    def user_subreddits_list(self):
+        &#34;&#34;&#34;
+        Returns: str - subreddit user list. A string of comma separated subreddits
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;SUBREDDIT_USER_LIST&#34;)
+
+    @property
+    def user_subreddits_sort_method(self):
+        &#34;&#34;&#34;
+        Returns: str - subreddit user list. A string of comma separated subreddits
+
+        &#34;&#34;&#34;
+        return os.environ.get(&#34;SUBREDDIT_SORT_METHOD&#34;)
+
+    @property
+    def subreddit_directory(self):
+        return &#34;output/subreddit&#34;
+
+    @property
+    def user_directory(self):
+        return &#34;output/user&#34;
+
+    @property
+    def reddit_headers(self):
+        &#34;&#34;&#34;
+        Sets up the header info, which gives reddit a brief description of the app
+        @return:
+        &#34;&#34;&#34;
+        return {
+            &#34;User-Agent&#34;: &#34;Mozilla/5.0:com.martimdlima.redscrappy:v0.0.1 (by /u/mdlima__)&#34;
+        }
+
+    @property
+    def check_mark_symbol(self):
+        &#34;&#34;&#34;
+        Returns: str - check mark symbol
+
+        &#34;&#34;&#34;
+        return &#34;\N{CHECK MARK}&#34;
+
+    @property
+    def cross_symbol(self):
+        &#34;&#34;&#34;
+        Returns: str - cross symbol
+
+        &#34;&#34;&#34;
+        return &#34;\N{BALLOT X}&#34;
+
+    @property
+    def reddit_url(self):
+        &#34;&#34;&#34;
+         New reddit base url
+        &#34;&#34;&#34;
+        return &#34;https://www.reddit.com&#34;
+
+    @property
+    def old_reddit_url(self):
+        &#34;&#34;&#34;
+        Old reddit base url
+        &#34;&#34;&#34;
+        return &#34;https://old.reddit.com&#34;
+
+    @property
+    def reddit_api_base_url(self):
+        &#34;&#34;&#34;
+        reddit API base url
+        &#34;&#34;&#34;
+        return &#34;https://oauth.reddit.com&#34;
+
+    @property
+    def output_path(self):
+        return Path(&#34;./subreddit/&#34;)
+
+    @property
+    def resolutions(self):
+        &#34;&#34;&#34;
+        Resolutions for the most popular resolutions
+        &#34;&#34;&#34;
+        return defaultdict(
+            lambda: &#34;other&#34;,
+            {
+                (0, 0, 1280, 720): &#34;720p&#34;,
+                (1281, 721, 1920, 1080): &#34;1080p&#34;,
+                (1921, 1081, 2560, 1440): &#34;1440p&#34;,
+                (2561, 1441, 3840, 2160): &#34;2160p&#34;,
+                (3841, 2161, 7680, 4320): &#34;4k&#34;,
+                (7681, 4321, float(&#34;inf&#34;), float(&#34;inf&#34;)): &#34;8k&#34;,
+            },
+        )
+
+    @property
+    def user_agent(self):
+        return {&#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;}
+
+    @property
+    def attrs(self):
+        &#34;&#34;&#34;
+        Default attrs for scrapping reddit posts
+        &#34;&#34;&#34;
+        return {&#34;class&#34;: &#34;thing&#34;}
+
+    @property
+    def possible_urls(self):
+        &#34;&#34;&#34;
+        Valid possible url prefixes that may appear during scraping
+        &#34;&#34;&#34;
+        return [
+            &#34;ze-robot.com/dl/&#34;,
+            &#34;preview.redd.it&#34;,
+            &#34;i.redd.it/&#34;,
+            &#34;static.greatbigcanvas.com&#34;,
+            &#34;external-preview.redd.it/&#34;
+            #&#34;https://preview.redd.it/&#34;,
+            #&#34;https://ze-robot.com&#34;,
+            #&#34;https://i.redd.it/&#34;,
+            #&#34;https://old.reddit.com/r/&#34;,
+            #&#34;https://static.greatbigcanvas.com&#34;,
+            #&#34;https://external-preview.redd.it/&#34;
+        ]
+
+    @property
+    def invalid_url_prefixes(self):
+        &#34;&#34;&#34;
+        Invalid possible url prefixes that may appear during scraping
+        &#34;&#34;&#34;
+        return [
+            &#34;/u/ze-robot/&#34;,
+            &#34;https://ze-robot.com/#faq&#34;,
+            &#34;https://www.wallpaperflare.com/&#34;,
+            &#34;https://www.reddit.com/message/compose/&#34;,
+            &#34;https://old.reddit.com/user&#34;,
+        ]
+
+    @property
+    def match_url(self):
+        &#34;&#34;&#34;
+        Regex that match urls in the format https://subdomain.domain
+        &#34;&#34;&#34;
+        reg = r&#34;https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+/[-\w./?%&amp;=]*&#34;
+        return reg
+
+    @property
+    def domain_regex(self):
+        &#34;&#34;&#34;
+        Regex for validating domains
+        The first regular expression uses a positive lookahead to assert that the string contains between 1 and 254
+        characters ((?=^.{1,254}$)). Then it uses a capturing group to match one or more repetitions of a subpattern
+        that consists of one or more characters that are not a digit followed by an optional dot.
+        Finally, it uses a non-capturing group to match two or more
+        alphabetical characters ((?:[a-zA-Z]{2,})$). In summary, this regex matches a string that consists of one
+        or more non-digit characters followed by an optional dot, and ends with two or more alphabetical
+        characters. This would match a domain name such as &#34;example.com&#34;.
+
+        The second regular expression is a simplified version of the first one, and it only matches domain names
+        that consist of one or more subdomains separated by dots, followed by a top-level domain.
+        The regex starts by using a capturing group to match one or more repetitions of a subpattern that consists
+         of a letter or digit ([a-zA-Z0-9]), followed by an optional subpattern that consists of between 0 and 61
+         characters that are either a letter, digit, or a hyphen (([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?),
+         followed by a dot. This pattern is repeated one or more times, followed by a subpattern that matches
+        two or more alphabetical characters ([a-zA-Z]{2,}). In summary, this regex matches a string that consists
+        of one or more subdomains separated by dots, followed by a top-level domain. This would match a domain
+        name such as &#34;sub.example.com&#34;.
+        &#34;&#34;&#34;
+        # reg&#34;(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)&#34;
+        reg = r&#34;^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$&#34;
+        return reg
+
+    @property
+    def path_regex(self):
+        &#34;&#34;&#34;
+        Regex for validating paths
+        &#34;&#34;&#34;
+        return r&#34;^\/[\/\.a-zA-Z0-9\-]+$&#34;
+
+    @property
+    def path_regex_with_query_params(self):
+        &#34;&#34;&#34;
+        Regex for validating paths with query params
+        &#34;&#34;&#34;
+        reg = r&#34;^(\/\w+)+(\.)?\w+(\?(\w+=[\w\d]+(&amp;\w+=[\w\d]+)*)+){0,1}$&#34;
+        return reg
+
+    @property
+    def validate_and_split_string_regex(self):
+        &#34;&#34;&#34;
+        validate if a string is composed of values separated by commas or semicolons and only contains plus signs,
+        underscores, and alphanumeric characters
+        &#34;&#34;&#34;
+        # pattern = r&#39;[^\w\s,;]+&#39;
+        # pattern = r&#34;^[a-zA-Z0-9+\s]*([,;][a-zA-Z0-9+\s]*)*$&#34;
+        # pattern = ^[a-zA-Z0-9+\s]*([,;][a-zA-Z0-9+\s]*)*$
+
+        # Check if the string contains any special characters besides commas and semicolons
+        pattern = r&#34;^[a-zA-Z0-9+_]*([,;][a-zA-Z0-9+_]*)*$&#34;
+        return pattern
+
+    @property
+    def extract_num_children(self):
+        pattern = r&#34;\d+\.\d+|\d+&#34;
+        return pattern
+
+    @property
+    def current_date(self):
+        now = datetime.datetime.now()
+        formatted_date = now.strftime(&#34;%d_%m_%Y_%H_%M_%S&#34;)
+        return formatted_date</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="src.common.constants.ConstantsNamespace.attrs"><code class="name">var <span class="ident">attrs</span></code></dt>
+<dd>
+<div class="desc"><p>Default attrs for scrapping reddit posts</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def attrs(self):
+    &#34;&#34;&#34;
+    Default attrs for scrapping reddit posts
+    &#34;&#34;&#34;
+    return {&#34;class&#34;: &#34;thing&#34;}</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.check_mark_symbol"><code class="name">var <span class="ident">check_mark_symbol</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - check mark symbol</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def check_mark_symbol(self):
+    &#34;&#34;&#34;
+    Returns: str - check mark symbol
+
+    &#34;&#34;&#34;
+    return &#34;\N{CHECK MARK}&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.client_id"><code class="name">var <span class="ident">client_id</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - User API KEY</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def client_id(self):
+    &#34;&#34;&#34;
+    Returns: str - User API KEY
+
+    &#34;&#34;&#34;
+    return os.environ.get(&#34;REDDIT_API_KEY&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.cross_symbol"><code class="name">var <span class="ident">cross_symbol</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - cross symbol</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def cross_symbol(self):
+    &#34;&#34;&#34;
+    Returns: str - cross symbol
+
+    &#34;&#34;&#34;
+    return &#34;\N{BALLOT X}&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.current_date"><code class="name">var <span class="ident">current_date</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def current_date(self):
+    now = datetime.datetime.now()
+    formatted_date = now.strftime(&#34;%d_%m_%Y_%H_%M_%S&#34;)
+    return formatted_date</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.domain_regex"><code class="name">var <span class="ident">domain_regex</span></code></dt>
+<dd>
+<div class="desc"><p>Regex for validating domains
+The first regular expression uses a positive lookahead to assert that the string contains between 1 and 254
+characters ((?=^.{1,254}$)). Then it uses a capturing group to match one or more repetitions of a subpattern
+that consists of one or more characters that are not a digit followed by an optional dot.
+Finally, it uses a non-capturing group to match two or more
+alphabetical characters ((?:[a-zA-Z]{2,})$). In summary, this regex matches a string that consists of one
+or more non-digit characters followed by an optional dot, and ends with two or more alphabetical
+characters. This would match a domain name such as "example.com".</p>
+<p>The second regular expression is a simplified version of the first one, and it only matches domain names
+that consist of one or more subdomains separated by dots, followed by a top-level domain.
+The regex starts by using a capturing group to match one or more repetitions of a subpattern that consists
+of a letter or digit ([a-zA-Z0-9]), followed by an optional subpattern that consists of between 0 and 61
+characters that are either a letter, digit, or a hyphen (([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?),
+followed by a dot. This pattern is repeated one or more times, followed by a subpattern that matches
+two or more alphabetical characters ([a-zA-Z]{2,}). In summary, this regex matches a string that consists
+of one or more subdomains separated by dots, followed by a top-level domain. This would match a domain
+name such as "sub.example.com".</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def domain_regex(self):
+    &#34;&#34;&#34;
+    Regex for validating domains
+    The first regular expression uses a positive lookahead to assert that the string contains between 1 and 254
+    characters ((?=^.{1,254}$)). Then it uses a capturing group to match one or more repetitions of a subpattern
+    that consists of one or more characters that are not a digit followed by an optional dot.
+    Finally, it uses a non-capturing group to match two or more
+    alphabetical characters ((?:[a-zA-Z]{2,})$). In summary, this regex matches a string that consists of one
+    or more non-digit characters followed by an optional dot, and ends with two or more alphabetical
+    characters. This would match a domain name such as &#34;example.com&#34;.
+
+    The second regular expression is a simplified version of the first one, and it only matches domain names
+    that consist of one or more subdomains separated by dots, followed by a top-level domain.
+    The regex starts by using a capturing group to match one or more repetitions of a subpattern that consists
+     of a letter or digit ([a-zA-Z0-9]), followed by an optional subpattern that consists of between 0 and 61
+     characters that are either a letter, digit, or a hyphen (([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?),
+     followed by a dot. This pattern is repeated one or more times, followed by a subpattern that matches
+    two or more alphabetical characters ([a-zA-Z]{2,}). In summary, this regex matches a string that consists
+    of one or more subdomains separated by dots, followed by a top-level domain. This would match a domain
+    name such as &#34;sub.example.com&#34;.
+    &#34;&#34;&#34;
+    # reg&#34;(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)&#34;
+    reg = r&#34;^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$&#34;
+    return reg</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.extract_num_children"><code class="name">var <span class="ident">extract_num_children</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def extract_num_children(self):
+    pattern = r&#34;\d+\.\d+|\d+&#34;
+    return pattern</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.invalid_url_prefixes"><code class="name">var <span class="ident">invalid_url_prefixes</span></code></dt>
+<dd>
+<div class="desc"><p>Invalid possible url prefixes that may appear during scraping</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def invalid_url_prefixes(self):
+    &#34;&#34;&#34;
+    Invalid possible url prefixes that may appear during scraping
+    &#34;&#34;&#34;
+    return [
+        &#34;/u/ze-robot/&#34;,
+        &#34;https://ze-robot.com/#faq&#34;,
+        &#34;https://www.wallpaperflare.com/&#34;,
+        &#34;https://www.reddit.com/message/compose/&#34;,
+        &#34;https://old.reddit.com/user&#34;,
+    ]</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.match_url"><code class="name">var <span class="ident">match_url</span></code></dt>
+<dd>
+<div class="desc"><p>Regex that match urls in the format <a href="https://subdomain.domain">https://subdomain.domain</a></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def match_url(self):
+    &#34;&#34;&#34;
+    Regex that match urls in the format https://subdomain.domain
+    &#34;&#34;&#34;
+    reg = r&#34;https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+/[-\w./?%&amp;=]*&#34;
+    return reg</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.old_reddit_url"><code class="name">var <span class="ident">old_reddit_url</span></code></dt>
+<dd>
+<div class="desc"><p>Old reddit base url</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def old_reddit_url(self):
+    &#34;&#34;&#34;
+    Old reddit base url
+    &#34;&#34;&#34;
+    return &#34;https://old.reddit.com&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.output_path"><code class="name">var <span class="ident">output_path</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def output_path(self):
+    return Path(&#34;./subreddit/&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.password"><code class="name">var <span class="ident">password</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - User reddit password</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def password(self):
+    &#34;&#34;&#34;
+    Returns: str - User reddit password
+
+    &#34;&#34;&#34;
+    return os.environ.get(&#34;REDDIT_PASSWORD&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.path_regex"><code class="name">var <span class="ident">path_regex</span></code></dt>
+<dd>
+<div class="desc"><p>Regex for validating paths</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def path_regex(self):
+    &#34;&#34;&#34;
+    Regex for validating paths
+    &#34;&#34;&#34;
+    return r&#34;^\/[\/\.a-zA-Z0-9\-]+$&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.path_regex_with_query_params"><code class="name">var <span class="ident">path_regex_with_query_params</span></code></dt>
+<dd>
+<div class="desc"><p>Regex for validating paths with query params</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def path_regex_with_query_params(self):
+    &#34;&#34;&#34;
+    Regex for validating paths with query params
+    &#34;&#34;&#34;
+    reg = r&#34;^(\/\w+)+(\.)?\w+(\?(\w+=[\w\d]+(&amp;\w+=[\w\d]+)*)+){0,1}$&#34;
+    return reg</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.possible_urls"><code class="name">var <span class="ident">possible_urls</span></code></dt>
+<dd>
+<div class="desc"><p>Valid possible url prefixes that may appear during scraping</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def possible_urls(self):
+    &#34;&#34;&#34;
+    Valid possible url prefixes that may appear during scraping
+    &#34;&#34;&#34;
+    return [
+        &#34;ze-robot.com/dl/&#34;,
+        &#34;preview.redd.it&#34;,
+        &#34;i.redd.it/&#34;,
+        &#34;static.greatbigcanvas.com&#34;,
+        &#34;external-preview.redd.it/&#34;
+        #&#34;https://preview.redd.it/&#34;,
+        #&#34;https://ze-robot.com&#34;,
+        #&#34;https://i.redd.it/&#34;,
+        #&#34;https://old.reddit.com/r/&#34;,
+        #&#34;https://static.greatbigcanvas.com&#34;,
+        #&#34;https://external-preview.redd.it/&#34;
+    ]</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.reddit_api_base_url"><code class="name">var <span class="ident">reddit_api_base_url</span></code></dt>
+<dd>
+<div class="desc"><p>reddit API base url</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def reddit_api_base_url(self):
+    &#34;&#34;&#34;
+    reddit API base url
+    &#34;&#34;&#34;
+    return &#34;https://oauth.reddit.com&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.reddit_headers"><code class="name">var <span class="ident">reddit_headers</span></code></dt>
+<dd>
+<div class="desc"><p>Sets up the header info, which gives reddit a brief description of the app
+@return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def reddit_headers(self):
+    &#34;&#34;&#34;
+    Sets up the header info, which gives reddit a brief description of the app
+    @return:
+    &#34;&#34;&#34;
+    return {
+        &#34;User-Agent&#34;: &#34;Mozilla/5.0:com.martimdlima.redscrappy:v0.0.1 (by /u/mdlima__)&#34;
+    }</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.reddit_url"><code class="name">var <span class="ident">reddit_url</span></code></dt>
+<dd>
+<div class="desc"><p>New reddit base url</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def reddit_url(self):
+    &#34;&#34;&#34;
+     New reddit base url
+    &#34;&#34;&#34;
+    return &#34;https://www.reddit.com&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.resolutions"><code class="name">var <span class="ident">resolutions</span></code></dt>
+<dd>
+<div class="desc"><p>Resolutions for the most popular resolutions</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def resolutions(self):
+    &#34;&#34;&#34;
+    Resolutions for the most popular resolutions
+    &#34;&#34;&#34;
+    return defaultdict(
+        lambda: &#34;other&#34;,
+        {
+            (0, 0, 1280, 720): &#34;720p&#34;,
+            (1281, 721, 1920, 1080): &#34;1080p&#34;,
+            (1921, 1081, 2560, 1440): &#34;1440p&#34;,
+            (2561, 1441, 3840, 2160): &#34;2160p&#34;,
+            (3841, 2161, 7680, 4320): &#34;4k&#34;,
+            (7681, 4321, float(&#34;inf&#34;), float(&#34;inf&#34;)): &#34;8k&#34;,
+        },
+    )</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.secret_token"><code class="name">var <span class="ident">secret_token</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - User API secret</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def secret_token(self):
+    &#34;&#34;&#34;
+    Returns: str - User API secret
+
+    &#34;&#34;&#34;
+    return os.environ.get(&#34;REDDIT_API_SECRET&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.subreddit_directory"><code class="name">var <span class="ident">subreddit_directory</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def subreddit_directory(self):
+    return &#34;output/subreddit&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.user_agent"><code class="name">var <span class="ident">user_agent</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def user_agent(self):
+    return {&#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;}</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.user_directory"><code class="name">var <span class="ident">user_directory</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def user_directory(self):
+    return &#34;output/user&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.user_subreddits_list"><code class="name">var <span class="ident">user_subreddits_list</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - subreddit user list. A string of comma separated subreddits</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def user_subreddits_list(self):
+    &#34;&#34;&#34;
+    Returns: str - subreddit user list. A string of comma separated subreddits
+
+    &#34;&#34;&#34;
+    return os.environ.get(&#34;SUBREDDIT_USER_LIST&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.user_subreddits_sort_method"><code class="name">var <span class="ident">user_subreddits_sort_method</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - subreddit user list. A string of comma separated subreddits</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def user_subreddits_sort_method(self):
+    &#34;&#34;&#34;
+    Returns: str - subreddit user list. A string of comma separated subreddits
+
+    &#34;&#34;&#34;
+    return os.environ.get(&#34;SUBREDDIT_SORT_METHOD&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.username"><code class="name">var <span class="ident">username</span></code></dt>
+<dd>
+<div class="desc"><p>Returns: str - User reddit username</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def username(self):
+    &#34;&#34;&#34;
+    Returns: str - User reddit username
+
+    &#34;&#34;&#34;
+    return os.environ.get(&#34;REDDIT_USERNAME&#34;)</code></pre>
+</details>
+</dd>
+<dt id="src.common.constants.ConstantsNamespace.validate_and_split_string_regex"><code class="name">var <span class="ident">validate_and_split_string_regex</span></code></dt>
+<dd>
+<div class="desc"><p>validate if a string is composed of values separated by commas or semicolons and only contains plus signs,
+underscores, and alphanumeric characters</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def validate_and_split_string_regex(self):
+    &#34;&#34;&#34;
+    validate if a string is composed of values separated by commas or semicolons and only contains plus signs,
+    underscores, and alphanumeric characters
+    &#34;&#34;&#34;
+    # pattern = r&#39;[^\w\s,;]+&#39;
+    # pattern = r&#34;^[a-zA-Z0-9+\s]*([,;][a-zA-Z0-9+\s]*)*$&#34;
+    # pattern = ^[a-zA-Z0-9+\s]*([,;][a-zA-Z0-9+\s]*)*$
+
+    # Check if the string contains any special characters besides commas and semicolons
+    pattern = r&#34;^[a-zA-Z0-9+_]*([,;][a-zA-Z0-9+_]*)*$&#34;
+    return pattern</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.common" href="index.html">src.common</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.common.constants.ConstantsNamespace" href="#src.common.constants.ConstantsNamespace">ConstantsNamespace</a></code></h4>
+<ul class="">
+<li><code><a title="src.common.constants.ConstantsNamespace.attrs" href="#src.common.constants.ConstantsNamespace.attrs">attrs</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.check_mark_symbol" href="#src.common.constants.ConstantsNamespace.check_mark_symbol">check_mark_symbol</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.client_id" href="#src.common.constants.ConstantsNamespace.client_id">client_id</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.cross_symbol" href="#src.common.constants.ConstantsNamespace.cross_symbol">cross_symbol</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.current_date" href="#src.common.constants.ConstantsNamespace.current_date">current_date</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.domain_regex" href="#src.common.constants.ConstantsNamespace.domain_regex">domain_regex</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.extract_num_children" href="#src.common.constants.ConstantsNamespace.extract_num_children">extract_num_children</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.invalid_url_prefixes" href="#src.common.constants.ConstantsNamespace.invalid_url_prefixes">invalid_url_prefixes</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.match_url" href="#src.common.constants.ConstantsNamespace.match_url">match_url</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.old_reddit_url" href="#src.common.constants.ConstantsNamespace.old_reddit_url">old_reddit_url</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.output_path" href="#src.common.constants.ConstantsNamespace.output_path">output_path</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.password" href="#src.common.constants.ConstantsNamespace.password">password</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.path_regex" href="#src.common.constants.ConstantsNamespace.path_regex">path_regex</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.path_regex_with_query_params" href="#src.common.constants.ConstantsNamespace.path_regex_with_query_params">path_regex_with_query_params</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.possible_urls" href="#src.common.constants.ConstantsNamespace.possible_urls">possible_urls</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.reddit_api_base_url" href="#src.common.constants.ConstantsNamespace.reddit_api_base_url">reddit_api_base_url</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.reddit_headers" href="#src.common.constants.ConstantsNamespace.reddit_headers">reddit_headers</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.reddit_url" href="#src.common.constants.ConstantsNamespace.reddit_url">reddit_url</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.resolutions" href="#src.common.constants.ConstantsNamespace.resolutions">resolutions</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.secret_token" href="#src.common.constants.ConstantsNamespace.secret_token">secret_token</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.subreddit_directory" href="#src.common.constants.ConstantsNamespace.subreddit_directory">subreddit_directory</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.user_agent" href="#src.common.constants.ConstantsNamespace.user_agent">user_agent</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.user_directory" href="#src.common.constants.ConstantsNamespace.user_directory">user_directory</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.user_subreddits_list" href="#src.common.constants.ConstantsNamespace.user_subreddits_list">user_subreddits_list</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.user_subreddits_sort_method" href="#src.common.constants.ConstantsNamespace.user_subreddits_sort_method">user_subreddits_sort_method</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.username" href="#src.common.constants.ConstantsNamespace.username">username</a></code></li>
+<li><code><a title="src.common.constants.ConstantsNamespace.validate_and_split_string_regex" href="#src.common.constants.ConstantsNamespace.validate_and_split_string_regex">validate_and_split_string_regex</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

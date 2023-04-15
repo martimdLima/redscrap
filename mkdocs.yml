@@ -1,0 +1,14 @@
+site_name: Redscrap Docs
+
+theme:
+  name: "material"
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - Redscrap Docs: index.md
+  - tutorials.md
+  - how-to-guides.md
+  - reference.md
+  - explanation.md

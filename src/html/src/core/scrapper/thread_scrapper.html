@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.core.scrapper.thread_scrapper API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.core.scrapper.thread_scrapper</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import logging
+import time
+from typing import Any, Optional, Dict, Union
+import requests  # type: ignore
+from loguru import logger  # type: ignore
+from bs4 import BeautifulSoup, ResultSet
+
+from common.exceptions import TokenErrorException  # type: ignore
+from common.logging.logging_setup import LoggingSetup  # type: ignore
+from common.constants import ConstantsNamespace  # type: ignore
+from common.logging.utils.loguru_wrappers import logger_wraps  # type: ignore
+from common.validations.url_validations import UrlValidations  # type: ignore
+from common.request_manager import RequestManager  # type: ignore
+from common.image_downloader import ImageDownloader  # type: ignore
+from common.io_operations import IOOperations  # type: ignore
+from core.scrapper.comment_scrapper import CommentScrapper  # type: ignore
+from core.api.reddit_api import RedditApi  # type: ignore
+from core.scrapper.scraper_helper import ScraperHelper  # type: ignore
+
+
+class ThreadScrapper:
+    &#34;&#34;&#34;
+    A class that provides methods to scrape threads from subreddits or users
+
+    Attributes:
+
+    Methods:
+        - def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
+            max_counter: Optional[int] = None ) -&gt; Dict[str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any],
+            ResultSet[Any], Dict[str, Any], Any]], Any]]:
+            Scrape threads from a subreddit or user and return the results.
+        - def scrape_single_thread(self, link: str, verbose: bool):
+            Scrapes the given Reddit thread URL and returns a tuple containing a list of image URLs and a dictionary of
+            comments.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.logging_funcs = LoggingSetup()
+        self.constants = ConstantsNamespace()
+        self.validations = UrlValidations()
+        self.comment_scrapper = CommentScrapper()
+        self.request_manager = RequestManager()
+        self.io_operations = IOOperations()
+        self.image_downloader = ImageDownloader()
+        self.scraper_helper = ScraperHelper()
+        self.reddit_api = RedditApi(self.constants.client_id, self.constants.secret_token, self.constants.username,
+                                    self.constants.password)
+
+    def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
+                       max_counter: Optional[int] = None
+                       ) -&gt; Dict[
+        str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]]:
+        &#34;&#34;&#34;
+        Scrape threads from a subreddit or user and return the results.
+
+        Args:
+            subreddit_or_user (str): The name of the subreddit or user from which to scrape threads.
+            sort (str): The method to sort the threads, such as &#34;hot&#34; or &#34;top&#34;.
+            scrape_mode (str): The mode in which to scrape threads, either &#34;subreddit&#34; or &#34;user&#34;.
+            verbose (bool): A flag indicating whether to log verbose output.
+            max_counter (Optional[int], optional): The maximum number of threads to scrape. Defaults to None.
+
+        Returns:
+            Dict[str, Union[ Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]],
+                Any]]:
+                A dictionary of thread URLs and their corresponding information, such as their author, datetime,
+                 rating, URLs, and comments.
+        &#34;&#34;&#34;
+        params: Optional[Dict[str, Any]] = None
+
+        if scrape_mode == &#34;subreddit&#34;:
+            endpoint = &#34;/r/{}/{}&#34;.format(subreddit_or_user, sort)
+            url = &#34;{}{}&#34;.format(self.constants.old_reddit_url, endpoint)
+        else:
+            # Generating the URL leading to the desired subreddit
+            endpoint = &#34;/user/{}/{}&#34;.format(subreddit_or_user, &#34;submitted&#34;)
+            url = &#34;{}{}&#34;.format(self.constants.old_reddit_url, endpoint)
+            params = self.reddit_api.generate_params_for_reddit_api_req(None, None, None, None, &#34;all&#34;, None)
+
+        req = self.request_manager.request_page(
+            url,
+            self.constants.user_agent,
+            params if params is not None else None
+        )
+
+        threads_urls: Dict[
+            str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]
+        ] = {}  # noqa comments
+        thread_img_urls = {}
+
+        counter = 1
+        full = False
+        if req.status_code == 200:
+            msg = &#34;\nCollecting information for {}....&#34;.format(url)
+            logger.info(msg) if verbose else None
+
+            soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+
+            if scrape_mode == &#34;subreddit&#34;:
+                soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+                threads_list_element = soup.find(
+                    &#34;div&#34;, attrs={&#34;class&#34;: &#34;sitetable linklisting&#34;})
+                threads = threads_list_element.find_all(
+                    &#34;div&#34;, attrs={&#34;data-subreddit-prefixed&#34;: &#34;r/{}&#34;.format(subreddit_or_user)})
+            else:
+                threads_list_element = soup.find(&#34;div&#34;, attrs={&#34;class&#34;: &#34;sitetable linklisting&#34;})
+                threads = threads_list_element.find_all(&#34;div&#34;, attrs={&#34;data-author&#34;: subreddit_or_user})
+
+            max_count = (int(max_counter) if max_counter is not None else len(threads))
+
+            while full is not True:
+                for thread in threads:
+                    try:
+                        msg = &#34;\nCollecting information from thread {} of {}...&#34;.format(counter, max_count)
+                        logger.info(msg) if verbose else None
+
+                        thread_details_path = thread.attrs[&#34;data-permalink&#34;]
+                        thread_url = self.constants.old_reddit_url + thread_details_path
+
+                        thread_comments, img_urls = self.scrape_single_thread(
+                            thread_details_path, verbose
+                        )
+
+                        current_thread = &#34;{}&#34;.format(thread_url)
+                        thread_img_urls[current_thread] = {
+                            &#34;author&#34;: self.scraper_helper.construct_author_dict(thread),
+                            &#34;datetime&#34;: self.scraper_helper.construct_time_dict(thread),
+                            &#34;rating&#34;: self.scraper_helper.construct_thread_rating_dict(thread),
+                            &#34;thread_url&#34;: thread_url,
+                            &#34;urls&#34;: img_urls,
+                            &#34;comments&#34;: thread_comments
+                        }
+
+                        msg = &#34;Finished scrapping images for thread {}. {} images where scraped&#34;.format(
+                            thread_url, len(list(set(img_urls))))
+                        logger.info(msg) if verbose else None
+
+                        if counter == max_count:
+                            full = True
+                            break
+                        time.sleep(2)
+                        counter += 1
+                    except AttributeError:
+                        continue
+                if full:
+                    break
+
+                try:
+                    next_button = soup.find(&#34;span&#34;, class_=&#34;next-button&#34;)
+                    next_page_link = next_button.find(&#34;a&#34;).attrs[&#34;href&#34;]  # type: ignore
+
+                    req = requests.get(next_page_link, headers=self.constants.user_agent, timeout=10)
+                    soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+                except TokenErrorException as exc:
+                    self.logging_funcs.print_exception_log(str(exc), verbose)
+                    break
+
+            threads_urls[subreddit_or_user] = thread_img_urls
+
+            logger.debug(&#34;[5] FINISHED SCRAPING STEP&#34;, verbose)
+        else:
+            message = &#34;Error fetching results.. Try again!&#34;
+            self.logging_funcs.print_exception_log(message, verbose)
+
+        return threads_urls
+
+    @logger_wraps()
+    def scrape_single_thread(self, link: str, verbose: bool):
+        &#34;&#34;&#34;
+        Scrapes the given Reddit thread URL and returns a tuple containing a list of image URLs and a dictionary of
+         comments.
+
+        Args:
+            link (str): The URL of the Reddit thread to be scraped.
+            verbose (bool): Whether to print verbose logging messages.
+
+        Returns:
+            tuple[Any, dict[str, dict[str, Any]]]: A tuple containing a list of image URLs and a dictionary of comments.
+        &#34;&#34;&#34;
+        msg = &#34;Scraping thread: {}{}&#34;.format(self.constants.old_reddit_url, link)
+        logger.info(msg) if verbose else None
+
+        # Using a user-agent to mimic browser activity
+        req = self.request_manager.request_page(self.constants.old_reddit_url + link, self.constants.user_agent)
+
+        if req is not None:
+            # Parsing through the web page for obtaining the right html tags
+            # and scraping the details required
+            soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+
+            thread_images = []
+
+            thread_img_ele = soup.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;expando&#34;})
+
+            if thread_img_ele is not None:
+                thread_image_a_tags = thread_img_ele.find_all(&#34;a&#34;, attrs={&#34;class&#34;, &#34;may-blank&#34;})
+                thread_iframe_tag = thread_img_ele.find(&#34;iframe&#34;, attrs={&#34;class&#34;, &#34;media-embed&#34;})
+
+                if thread_image_a_tags is not None and len(thread_image_a_tags) &gt;= 1:
+                    for thread_image_a_tag in thread_image_a_tags:
+                        logging.debug(thread_image_a_tag.attrs[&#34;href&#34;])
+                        if self.validations.validate_if_url_is_a_valid_img_link(
+                                thread_image_a_tag.attrs[&#34;href&#34;], self.constants.possible_urls):
+                            thread_images.append(thread_image_a_tag.attrs[&#34;href&#34;])
+
+                        img_tag = thread_img_ele.find(&#34;img&#34;, attrs={&#34;class&#34;, &#34;preview&#34;})
+
+                        if img_tag is not None:
+                            logging.debug(img_tag.attrs[&#34;src&#34;])
+                            if self.validations.validate_if_url_is_a_valid_img_link(
+                                    img_tag.attrs[&#34;src&#34;], self.constants.possible_urls):
+                                thread_images.append(img_tag.attrs[&#34;src&#34;])
+
+                if thread_iframe_tag is not None:
+                    logging.debug(thread_iframe_tag.attrs[&#34;src&#34;])
+                    if self.validations.validate_image_url(
+                            self.constants.possible_urls, thread_iframe_tag.attrs[&#34;src&#34;]):
+                        thread_images.append(thread_iframe_tag.attrs[&#34;src&#34;])
+
+            thread_images = list(set(thread_images))
+
+            thread_comments, img_urls = self.comment_scrapper.scrape_comments(soup)
+
+            # Remove all elements from thread_images that contain the value &#34;crop=smart&#34;
+            thread_images = [x for x in thread_images if &#34;crop=smart&#34; not in x]
+
+            logging.debug(thread_images)
+            logging.debug(len(thread_images))
+
+            img_urls = img_urls + thread_images
+            return thread_comments, img_urls</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.core.scrapper.thread_scrapper.ThreadScrapper"><code class="flex name class">
+<span>class <span class="ident">ThreadScrapper</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class that provides methods to scrape threads from subreddits or users</p>
+<p>Attributes:</p>
+<h2 id="methods">Methods</h2>
+<ul>
+<li>def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
+max_counter: Optional[int] = None ) -&gt; Dict[str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any],
+ResultSet[Any], Dict[str, Any], Any]], Any]]:
+Scrape threads from a subreddit or user and return the results.</li>
+<li>def scrape_single_thread(self, link: str, verbose: bool):
+Scrapes the given Reddit thread URL and returns a tuple containing a list of image URLs and a dictionary of
+comments.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ThreadScrapper:
+    &#34;&#34;&#34;
+    A class that provides methods to scrape threads from subreddits or users
+
+    Attributes:
+
+    Methods:
+        - def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
+            max_counter: Optional[int] = None ) -&gt; Dict[str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any],
+            ResultSet[Any], Dict[str, Any], Any]], Any]]:
+            Scrape threads from a subreddit or user and return the results.
+        - def scrape_single_thread(self, link: str, verbose: bool):
+            Scrapes the given Reddit thread URL and returns a tuple containing a list of image URLs and a dictionary of
+            comments.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.logging_funcs = LoggingSetup()
+        self.constants = ConstantsNamespace()
+        self.validations = UrlValidations()
+        self.comment_scrapper = CommentScrapper()
+        self.request_manager = RequestManager()
+        self.io_operations = IOOperations()
+        self.image_downloader = ImageDownloader()
+        self.scraper_helper = ScraperHelper()
+        self.reddit_api = RedditApi(self.constants.client_id, self.constants.secret_token, self.constants.username,
+                                    self.constants.password)
+
+    def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
+                       max_counter: Optional[int] = None
+                       ) -&gt; Dict[
+        str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]]:
+        &#34;&#34;&#34;
+        Scrape threads from a subreddit or user and return the results.
+
+        Args:
+            subreddit_or_user (str): The name of the subreddit or user from which to scrape threads.
+            sort (str): The method to sort the threads, such as &#34;hot&#34; or &#34;top&#34;.
+            scrape_mode (str): The mode in which to scrape threads, either &#34;subreddit&#34; or &#34;user&#34;.
+            verbose (bool): A flag indicating whether to log verbose output.
+            max_counter (Optional[int], optional): The maximum number of threads to scrape. Defaults to None.
+
+        Returns:
+            Dict[str, Union[ Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]],
+                Any]]:
+                A dictionary of thread URLs and their corresponding information, such as their author, datetime,
+                 rating, URLs, and comments.
+        &#34;&#34;&#34;
+        params: Optional[Dict[str, Any]] = None
+
+        if scrape_mode == &#34;subreddit&#34;:
+            endpoint = &#34;/r/{}/{}&#34;.format(subreddit_or_user, sort)
+            url = &#34;{}{}&#34;.format(self.constants.old_reddit_url, endpoint)
+        else:
+            # Generating the URL leading to the desired subreddit
+            endpoint = &#34;/user/{}/{}&#34;.format(subreddit_or_user, &#34;submitted&#34;)
+            url = &#34;{}{}&#34;.format(self.constants.old_reddit_url, endpoint)
+            params = self.reddit_api.generate_params_for_reddit_api_req(None, None, None, None, &#34;all&#34;, None)
+
+        req = self.request_manager.request_page(
+            url,
+            self.constants.user_agent,
+            params if params is not None else None
+        )
+
+        threads_urls: Dict[
+            str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]
+        ] = {}  # noqa comments
+        thread_img_urls = {}
+
+        counter = 1
+        full = False
+        if req.status_code == 200:
+            msg = &#34;\nCollecting information for {}....&#34;.format(url)
+            logger.info(msg) if verbose else None
+
+            soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+
+            if scrape_mode == &#34;subreddit&#34;:
+                soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+                threads_list_element = soup.find(
+                    &#34;div&#34;, attrs={&#34;class&#34;: &#34;sitetable linklisting&#34;})
+                threads = threads_list_element.find_all(
+                    &#34;div&#34;, attrs={&#34;data-subreddit-prefixed&#34;: &#34;r/{}&#34;.format(subreddit_or_user)})
+            else:
+                threads_list_element = soup.find(&#34;div&#34;, attrs={&#34;class&#34;: &#34;sitetable linklisting&#34;})
+                threads = threads_list_element.find_all(&#34;div&#34;, attrs={&#34;data-author&#34;: subreddit_or_user})
+
+            max_count = (int(max_counter) if max_counter is not None else len(threads))
+
+            while full is not True:
+                for thread in threads:
+                    try:
+                        msg = &#34;\nCollecting information from thread {} of {}...&#34;.format(counter, max_count)
+                        logger.info(msg) if verbose else None
+
+                        thread_details_path = thread.attrs[&#34;data-permalink&#34;]
+                        thread_url = self.constants.old_reddit_url + thread_details_path
+
+                        thread_comments, img_urls = self.scrape_single_thread(
+                            thread_details_path, verbose
+                        )
+
+                        current_thread = &#34;{}&#34;.format(thread_url)
+                        thread_img_urls[current_thread] = {
+                            &#34;author&#34;: self.scraper_helper.construct_author_dict(thread),
+                            &#34;datetime&#34;: self.scraper_helper.construct_time_dict(thread),
+                            &#34;rating&#34;: self.scraper_helper.construct_thread_rating_dict(thread),
+                            &#34;thread_url&#34;: thread_url,
+                            &#34;urls&#34;: img_urls,
+                            &#34;comments&#34;: thread_comments
+                        }
+
+                        msg = &#34;Finished scrapping images for thread {}. {} images where scraped&#34;.format(
+                            thread_url, len(list(set(img_urls))))
+                        logger.info(msg) if verbose else None
+
+                        if counter == max_count:
+                            full = True
+                            break
+                        time.sleep(2)
+                        counter += 1
+                    except AttributeError:
+                        continue
+                if full:
+                    break
+
+                try:
+                    next_button = soup.find(&#34;span&#34;, class_=&#34;next-button&#34;)
+                    next_page_link = next_button.find(&#34;a&#34;).attrs[&#34;href&#34;]  # type: ignore
+
+                    req = requests.get(next_page_link, headers=self.constants.user_agent, timeout=10)
+                    soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+                except TokenErrorException as exc:
+                    self.logging_funcs.print_exception_log(str(exc), verbose)
+                    break
+
+            threads_urls[subreddit_or_user] = thread_img_urls
+
+            logger.debug(&#34;[5] FINISHED SCRAPING STEP&#34;, verbose)
+        else:
+            message = &#34;Error fetching results.. Try again!&#34;
+            self.logging_funcs.print_exception_log(message, verbose)
+
+        return threads_urls
+
+    @logger_wraps()
+    def scrape_single_thread(self, link: str, verbose: bool):
+        &#34;&#34;&#34;
+        Scrapes the given Reddit thread URL and returns a tuple containing a list of image URLs and a dictionary of
+         comments.
+
+        Args:
+            link (str): The URL of the Reddit thread to be scraped.
+            verbose (bool): Whether to print verbose logging messages.
+
+        Returns:
+            tuple[Any, dict[str, dict[str, Any]]]: A tuple containing a list of image URLs and a dictionary of comments.
+        &#34;&#34;&#34;
+        msg = &#34;Scraping thread: {}{}&#34;.format(self.constants.old_reddit_url, link)
+        logger.info(msg) if verbose else None
+
+        # Using a user-agent to mimic browser activity
+        req = self.request_manager.request_page(self.constants.old_reddit_url + link, self.constants.user_agent)
+
+        if req is not None:
+            # Parsing through the web page for obtaining the right html tags
+            # and scraping the details required
+            soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+
+            thread_images = []
+
+            thread_img_ele = soup.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;expando&#34;})
+
+            if thread_img_ele is not None:
+                thread_image_a_tags = thread_img_ele.find_all(&#34;a&#34;, attrs={&#34;class&#34;, &#34;may-blank&#34;})
+                thread_iframe_tag = thread_img_ele.find(&#34;iframe&#34;, attrs={&#34;class&#34;, &#34;media-embed&#34;})
+
+                if thread_image_a_tags is not None and len(thread_image_a_tags) &gt;= 1:
+                    for thread_image_a_tag in thread_image_a_tags:
+                        logging.debug(thread_image_a_tag.attrs[&#34;href&#34;])
+                        if self.validations.validate_if_url_is_a_valid_img_link(
+                                thread_image_a_tag.attrs[&#34;href&#34;], self.constants.possible_urls):
+                            thread_images.append(thread_image_a_tag.attrs[&#34;href&#34;])
+
+                        img_tag = thread_img_ele.find(&#34;img&#34;, attrs={&#34;class&#34;, &#34;preview&#34;})
+
+                        if img_tag is not None:
+                            logging.debug(img_tag.attrs[&#34;src&#34;])
+                            if self.validations.validate_if_url_is_a_valid_img_link(
+                                    img_tag.attrs[&#34;src&#34;], self.constants.possible_urls):
+                                thread_images.append(img_tag.attrs[&#34;src&#34;])
+
+                if thread_iframe_tag is not None:
+                    logging.debug(thread_iframe_tag.attrs[&#34;src&#34;])
+                    if self.validations.validate_image_url(
+                            self.constants.possible_urls, thread_iframe_tag.attrs[&#34;src&#34;]):
+                        thread_images.append(thread_iframe_tag.attrs[&#34;src&#34;])
+
+            thread_images = list(set(thread_images))
+
+            thread_comments, img_urls = self.comment_scrapper.scrape_comments(soup)
+
+            # Remove all elements from thread_images that contain the value &#34;crop=smart&#34;
+            thread_images = [x for x in thread_images if &#34;crop=smart&#34; not in x]
+
+            logging.debug(thread_images)
+            logging.debug(len(thread_images))
+
+            img_urls = img_urls + thread_images
+            return thread_comments, img_urls</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="src.core.scrapper.thread_scrapper.ThreadScrapper.scrape_single_thread"><code class="name flex">
+<span>def <span class="ident">scrape_single_thread</span></span>(<span>self, link: str, verbose: bool)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scrapes the given Reddit thread URL and returns a tuple containing a list of image URLs and a dictionary of
+comments.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>link</code></strong> :&ensp;<code>str</code></dt>
+<dd>The URL of the Reddit thread to be scraped.</dd>
+<dt><strong><code>verbose</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Whether to print verbose logging messages.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple[Any, dict[str, dict[str, Any]]]</code></dt>
+<dd>A tuple containing a list of image URLs and a dictionary of comments.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@logger_wraps()
+def scrape_single_thread(self, link: str, verbose: bool):
+    &#34;&#34;&#34;
+    Scrapes the given Reddit thread URL and returns a tuple containing a list of image URLs and a dictionary of
+     comments.
+
+    Args:
+        link (str): The URL of the Reddit thread to be scraped.
+        verbose (bool): Whether to print verbose logging messages.
+
+    Returns:
+        tuple[Any, dict[str, dict[str, Any]]]: A tuple containing a list of image URLs and a dictionary of comments.
+    &#34;&#34;&#34;
+    msg = &#34;Scraping thread: {}{}&#34;.format(self.constants.old_reddit_url, link)
+    logger.info(msg) if verbose else None
+
+    # Using a user-agent to mimic browser activity
+    req = self.request_manager.request_page(self.constants.old_reddit_url + link, self.constants.user_agent)
+
+    if req is not None:
+        # Parsing through the web page for obtaining the right html tags
+        # and scraping the details required
+        soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+
+        thread_images = []
+
+        thread_img_ele = soup.find(&#34;div&#34;, attrs={&#34;class&#34;, &#34;expando&#34;})
+
+        if thread_img_ele is not None:
+            thread_image_a_tags = thread_img_ele.find_all(&#34;a&#34;, attrs={&#34;class&#34;, &#34;may-blank&#34;})
+            thread_iframe_tag = thread_img_ele.find(&#34;iframe&#34;, attrs={&#34;class&#34;, &#34;media-embed&#34;})
+
+            if thread_image_a_tags is not None and len(thread_image_a_tags) &gt;= 1:
+                for thread_image_a_tag in thread_image_a_tags:
+                    logging.debug(thread_image_a_tag.attrs[&#34;href&#34;])
+                    if self.validations.validate_if_url_is_a_valid_img_link(
+                            thread_image_a_tag.attrs[&#34;href&#34;], self.constants.possible_urls):
+                        thread_images.append(thread_image_a_tag.attrs[&#34;href&#34;])
+
+                    img_tag = thread_img_ele.find(&#34;img&#34;, attrs={&#34;class&#34;, &#34;preview&#34;})
+
+                    if img_tag is not None:
+                        logging.debug(img_tag.attrs[&#34;src&#34;])
+                        if self.validations.validate_if_url_is_a_valid_img_link(
+                                img_tag.attrs[&#34;src&#34;], self.constants.possible_urls):
+                            thread_images.append(img_tag.attrs[&#34;src&#34;])
+
+            if thread_iframe_tag is not None:
+                logging.debug(thread_iframe_tag.attrs[&#34;src&#34;])
+                if self.validations.validate_image_url(
+                        self.constants.possible_urls, thread_iframe_tag.attrs[&#34;src&#34;]):
+                    thread_images.append(thread_iframe_tag.attrs[&#34;src&#34;])
+
+        thread_images = list(set(thread_images))
+
+        thread_comments, img_urls = self.comment_scrapper.scrape_comments(soup)
+
+        # Remove all elements from thread_images that contain the value &#34;crop=smart&#34;
+        thread_images = [x for x in thread_images if &#34;crop=smart&#34; not in x]
+
+        logging.debug(thread_images)
+        logging.debug(len(thread_images))
+
+        img_urls = img_urls + thread_images
+        return thread_comments, img_urls</code></pre>
+</details>
+</dd>
+<dt id="src.core.scrapper.thread_scrapper.ThreadScrapper.scrape_threads"><code class="name flex">
+<span>def <span class="ident">scrape_threads</span></span>(<span>self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool, max_counter: Optional[int] = None) ‑> Dict[str, Union[Dict[str, Union[Dict[str, Any], bs4.element.ResultSet[Any], Any]], Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scrape threads from a subreddit or user and return the results.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>subreddit_or_user</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the subreddit or user from which to scrape threads.</dd>
+<dt><strong><code>sort</code></strong> :&ensp;<code>str</code></dt>
+<dd>The method to sort the threads, such as "hot" or "top".</dd>
+<dt><strong><code>scrape_mode</code></strong> :&ensp;<code>str</code></dt>
+<dd>The mode in which to scrape threads, either "subreddit" or "user".</dd>
+<dt><strong><code>verbose</code></strong> :&ensp;<code>bool</code></dt>
+<dd>A flag indicating whether to log verbose output.</dd>
+<dt><strong><code>max_counter</code></strong> :&ensp;<code>Optional[int]</code>, optional</dt>
+<dd>The maximum number of threads to scrape. Defaults to None.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Dict[str, Union[ Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]],
+Any]]:
+A dictionary of thread URLs and their corresponding information, such as their author, datetime,
+rating, URLs, and comments.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
+                   max_counter: Optional[int] = None
+                   ) -&gt; Dict[
+    str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]]:
+    &#34;&#34;&#34;
+    Scrape threads from a subreddit or user and return the results.
+
+    Args:
+        subreddit_or_user (str): The name of the subreddit or user from which to scrape threads.
+        sort (str): The method to sort the threads, such as &#34;hot&#34; or &#34;top&#34;.
+        scrape_mode (str): The mode in which to scrape threads, either &#34;subreddit&#34; or &#34;user&#34;.
+        verbose (bool): A flag indicating whether to log verbose output.
+        max_counter (Optional[int], optional): The maximum number of threads to scrape. Defaults to None.
+
+    Returns:
+        Dict[str, Union[ Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]],
+            Any]]:
+            A dictionary of thread URLs and their corresponding information, such as their author, datetime,
+             rating, URLs, and comments.
+    &#34;&#34;&#34;
+    params: Optional[Dict[str, Any]] = None
+
+    if scrape_mode == &#34;subreddit&#34;:
+        endpoint = &#34;/r/{}/{}&#34;.format(subreddit_or_user, sort)
+        url = &#34;{}{}&#34;.format(self.constants.old_reddit_url, endpoint)
+    else:
+        # Generating the URL leading to the desired subreddit
+        endpoint = &#34;/user/{}/{}&#34;.format(subreddit_or_user, &#34;submitted&#34;)
+        url = &#34;{}{}&#34;.format(self.constants.old_reddit_url, endpoint)
+        params = self.reddit_api.generate_params_for_reddit_api_req(None, None, None, None, &#34;all&#34;, None)
+
+    req = self.request_manager.request_page(
+        url,
+        self.constants.user_agent,
+        params if params is not None else None
+    )
+
+    threads_urls: Dict[
+        str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]
+    ] = {}  # noqa comments
+    thread_img_urls = {}
+
+    counter = 1
+    full = False
+    if req.status_code == 200:
+        msg = &#34;\nCollecting information for {}....&#34;.format(url)
+        logger.info(msg) if verbose else None
+
+        soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+
+        if scrape_mode == &#34;subreddit&#34;:
+            soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+            threads_list_element = soup.find(
+                &#34;div&#34;, attrs={&#34;class&#34;: &#34;sitetable linklisting&#34;})
+            threads = threads_list_element.find_all(
+                &#34;div&#34;, attrs={&#34;data-subreddit-prefixed&#34;: &#34;r/{}&#34;.format(subreddit_or_user)})
+        else:
+            threads_list_element = soup.find(&#34;div&#34;, attrs={&#34;class&#34;: &#34;sitetable linklisting&#34;})
+            threads = threads_list_element.find_all(&#34;div&#34;, attrs={&#34;data-author&#34;: subreddit_or_user})
+
+        max_count = (int(max_counter) if max_counter is not None else len(threads))
+
+        while full is not True:
+            for thread in threads:
+                try:
+                    msg = &#34;\nCollecting information from thread {} of {}...&#34;.format(counter, max_count)
+                    logger.info(msg) if verbose else None
+
+                    thread_details_path = thread.attrs[&#34;data-permalink&#34;]
+                    thread_url = self.constants.old_reddit_url + thread_details_path
+
+                    thread_comments, img_urls = self.scrape_single_thread(
+                        thread_details_path, verbose
+                    )
+
+                    current_thread = &#34;{}&#34;.format(thread_url)
+                    thread_img_urls[current_thread] = {
+                        &#34;author&#34;: self.scraper_helper.construct_author_dict(thread),
+                        &#34;datetime&#34;: self.scraper_helper.construct_time_dict(thread),
+                        &#34;rating&#34;: self.scraper_helper.construct_thread_rating_dict(thread),
+                        &#34;thread_url&#34;: thread_url,
+                        &#34;urls&#34;: img_urls,
+                        &#34;comments&#34;: thread_comments
+                    }
+
+                    msg = &#34;Finished scrapping images for thread {}. {} images where scraped&#34;.format(
+                        thread_url, len(list(set(img_urls))))
+                    logger.info(msg) if verbose else None
+
+                    if counter == max_count:
+                        full = True
+                        break
+                    time.sleep(2)
+                    counter += 1
+                except AttributeError:
+                    continue
+            if full:
+                break
+
+            try:
+                next_button = soup.find(&#34;span&#34;, class_=&#34;next-button&#34;)
+                next_page_link = next_button.find(&#34;a&#34;).attrs[&#34;href&#34;]  # type: ignore
+
+                req = requests.get(next_page_link, headers=self.constants.user_agent, timeout=10)
+                soup = BeautifulSoup(req.text, &#34;html.parser&#34;)
+            except TokenErrorException as exc:
+                self.logging_funcs.print_exception_log(str(exc), verbose)
+                break
+
+        threads_urls[subreddit_or_user] = thread_img_urls
+
+        logger.debug(&#34;[5] FINISHED SCRAPING STEP&#34;, verbose)
+    else:
+        message = &#34;Error fetching results.. Try again!&#34;
+        self.logging_funcs.print_exception_log(message, verbose)
+
+    return threads_urls</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.core.scrapper" href="index.html">src.core.scrapper</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.core.scrapper.thread_scrapper.ThreadScrapper" href="#src.core.scrapper.thread_scrapper.ThreadScrapper">ThreadScrapper</a></code></h4>
+<ul class="">
+<li><code><a title="src.core.scrapper.thread_scrapper.ThreadScrapper.scrape_single_thread" href="#src.core.scrapper.thread_scrapper.ThreadScrapper.scrape_single_thread">scrape_single_thread</a></code></li>
+<li><code><a title="src.core.scrapper.thread_scrapper.ThreadScrapper.scrape_threads" href="#src.core.scrapper.thread_scrapper.ThreadScrapper.scrape_threads">scrape_threads</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

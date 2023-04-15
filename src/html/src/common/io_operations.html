@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.common.io_operations API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.common.io_operations</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import glob
+import json
+import mimetypes
+import os
+import shutil
+import sys
+from pathlib import Path
+from typing import Any
+from loguru import logger       # type: ignore
+from tqdm import tqdm
+from PIL import Image       # type: ignore
+
+from common.constants import ConstantsNamespace     # type: ignore
+from common.logging.logging_setup import LoggingSetup       # type: ignore
+
+
+class IOOperations:
+    &#34;&#34;&#34;
+    The IOOperations class provides methods for input-output operations, including writing detailed post information,
+    validating directories, sorting files by MIME type and resolution, and deleting original files.
+
+    This class requires access to the ConstantsNamespace and LoggingSetup classes from the common package, as well as
+    the PIL library for image processing.
+
+    Methods:
+        - def write_detailed_post_information(payload: Any, operation: str, filename) -&gt; None:
+            Writes payload to a file with the given filename, using the specified operation mode. The file format is
+            determined by the extension of the filename. output_post_detailed_information(payload): Writes all image
+            URLs in payload to a JSON file named src/output/image_urls.json, sorted by subreddit and post.
+        - def validate_directories(input_dir):
+            Checks if the input_dir directory exists. If it does not exist, logs an
+            error message and exits the program.
+        - def sort_by_mime_type_and_resolution(input_dir: Path, output_dir: Path, remove: bool):
+            Sorts all files in the input_dir directory by MIME type and resolution. The sorted files are copied to the
+            corresponding folders in the output_dir directory, and original files are deleted if the remove flag is set
+             to True.
+        -def delete_original_files(input_dir, remove): Deletes all original files in the input_dir directory if the
+        remove flag is set to True.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.logging_funcs = LoggingSetup()
+        self.constants = ConstantsNamespace()
+
+    def validate_path(self, path):
+        if os.path.exists(path):
+            if os.path.isfile(path):
+                logger.debug(&#34;Valid file path but not directory&#34;)
+                is_valid = False
+            elif os.path.isdir(path):
+                logger.debug(&#34;Valid directory path&#34;)
+                is_valid = True
+            else:
+                logger.debug(&#34;Valid path, but not a file or directory&#34;)
+                is_valid = False
+        else:
+            logger.error(&#34;Error: Invalid Path:&#34;, path)
+            raise OSError(&#34;Error: Invalid Path:&#34;, path)
+
+        return is_valid
+
+    def init_directory(self, path):
+        &#34;&#34;&#34;
+        Checks if a directory exists at the given path and creates it if it does not exist.
+
+        Args:
+        path (str): The path to the directory to check/create.
+        &#34;&#34;&#34;
+        if not os.path.exists(path):
+            os.makedirs(path)
+            msg = &#34;Directory created at {}&#34;.format(path)
+            logger.debug(msg)
+        else:
+            msg = &#34;Directory already exists at {}&#34;.format(path)
+            logger.debug(msg)
+
+    def init_directories(self, output):
+        output_directory = None
+
+        if output is not None:
+            if self.validate_path(output):
+                logger.debug(&#34;Provided output parameter: {} is VALID&#34;.format(output))
+                output_directory = output
+        else:
+            # Check if the Documents folder exists in the user&#39;s home directory. If not attempt to create it
+            if os.name == &#39;nt&#39;:  # for Windows systems
+                docs_folder = os.path.join(os.path.expanduser(&#34;~&#34;), &#34;Documents&#34;)
+            else:  # for Linux and macOS systems
+                docs_folder = os.path.join(os.path.expanduser(&#34;~&#34;), &#34;Documents&#34;)
+
+            if os.path.exists(docs_folder):
+                logger.debug(&#34;Documents folder exists at:&#34;, docs_folder)
+            else:
+                try:
+                    logger.debug(&#34;Documents folder doesn&#39;t exist at: {}. \n Attempt to create it.&#34;.format(docs_folder))
+                    output_directory = os.path.join(docs_folder, &#34;output&#34;)
+                    os.makedirs(output_directory)
+                    logger.debug(&#34;Documents folder created at:&#34;, output_directory)
+                except OSError as exc:
+                    logger.error(&#34;Error creating Documents folder:&#34;, exc)
+                    raise OSError(&#34;Error creating Documents folder:&#34;, exc)
+
+            output_directory = os.path.join(docs_folder, &#34;output&#34;)
+
+        user_reports = os.path.join(output_directory, &#34;reports/users&#34;)
+        subreddit_reports = os.path.join(output_directory, &#34;reports/subreddits&#34;)
+        subreddit_downloads_directory = os.path.join(output_directory, &#34;downloads/subreddit&#34;)
+        user_downloads_directory = os.path.join(output_directory, &#34;downloads/subreddit&#34;)
+        logs = os.path.join(output_directory, &#34;logs&#34;)
+
+        self.init_directory(output_directory)
+        self.init_directory(user_reports)
+        self.init_directory(subreddit_reports)
+        self.init_directory(subreddit_downloads_directory)
+        self.init_directory(user_downloads_directory)
+        self.init_directory(logs)
+
+        return output_directory
+
+    def validate_directory(self, input_dir):
+        &#34;&#34;&#34;Check if the input directory exists and exit if it does not.
+
+        Args:
+            input_dir: The path to the input directory.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        # Checking if input directory exists
+        input_dir_path = Path(input_dir)
+        if not input_dir_path.exists():
+            logger.error(&#34;Input directory does not exist&#34;)
+            sys.exit()
+
+    def write_detailed_post_information(self, payload: Any, operation: str, filename: str, verbose: bool) -&gt; None:
+        &#34;&#34;&#34;Write payload to a file in the specified format.
+
+        Args:
+            payload: The data to be written to the file.
+            operation: The file operation mode (&#39;w&#39; for write, &#39;a&#39; for append, etc.).
+            filename: The path and filename of the file to write to.
+            verbose: Boolean flag that controls the verbosity output
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        logger.debug(&#34;[9] STARTED WRITING SUBREDDIT REPORT INFORMATION STEP&#34;, verbose)
+
+        extension = Path(filename).suffixes[-1]
+
+        with open(filename, operation, encoding=&#34;utf-8&#34;) as file:
+            if extension == &#34;.txt&#34;:
+                file.write(payload)
+            elif extension == &#34;.json&#34;:
+                json_str = json.dumps(payload, indent=4)
+                file.write(json_str)
+
+        logger.debug(&#34;[9] FINISHED WRITING SUBREDDIT REPORT INFORMATION STEP&#34;, verbose)
+
+    def create_output_folder_and_move_files(
+            self, file_path: Path, output_dir: Path, matching_value: str, mimetype: str):
+        &#34;&#34;&#34;
+        Creates the output folder and then moves the files to said folder
+        Args:
+            file_path:
+            output_dir:
+            matching_value:
+            mimetype:
+
+        Returns:
+
+        &#34;&#34;&#34;
+        destination_path = os.path.join(
+            output_dir, matching_value, mimetype.split(&#34;/&#34;)[1]
+        )
+
+        os.makedirs(destination_path, exist_ok=True)
+        shutil.copy2(file_path, destination_path)
+        msg = &#34;Copied {} to {}&#34;.format(file_path, destination_path)
+        logger.debug(msg)
+
+    def delete_original_files(self, input_dir, remove, verbose):
+        &#34;&#34;&#34;Delete the original files from the input directory if `remove` is True.
+
+        Args:
+            verbose:
+            input_dir: The path to the input directory.
+            remove: Whether to remove the original files.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        logger.debug(&#34;[8] STARTED CLEANUP STEP&#34;, verbose)
+        if remove:
+            input_dir_path = Path(input_dir)
+            for file in input_dir_path.iterdir():
+                if file.is_file():
+                    file.unlink()
+
+        logger.debug(&#34;[8] FINISHED CLEANUP STEP&#34;, verbose)
+
+    def sort_by_mime_type_and_resolution(self, input_dir: Path, output_dir: Path, remove: bool, verbose):
+        &#34;&#34;&#34;Sort image files in the input directory by MIME type and resolution and save them to the
+        output directory.
+
+        Args:
+            verbose:
+            input_dir: The path to the input directory.
+            output_dir: The path to the output directory.
+            remove: Whether to remove the original files after copying.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        logger.debug(&#34;[7] STARTED FILE SORTING STEP&#34;, verbose)
+
+        msg = &#34;Sorting downloaded images&#34;
+        logger.info(msg) if verbose else None
+
+        image_files = glob.glob(str(input_dir) + &#34;/*.jpg&#34;) + glob.glob(str(input_dir) + &#34;/*.png&#34;) + glob.glob(
+            str(input_dir) + &#34;/*.gif&#34;)
+
+        # Wrapping the loop with tqdm and customize the appearance of the progress bar
+        with tqdm(
+                total=len(image_files),
+                desc=&#34;Sorting images&#34;,
+                ncols=100,
+                colour=&#34;green&#34;,
+                unit_scale=True,
+                dynamic_ncols=True) as pbar:
+            for file_path in Path(input_dir).glob(&#34;*.*&#34;):
+                try:
+                    with Image.open(file_path) as img:
+                        width, height = img.size
+                        mimetype, _ = mimetypes.guess_type(str(file_path))
+                        # checks if img path has a mimetype, and it starts with image/.*
+                        if mimetype and mimetype.startswith(&#34;image/&#34;):
+                            # match the resolution to the resolutions in the resolutions dict
+                            matching_key = next((resolution for resolution in self.constants.resolutions.keys() if
+                                                 resolution[0] &lt;= width &lt;= resolution[2] and resolution[1] &lt;= height &lt;=
+                                                 resolution[3]), None)
+
+                            # If any of resolutions match, save the img to the corresponding folder, if it doesn&#39;t
+                            # save the image to an &#34;other&#34; folder
+                            if matching_key:
+                                matching_value = self.constants.resolutions[matching_key]
+
+                                msg = &#34;The corresponding resolution designation for the matching resolution {} is {}.&#34;\
+                                    .format(matching_key, matching_value)
+                                logger.debug(msg)
+
+                                self.create_output_folder_and_move_files(
+                                    file_path, output_dir, matching_value, mimetype)
+                            else:
+                                logger.debug(&#34;The resolution is not in the dictionary.&#34;)
+
+                                self.create_output_folder_and_move_files(file_path, output_dir, &#34;other&#34;, mimetype)
+
+                except IOError as exc:
+                    logger.error(&#34;Error occurred while processing %s: %s&#34;, file_path, exc)
+                pbar.update(1)
+
+        logger.debug(&#34;[7] FINISHED FILE SORTING STEP&#34;, verbose)
+
+        # if remove flag is passed delete the original files
+        self.delete_original_files(input_dir, remove, verbose)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.common.io_operations.IOOperations"><code class="flex name class">
+<span>class <span class="ident">IOOperations</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>The IOOperations class provides methods for input-output operations, including writing detailed post information,
+validating directories, sorting files by MIME type and resolution, and deleting original files.</p>
+<p>This class requires access to the ConstantsNamespace and LoggingSetup classes from the common package, as well as
+the PIL library for image processing.</p>
+<h2 id="methods">Methods</h2>
+<ul>
+<li>def write_detailed_post_information(payload: Any, operation: str, filename) -&gt; None:
+Writes payload to a file with the given filename, using the specified operation mode. The file format is
+determined by the extension of the filename. output_post_detailed_information(payload): Writes all image
+URLs in payload to a JSON file named src/output/image_urls.json, sorted by subreddit and post.</li>
+<li>def validate_directories(input_dir):
+Checks if the input_dir directory exists. If it does not exist, logs an
+error message and exits the program.</li>
+<li>def sort_by_mime_type_and_resolution(input_dir: Path, output_dir: Path, remove: bool):
+Sorts all files in the input_dir directory by MIME type and resolution. The sorted files are copied to the
+corresponding folders in the output_dir directory, and original files are deleted if the remove flag is set
+to True.
+-def delete_original_files(input_dir, remove): Deletes all original files in the input_dir directory if the
+remove flag is set to True.</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class IOOperations:
+    &#34;&#34;&#34;
+    The IOOperations class provides methods for input-output operations, including writing detailed post information,
+    validating directories, sorting files by MIME type and resolution, and deleting original files.
+
+    This class requires access to the ConstantsNamespace and LoggingSetup classes from the common package, as well as
+    the PIL library for image processing.
+
+    Methods:
+        - def write_detailed_post_information(payload: Any, operation: str, filename) -&gt; None:
+            Writes payload to a file with the given filename, using the specified operation mode. The file format is
+            determined by the extension of the filename. output_post_detailed_information(payload): Writes all image
+            URLs in payload to a JSON file named src/output/image_urls.json, sorted by subreddit and post.
+        - def validate_directories(input_dir):
+            Checks if the input_dir directory exists. If it does not exist, logs an
+            error message and exits the program.
+        - def sort_by_mime_type_and_resolution(input_dir: Path, output_dir: Path, remove: bool):
+            Sorts all files in the input_dir directory by MIME type and resolution. The sorted files are copied to the
+            corresponding folders in the output_dir directory, and original files are deleted if the remove flag is set
+             to True.
+        -def delete_original_files(input_dir, remove): Deletes all original files in the input_dir directory if the
+        remove flag is set to True.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        super().__init__()
+        self.logging_funcs = LoggingSetup()
+        self.constants = ConstantsNamespace()
+
+    def validate_path(self, path):
+        if os.path.exists(path):
+            if os.path.isfile(path):
+                logger.debug(&#34;Valid file path but not directory&#34;)
+                is_valid = False
+            elif os.path.isdir(path):
+                logger.debug(&#34;Valid directory path&#34;)
+                is_valid = True
+            else:
+                logger.debug(&#34;Valid path, but not a file or directory&#34;)
+                is_valid = False
+        else:
+            logger.error(&#34;Error: Invalid Path:&#34;, path)
+            raise OSError(&#34;Error: Invalid Path:&#34;, path)
+
+        return is_valid
+
+    def init_directory(self, path):
+        &#34;&#34;&#34;
+        Checks if a directory exists at the given path and creates it if it does not exist.
+
+        Args:
+        path (str): The path to the directory to check/create.
+        &#34;&#34;&#34;
+        if not os.path.exists(path):
+            os.makedirs(path)
+            msg = &#34;Directory created at {}&#34;.format(path)
+            logger.debug(msg)
+        else:
+            msg = &#34;Directory already exists at {}&#34;.format(path)
+            logger.debug(msg)
+
+    def init_directories(self, output):
+        output_directory = None
+
+        if output is not None:
+            if self.validate_path(output):
+                logger.debug(&#34;Provided output parameter: {} is VALID&#34;.format(output))
+                output_directory = output
+        else:
+            # Check if the Documents folder exists in the user&#39;s home directory. If not attempt to create it
+            if os.name == &#39;nt&#39;:  # for Windows systems
+                docs_folder = os.path.join(os.path.expanduser(&#34;~&#34;), &#34;Documents&#34;)
+            else:  # for Linux and macOS systems
+                docs_folder = os.path.join(os.path.expanduser(&#34;~&#34;), &#34;Documents&#34;)
+
+            if os.path.exists(docs_folder):
+                logger.debug(&#34;Documents folder exists at:&#34;, docs_folder)
+            else:
+                try:
+                    logger.debug(&#34;Documents folder doesn&#39;t exist at: {}. \n Attempt to create it.&#34;.format(docs_folder))
+                    output_directory = os.path.join(docs_folder, &#34;output&#34;)
+                    os.makedirs(output_directory)
+                    logger.debug(&#34;Documents folder created at:&#34;, output_directory)
+                except OSError as exc:
+                    logger.error(&#34;Error creating Documents folder:&#34;, exc)
+                    raise OSError(&#34;Error creating Documents folder:&#34;, exc)
+
+            output_directory = os.path.join(docs_folder, &#34;output&#34;)
+
+        user_reports = os.path.join(output_directory, &#34;reports/users&#34;)
+        subreddit_reports = os.path.join(output_directory, &#34;reports/subreddits&#34;)
+        subreddit_downloads_directory = os.path.join(output_directory, &#34;downloads/subreddit&#34;)
+        user_downloads_directory = os.path.join(output_directory, &#34;downloads/subreddit&#34;)
+        logs = os.path.join(output_directory, &#34;logs&#34;)
+
+        self.init_directory(output_directory)
+        self.init_directory(user_reports)
+        self.init_directory(subreddit_reports)
+        self.init_directory(subreddit_downloads_directory)
+        self.init_directory(user_downloads_directory)
+        self.init_directory(logs)
+
+        return output_directory
+
+    def validate_directory(self, input_dir):
+        &#34;&#34;&#34;Check if the input directory exists and exit if it does not.
+
+        Args:
+            input_dir: The path to the input directory.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        # Checking if input directory exists
+        input_dir_path = Path(input_dir)
+        if not input_dir_path.exists():
+            logger.error(&#34;Input directory does not exist&#34;)
+            sys.exit()
+
+    def write_detailed_post_information(self, payload: Any, operation: str, filename: str, verbose: bool) -&gt; None:
+        &#34;&#34;&#34;Write payload to a file in the specified format.
+
+        Args:
+            payload: The data to be written to the file.
+            operation: The file operation mode (&#39;w&#39; for write, &#39;a&#39; for append, etc.).
+            filename: The path and filename of the file to write to.
+            verbose: Boolean flag that controls the verbosity output
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        logger.debug(&#34;[9] STARTED WRITING SUBREDDIT REPORT INFORMATION STEP&#34;, verbose)
+
+        extension = Path(filename).suffixes[-1]
+
+        with open(filename, operation, encoding=&#34;utf-8&#34;) as file:
+            if extension == &#34;.txt&#34;:
+                file.write(payload)
+            elif extension == &#34;.json&#34;:
+                json_str = json.dumps(payload, indent=4)
+                file.write(json_str)
+
+        logger.debug(&#34;[9] FINISHED WRITING SUBREDDIT REPORT INFORMATION STEP&#34;, verbose)
+
+    def create_output_folder_and_move_files(
+            self, file_path: Path, output_dir: Path, matching_value: str, mimetype: str):
+        &#34;&#34;&#34;
+        Creates the output folder and then moves the files to said folder
+        Args:
+            file_path:
+            output_dir:
+            matching_value:
+            mimetype:
+
+        Returns:
+
+        &#34;&#34;&#34;
+        destination_path = os.path.join(
+            output_dir, matching_value, mimetype.split(&#34;/&#34;)[1]
+        )
+
+        os.makedirs(destination_path, exist_ok=True)
+        shutil.copy2(file_path, destination_path)
+        msg = &#34;Copied {} to {}&#34;.format(file_path, destination_path)
+        logger.debug(msg)
+
+    def delete_original_files(self, input_dir, remove, verbose):
+        &#34;&#34;&#34;Delete the original files from the input directory if `remove` is True.
+
+        Args:
+            verbose:
+            input_dir: The path to the input directory.
+            remove: Whether to remove the original files.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        logger.debug(&#34;[8] STARTED CLEANUP STEP&#34;, verbose)
+        if remove:
+            input_dir_path = Path(input_dir)
+            for file in input_dir_path.iterdir():
+                if file.is_file():
+                    file.unlink()
+
+        logger.debug(&#34;[8] FINISHED CLEANUP STEP&#34;, verbose)
+
+    def sort_by_mime_type_and_resolution(self, input_dir: Path, output_dir: Path, remove: bool, verbose):
+        &#34;&#34;&#34;Sort image files in the input directory by MIME type and resolution and save them to the
+        output directory.
+
+        Args:
+            verbose:
+            input_dir: The path to the input directory.
+            output_dir: The path to the output directory.
+            remove: Whether to remove the original files after copying.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
+        logger.debug(&#34;[7] STARTED FILE SORTING STEP&#34;, verbose)
+
+        msg = &#34;Sorting downloaded images&#34;
+        logger.info(msg) if verbose else None
+
+        image_files = glob.glob(str(input_dir) + &#34;/*.jpg&#34;) + glob.glob(str(input_dir) + &#34;/*.png&#34;) + glob.glob(
+            str(input_dir) + &#34;/*.gif&#34;)
+
+        # Wrapping the loop with tqdm and customize the appearance of the progress bar
+        with tqdm(
+                total=len(image_files),
+                desc=&#34;Sorting images&#34;,
+                ncols=100,
+                colour=&#34;green&#34;,
+                unit_scale=True,
+                dynamic_ncols=True) as pbar:
+            for file_path in Path(input_dir).glob(&#34;*.*&#34;):
+                try:
+                    with Image.open(file_path) as img:
+                        width, height = img.size
+                        mimetype, _ = mimetypes.guess_type(str(file_path))
+                        # checks if img path has a mimetype, and it starts with image/.*
+                        if mimetype and mimetype.startswith(&#34;image/&#34;):
+                            # match the resolution to the resolutions in the resolutions dict
+                            matching_key = next((resolution for resolution in self.constants.resolutions.keys() if
+                                                 resolution[0] &lt;= width &lt;= resolution[2] and resolution[1] &lt;= height &lt;=
+                                                 resolution[3]), None)
+
+                            # If any of resolutions match, save the img to the corresponding folder, if it doesn&#39;t
+                            # save the image to an &#34;other&#34; folder
+                            if matching_key:
+                                matching_value = self.constants.resolutions[matching_key]
+
+                                msg = &#34;The corresponding resolution designation for the matching resolution {} is {}.&#34;\
+                                    .format(matching_key, matching_value)
+                                logger.debug(msg)
+
+                                self.create_output_folder_and_move_files(
+                                    file_path, output_dir, matching_value, mimetype)
+                            else:
+                                logger.debug(&#34;The resolution is not in the dictionary.&#34;)
+
+                                self.create_output_folder_and_move_files(file_path, output_dir, &#34;other&#34;, mimetype)
+
+                except IOError as exc:
+                    logger.error(&#34;Error occurred while processing %s: %s&#34;, file_path, exc)
+                pbar.update(1)
+
+        logger.debug(&#34;[7] FINISHED FILE SORTING STEP&#34;, verbose)
+
+        # if remove flag is passed delete the original files
+        self.delete_original_files(input_dir, remove, verbose)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="src.common.io_operations.IOOperations.create_output_folder_and_move_files"><code class="name flex">
+<span>def <span class="ident">create_output_folder_and_move_files</span></span>(<span>self, file_path: pathlib.Path, output_dir: pathlib.Path, matching_value: str, mimetype: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates the output folder and then moves the files to said folder</p>
+<h2 id="args">Args</h2>
+<p>file_path:
+output_dir:
+matching_value:
+mimetype:
+Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_output_folder_and_move_files(
+        self, file_path: Path, output_dir: Path, matching_value: str, mimetype: str):
+    &#34;&#34;&#34;
+    Creates the output folder and then moves the files to said folder
+    Args:
+        file_path:
+        output_dir:
+        matching_value:
+        mimetype:
+
+    Returns:
+
+    &#34;&#34;&#34;
+    destination_path = os.path.join(
+        output_dir, matching_value, mimetype.split(&#34;/&#34;)[1]
+    )
+
+    os.makedirs(destination_path, exist_ok=True)
+    shutil.copy2(file_path, destination_path)
+    msg = &#34;Copied {} to {}&#34;.format(file_path, destination_path)
+    logger.debug(msg)</code></pre>
+</details>
+</dd>
+<dt id="src.common.io_operations.IOOperations.delete_original_files"><code class="name flex">
+<span>def <span class="ident">delete_original_files</span></span>(<span>self, input_dir, remove, verbose)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Delete the original files from the input directory if <code>remove</code> is True.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>verbose:</dt>
+<dt><strong><code>input_dir</code></strong></dt>
+<dd>The path to the input directory.</dd>
+<dt><strong><code>remove</code></strong></dt>
+<dd>Whether to remove the original files.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_original_files(self, input_dir, remove, verbose):
+    &#34;&#34;&#34;Delete the original files from the input directory if `remove` is True.
+
+    Args:
+        verbose:
+        input_dir: The path to the input directory.
+        remove: Whether to remove the original files.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    logger.debug(&#34;[8] STARTED CLEANUP STEP&#34;, verbose)
+    if remove:
+        input_dir_path = Path(input_dir)
+        for file in input_dir_path.iterdir():
+            if file.is_file():
+                file.unlink()
+
+    logger.debug(&#34;[8] FINISHED CLEANUP STEP&#34;, verbose)</code></pre>
+</details>
+</dd>
+<dt id="src.common.io_operations.IOOperations.init_directories"><code class="name flex">
+<span>def <span class="ident">init_directories</span></span>(<span>self, output)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def init_directories(self, output):
+    output_directory = None
+
+    if output is not None:
+        if self.validate_path(output):
+            logger.debug(&#34;Provided output parameter: {} is VALID&#34;.format(output))
+            output_directory = output
+    else:
+        # Check if the Documents folder exists in the user&#39;s home directory. If not attempt to create it
+        if os.name == &#39;nt&#39;:  # for Windows systems
+            docs_folder = os.path.join(os.path.expanduser(&#34;~&#34;), &#34;Documents&#34;)
+        else:  # for Linux and macOS systems
+            docs_folder = os.path.join(os.path.expanduser(&#34;~&#34;), &#34;Documents&#34;)
+
+        if os.path.exists(docs_folder):
+            logger.debug(&#34;Documents folder exists at:&#34;, docs_folder)
+        else:
+            try:
+                logger.debug(&#34;Documents folder doesn&#39;t exist at: {}. \n Attempt to create it.&#34;.format(docs_folder))
+                output_directory = os.path.join(docs_folder, &#34;output&#34;)
+                os.makedirs(output_directory)
+                logger.debug(&#34;Documents folder created at:&#34;, output_directory)
+            except OSError as exc:
+                logger.error(&#34;Error creating Documents folder:&#34;, exc)
+                raise OSError(&#34;Error creating Documents folder:&#34;, exc)
+
+        output_directory = os.path.join(docs_folder, &#34;output&#34;)
+
+    user_reports = os.path.join(output_directory, &#34;reports/users&#34;)
+    subreddit_reports = os.path.join(output_directory, &#34;reports/subreddits&#34;)
+    subreddit_downloads_directory = os.path.join(output_directory, &#34;downloads/subreddit&#34;)
+    user_downloads_directory = os.path.join(output_directory, &#34;downloads/subreddit&#34;)
+    logs = os.path.join(output_directory, &#34;logs&#34;)
+
+    self.init_directory(output_directory)
+    self.init_directory(user_reports)
+    self.init_directory(subreddit_reports)
+    self.init_directory(subreddit_downloads_directory)
+    self.init_directory(user_downloads_directory)
+    self.init_directory(logs)
+
+    return output_directory</code></pre>
+</details>
+</dd>
+<dt id="src.common.io_operations.IOOperations.init_directory"><code class="name flex">
+<span>def <span class="ident">init_directory</span></span>(<span>self, path)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if a directory exists at the given path and creates it if it does not exist.</p>
+<p>Args:
+path (str): The path to the directory to check/create.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def init_directory(self, path):
+    &#34;&#34;&#34;
+    Checks if a directory exists at the given path and creates it if it does not exist.
+
+    Args:
+    path (str): The path to the directory to check/create.
+    &#34;&#34;&#34;
+    if not os.path.exists(path):
+        os.makedirs(path)
+        msg = &#34;Directory created at {}&#34;.format(path)
+        logger.debug(msg)
+    else:
+        msg = &#34;Directory already exists at {}&#34;.format(path)
+        logger.debug(msg)</code></pre>
+</details>
+</dd>
+<dt id="src.common.io_operations.IOOperations.sort_by_mime_type_and_resolution"><code class="name flex">
+<span>def <span class="ident">sort_by_mime_type_and_resolution</span></span>(<span>self, input_dir: pathlib.Path, output_dir: pathlib.Path, remove: bool, verbose)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sort image files in the input directory by MIME type and resolution and save them to the
+output directory.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>verbose:</dt>
+<dt><strong><code>input_dir</code></strong></dt>
+<dd>The path to the input directory.</dd>
+<dt><strong><code>output_dir</code></strong></dt>
+<dd>The path to the output directory.</dd>
+<dt><strong><code>remove</code></strong></dt>
+<dd>Whether to remove the original files after copying.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sort_by_mime_type_and_resolution(self, input_dir: Path, output_dir: Path, remove: bool, verbose):
+    &#34;&#34;&#34;Sort image files in the input directory by MIME type and resolution and save them to the
+    output directory.
+
+    Args:
+        verbose:
+        input_dir: The path to the input directory.
+        output_dir: The path to the output directory.
+        remove: Whether to remove the original files after copying.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    logger.debug(&#34;[7] STARTED FILE SORTING STEP&#34;, verbose)
+
+    msg = &#34;Sorting downloaded images&#34;
+    logger.info(msg) if verbose else None
+
+    image_files = glob.glob(str(input_dir) + &#34;/*.jpg&#34;) + glob.glob(str(input_dir) + &#34;/*.png&#34;) + glob.glob(
+        str(input_dir) + &#34;/*.gif&#34;)
+
+    # Wrapping the loop with tqdm and customize the appearance of the progress bar
+    with tqdm(
+            total=len(image_files),
+            desc=&#34;Sorting images&#34;,
+            ncols=100,
+            colour=&#34;green&#34;,
+            unit_scale=True,
+            dynamic_ncols=True) as pbar:
+        for file_path in Path(input_dir).glob(&#34;*.*&#34;):
+            try:
+                with Image.open(file_path) as img:
+                    width, height = img.size
+                    mimetype, _ = mimetypes.guess_type(str(file_path))
+                    # checks if img path has a mimetype, and it starts with image/.*
+                    if mimetype and mimetype.startswith(&#34;image/&#34;):
+                        # match the resolution to the resolutions in the resolutions dict
+                        matching_key = next((resolution for resolution in self.constants.resolutions.keys() if
+                                             resolution[0] &lt;= width &lt;= resolution[2] and resolution[1] &lt;= height &lt;=
+                                             resolution[3]), None)
+
+                        # If any of resolutions match, save the img to the corresponding folder, if it doesn&#39;t
+                        # save the image to an &#34;other&#34; folder
+                        if matching_key:
+                            matching_value = self.constants.resolutions[matching_key]
+
+                            msg = &#34;The corresponding resolution designation for the matching resolution {} is {}.&#34;\
+                                .format(matching_key, matching_value)
+                            logger.debug(msg)
+
+                            self.create_output_folder_and_move_files(
+                                file_path, output_dir, matching_value, mimetype)
+                        else:
+                            logger.debug(&#34;The resolution is not in the dictionary.&#34;)
+
+                            self.create_output_folder_and_move_files(file_path, output_dir, &#34;other&#34;, mimetype)
+
+            except IOError as exc:
+                logger.error(&#34;Error occurred while processing %s: %s&#34;, file_path, exc)
+            pbar.update(1)
+
+    logger.debug(&#34;[7] FINISHED FILE SORTING STEP&#34;, verbose)
+
+    # if remove flag is passed delete the original files
+    self.delete_original_files(input_dir, remove, verbose)</code></pre>
+</details>
+</dd>
+<dt id="src.common.io_operations.IOOperations.validate_directory"><code class="name flex">
+<span>def <span class="ident">validate_directory</span></span>(<span>self, input_dir)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the input directory exists and exit if it does not.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>input_dir</code></strong></dt>
+<dd>The path to the input directory.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_directory(self, input_dir):
+    &#34;&#34;&#34;Check if the input directory exists and exit if it does not.
+
+    Args:
+        input_dir: The path to the input directory.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    # Checking if input directory exists
+    input_dir_path = Path(input_dir)
+    if not input_dir_path.exists():
+        logger.error(&#34;Input directory does not exist&#34;)
+        sys.exit()</code></pre>
+</details>
+</dd>
+<dt id="src.common.io_operations.IOOperations.validate_path"><code class="name flex">
+<span>def <span class="ident">validate_path</span></span>(<span>self, path)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_path(self, path):
+    if os.path.exists(path):
+        if os.path.isfile(path):
+            logger.debug(&#34;Valid file path but not directory&#34;)
+            is_valid = False
+        elif os.path.isdir(path):
+            logger.debug(&#34;Valid directory path&#34;)
+            is_valid = True
+        else:
+            logger.debug(&#34;Valid path, but not a file or directory&#34;)
+            is_valid = False
+    else:
+        logger.error(&#34;Error: Invalid Path:&#34;, path)
+        raise OSError(&#34;Error: Invalid Path:&#34;, path)
+
+    return is_valid</code></pre>
+</details>
+</dd>
+<dt id="src.common.io_operations.IOOperations.write_detailed_post_information"><code class="name flex">
+<span>def <span class="ident">write_detailed_post_information</span></span>(<span>self, payload: Any, operation: str, filename: str, verbose: bool) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write payload to a file in the specified format.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>payload</code></strong></dt>
+<dd>The data to be written to the file.</dd>
+<dt><strong><code>operation</code></strong></dt>
+<dd>The file operation mode ('w' for write, 'a' for append, etc.).</dd>
+<dt><strong><code>filename</code></strong></dt>
+<dd>The path and filename of the file to write to.</dd>
+<dt><strong><code>verbose</code></strong></dt>
+<dd>Boolean flag that controls the verbosity output</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_detailed_post_information(self, payload: Any, operation: str, filename: str, verbose: bool) -&gt; None:
+    &#34;&#34;&#34;Write payload to a file in the specified format.
+
+    Args:
+        payload: The data to be written to the file.
+        operation: The file operation mode (&#39;w&#39; for write, &#39;a&#39; for append, etc.).
+        filename: The path and filename of the file to write to.
+        verbose: Boolean flag that controls the verbosity output
+
+    Returns:
+        None
+    &#34;&#34;&#34;
+    logger.debug(&#34;[9] STARTED WRITING SUBREDDIT REPORT INFORMATION STEP&#34;, verbose)
+
+    extension = Path(filename).suffixes[-1]
+
+    with open(filename, operation, encoding=&#34;utf-8&#34;) as file:
+        if extension == &#34;.txt&#34;:
+            file.write(payload)
+        elif extension == &#34;.json&#34;:
+            json_str = json.dumps(payload, indent=4)
+            file.write(json_str)
+
+    logger.debug(&#34;[9] FINISHED WRITING SUBREDDIT REPORT INFORMATION STEP&#34;, verbose)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.common" href="index.html">src.common</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.common.io_operations.IOOperations" href="#src.common.io_operations.IOOperations">IOOperations</a></code></h4>
+<ul class="">
+<li><code><a title="src.common.io_operations.IOOperations.create_output_folder_and_move_files" href="#src.common.io_operations.IOOperations.create_output_folder_and_move_files">create_output_folder_and_move_files</a></code></li>
+<li><code><a title="src.common.io_operations.IOOperations.delete_original_files" href="#src.common.io_operations.IOOperations.delete_original_files">delete_original_files</a></code></li>
+<li><code><a title="src.common.io_operations.IOOperations.init_directories" href="#src.common.io_operations.IOOperations.init_directories">init_directories</a></code></li>
+<li><code><a title="src.common.io_operations.IOOperations.init_directory" href="#src.common.io_operations.IOOperations.init_directory">init_directory</a></code></li>
+<li><code><a title="src.common.io_operations.IOOperations.sort_by_mime_type_and_resolution" href="#src.common.io_operations.IOOperations.sort_by_mime_type_and_resolution">sort_by_mime_type_and_resolution</a></code></li>
+<li><code><a title="src.common.io_operations.IOOperations.validate_directory" href="#src.common.io_operations.IOOperations.validate_directory">validate_directory</a></code></li>
+<li><code><a title="src.common.io_operations.IOOperations.validate_path" href="#src.common.io_operations.IOOperations.validate_path">validate_path</a></code></li>
+<li><code><a title="src.common.io_operations.IOOperations.write_detailed_post_information" href="#src.common.io_operations.IOOperations.write_detailed_post_information">write_detailed_post_information</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

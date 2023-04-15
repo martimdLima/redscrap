@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.core.api.reddit_api API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.core.api.reddit_api</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import logging
+from typing import Optional, Dict, Union
+from loguru import logger       # type: ignore
+import requests     # type: ignore
+
+from common.exceptions import SubredditNotFoundException, UserNotFoundException     # type: ignore
+from common.logging.logging_setup import LoggingSetup   # type: ignore
+from common.constants import ConstantsNamespace     # type: ignore
+from common.exceptions import TokenErrorException   # type: ignore
+
+
+class RedditApi:
+    &#34;&#34;&#34;
+        A class that provides functions to access Reddit API.
+
+    Attributes:
+
+    Methods:
+        def generate_headers(self, token: str) -&gt; Dict[str, str]:
+            Generates headers for a Reddit API request.
+        def generate_reddit_api_token(self, verbose: bool = False) -&gt; str:
+             Generate a Reddit API token using the user&#39;s credentials.
+        get_logged_user_profile(self, verbose: bool) -&gt; Union[Dict, None]:
+            Retrieve the logged-in user&#39;s profile information.
+        def generate_params_for_reddit_api_req(
+        self, after: Optional[str], before: Optional[str], count: Optional[int],
+        limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]
+        ) -&gt; Dict[str, str]:
+            Generate a dictionary of parameters to be used in a Reddit API request.
+
+    &#34;&#34;&#34;
+    def __init__(self, client_id, secret_token, username, password):
+        self.logging_setup = LoggingSetup()
+        self.main_constants = ConstantsNamespace()
+        self.client_id = client_id
+        self.secret_token = secret_token
+        self.username = username
+        self.password = password
+
+    def generate_headers(self, token: str) -&gt; Dict[str, str]:
+        &#34;&#34;&#34;
+        Generates headers for a Reddit API request.
+
+        Args:
+            token (str): A Reddit API access token.
+
+        Returns:
+            Dict[str, str]: A dictionary of headers with authorization token added.
+        &#34;&#34;&#34;
+        headers: dict[str, str] = {**self.main_constants.reddit_headers, **{&#34;Authorization&#34;: &#34;bearer {}&#34;.format(token)}}
+        return headers
+
+    # noinspection PyUnresolvedReferences
+    def generate_reddit_api_token(self, verbose: bool = False) -&gt; str:
+        &#34;&#34;&#34;Generate a Reddit API token using the user&#39;s credentials.
+
+        Args:
+            verbose (bool, optional): Whether to log additional debug information. Defaults to False.
+
+        Raises:
+            TokenErrorException: If the request to obtain the token fails.
+
+        Returns:
+            str: The generated Reddit API token.
+        &#34;&#34;&#34;
+
+        auth = requests.auth.HTTPBasicAuth(self.client_id, self.secret_token)
+        data = {
+            &#34;grant_type&#34;: &#34;password&#34;,
+            &#34;username&#34;: self.username,
+            &#34;password&#34;: self.password,
+        }
+        headers = self.main_constants.reddit_headers
+
+        res = requests.post(
+            &#34;https://www.reddit.com/api/v1/access_token&#34;,
+            auth=auth,
+            data=data,
+            headers=headers,
+        )
+
+        if not res.ok:
+            if verbose:
+                logger.exception(&#34;Request failed with code {}&#34;.format(res.status_code))
+            raise TokenErrorException(&#34;Failed to obtain Reddit API token&#34;)
+
+        token = res.json()[&#34;access_token&#34;]
+        msg = &#34;Generated Reddit API token: {}&#34;.format(token)
+        logger.exception(msg)
+        return token
+
+    def get_logged_user_profile(self, verbose: bool) -&gt; Union[Dict, None]:
+        &#34;&#34;&#34;
+        Retrieve the logged-in user&#39;s profile information.
+
+        Args:
+            verbose (bool): If True, prints the API request information and response.
+
+        Returns:
+            Union[Dict, None]: Returns a dictionary of the user profile information if successful,
+            otherwise returns None.
+
+        Raises:
+            UserNotFoundException: If the user profile is unavailable or could not be reached.
+        &#34;&#34;&#34;
+        # Generating the URL leading to the desired subreddit
+        url = &#34;https://oauth.reddit.com/api/v1/me&#34;
+        token = self.generate_reddit_api_token(verbose)
+        headers = {**self.main_constants.reddit_headers, **{&#34;Authorization&#34;: &#34;bearer {}&#34;.format(token)}}
+
+        response = None
+
+        try:
+            res = requests.get(url, headers=headers)
+
+            if res.ok:
+                response = res.json()
+
+        except UserNotFoundException as exc:
+            msg = (
+                &#34;Your user profile is unavailable or couldn&#39;t be reached at this moment&#34;
+            )
+            logging.exception(msg)
+            raise UserNotFoundException(msg) from exc
+
+        return response
+
+    def generate_params_for_reddit_api_req(
+        self, after: Optional[str], before: Optional[str], count: Optional[int],
+        limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]
+    ) -&gt; Dict[str, str]:
+        &#34;&#34;&#34;
+        Generate a dictionary of parameters to be used in a Reddit API request.
+
+        Args:
+            after (str or None): The fullname of the post to start after.
+            before (str or None): The fullname of the post to start before.
+            count (int or None): The number of items in the listing to skip.
+            limit (int or None): The maximum number of items to return.
+            show (str or None): The types of items to show.
+            sr_detail (bool or None): Whether to return details about the subreddit.
+
+        Returns:
+            A dictionary containing the specified parameters for a Reddit API request.
+        &#34;&#34;&#34;
+        params = {
+            &#34;after&#34;: after if after is not None else &#34;&#34;,
+            &#34;before&#34;: before if before is not None else &#34;&#34;,
+            &#34;count&#34;: count if count is not None else &#34;&#34;,
+            &#34;limit&#34;: limit if limit is not None else &#34;&#34;,
+            &#34;show&#34;: show if show is not None else &#34;&#34;,
+            &#34;sr_detail&#34;: sr_detail if sr_detail is not None else &#34;&#34;,
+        }
+
+        return params</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.core.api.reddit_api.RedditApi"><code class="flex name class">
+<span>class <span class="ident">RedditApi</span></span>
+<span>(</span><span>client_id, secret_token, username, password)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class that provides functions to access Reddit API.</p>
+<p>Attributes:</p>
+<h2 id="methods">Methods</h2>
+<p>def generate_headers(self, token: str) -&gt; Dict[str, str]:
+Generates headers for a Reddit API request.
+def generate_reddit_api_token(self, verbose: bool = False) -&gt; str:
+Generate a Reddit API token using the user's credentials.
+get_logged_user_profile(self, verbose: bool) -&gt; Union[Dict, None]:
+Retrieve the logged-in user's profile information.
+def generate_params_for_reddit_api_req(
+self, after: Optional[str], before: Optional[str], count: Optional[int],
+limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]
+) -&gt; Dict[str, str]:
+Generate a dictionary of parameters to be used in a Reddit API request.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RedditApi:
+    &#34;&#34;&#34;
+        A class that provides functions to access Reddit API.
+
+    Attributes:
+
+    Methods:
+        def generate_headers(self, token: str) -&gt; Dict[str, str]:
+            Generates headers for a Reddit API request.
+        def generate_reddit_api_token(self, verbose: bool = False) -&gt; str:
+             Generate a Reddit API token using the user&#39;s credentials.
+        get_logged_user_profile(self, verbose: bool) -&gt; Union[Dict, None]:
+            Retrieve the logged-in user&#39;s profile information.
+        def generate_params_for_reddit_api_req(
+        self, after: Optional[str], before: Optional[str], count: Optional[int],
+        limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]
+        ) -&gt; Dict[str, str]:
+            Generate a dictionary of parameters to be used in a Reddit API request.
+
+    &#34;&#34;&#34;
+    def __init__(self, client_id, secret_token, username, password):
+        self.logging_setup = LoggingSetup()
+        self.main_constants = ConstantsNamespace()
+        self.client_id = client_id
+        self.secret_token = secret_token
+        self.username = username
+        self.password = password
+
+    def generate_headers(self, token: str) -&gt; Dict[str, str]:
+        &#34;&#34;&#34;
+        Generates headers for a Reddit API request.
+
+        Args:
+            token (str): A Reddit API access token.
+
+        Returns:
+            Dict[str, str]: A dictionary of headers with authorization token added.
+        &#34;&#34;&#34;
+        headers: dict[str, str] = {**self.main_constants.reddit_headers, **{&#34;Authorization&#34;: &#34;bearer {}&#34;.format(token)}}
+        return headers
+
+    # noinspection PyUnresolvedReferences
+    def generate_reddit_api_token(self, verbose: bool = False) -&gt; str:
+        &#34;&#34;&#34;Generate a Reddit API token using the user&#39;s credentials.
+
+        Args:
+            verbose (bool, optional): Whether to log additional debug information. Defaults to False.
+
+        Raises:
+            TokenErrorException: If the request to obtain the token fails.
+
+        Returns:
+            str: The generated Reddit API token.
+        &#34;&#34;&#34;
+
+        auth = requests.auth.HTTPBasicAuth(self.client_id, self.secret_token)
+        data = {
+            &#34;grant_type&#34;: &#34;password&#34;,
+            &#34;username&#34;: self.username,
+            &#34;password&#34;: self.password,
+        }
+        headers = self.main_constants.reddit_headers
+
+        res = requests.post(
+            &#34;https://www.reddit.com/api/v1/access_token&#34;,
+            auth=auth,
+            data=data,
+            headers=headers,
+        )
+
+        if not res.ok:
+            if verbose:
+                logger.exception(&#34;Request failed with code {}&#34;.format(res.status_code))
+            raise TokenErrorException(&#34;Failed to obtain Reddit API token&#34;)
+
+        token = res.json()[&#34;access_token&#34;]
+        msg = &#34;Generated Reddit API token: {}&#34;.format(token)
+        logger.exception(msg)
+        return token
+
+    def get_logged_user_profile(self, verbose: bool) -&gt; Union[Dict, None]:
+        &#34;&#34;&#34;
+        Retrieve the logged-in user&#39;s profile information.
+
+        Args:
+            verbose (bool): If True, prints the API request information and response.
+
+        Returns:
+            Union[Dict, None]: Returns a dictionary of the user profile information if successful,
+            otherwise returns None.
+
+        Raises:
+            UserNotFoundException: If the user profile is unavailable or could not be reached.
+        &#34;&#34;&#34;
+        # Generating the URL leading to the desired subreddit
+        url = &#34;https://oauth.reddit.com/api/v1/me&#34;
+        token = self.generate_reddit_api_token(verbose)
+        headers = {**self.main_constants.reddit_headers, **{&#34;Authorization&#34;: &#34;bearer {}&#34;.format(token)}}
+
+        response = None
+
+        try:
+            res = requests.get(url, headers=headers)
+
+            if res.ok:
+                response = res.json()
+
+        except UserNotFoundException as exc:
+            msg = (
+                &#34;Your user profile is unavailable or couldn&#39;t be reached at this moment&#34;
+            )
+            logging.exception(msg)
+            raise UserNotFoundException(msg) from exc
+
+        return response
+
+    def generate_params_for_reddit_api_req(
+        self, after: Optional[str], before: Optional[str], count: Optional[int],
+        limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]
+    ) -&gt; Dict[str, str]:
+        &#34;&#34;&#34;
+        Generate a dictionary of parameters to be used in a Reddit API request.
+
+        Args:
+            after (str or None): The fullname of the post to start after.
+            before (str or None): The fullname of the post to start before.
+            count (int or None): The number of items in the listing to skip.
+            limit (int or None): The maximum number of items to return.
+            show (str or None): The types of items to show.
+            sr_detail (bool or None): Whether to return details about the subreddit.
+
+        Returns:
+            A dictionary containing the specified parameters for a Reddit API request.
+        &#34;&#34;&#34;
+        params = {
+            &#34;after&#34;: after if after is not None else &#34;&#34;,
+            &#34;before&#34;: before if before is not None else &#34;&#34;,
+            &#34;count&#34;: count if count is not None else &#34;&#34;,
+            &#34;limit&#34;: limit if limit is not None else &#34;&#34;,
+            &#34;show&#34;: show if show is not None else &#34;&#34;,
+            &#34;sr_detail&#34;: sr_detail if sr_detail is not None else &#34;&#34;,
+        }
+
+        return params</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="src.core.api.reddit_api.RedditApi.generate_headers"><code class="name flex">
+<span>def <span class="ident">generate_headers</span></span>(<span>self, token: str) ‑> Dict[str, str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates headers for a Reddit API request.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>token</code></strong> :&ensp;<code>str</code></dt>
+<dd>A Reddit API access token.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Dict[str, str]</code></dt>
+<dd>A dictionary of headers with authorization token added.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_headers(self, token: str) -&gt; Dict[str, str]:
+    &#34;&#34;&#34;
+    Generates headers for a Reddit API request.
+
+    Args:
+        token (str): A Reddit API access token.
+
+    Returns:
+        Dict[str, str]: A dictionary of headers with authorization token added.
+    &#34;&#34;&#34;
+    headers: dict[str, str] = {**self.main_constants.reddit_headers, **{&#34;Authorization&#34;: &#34;bearer {}&#34;.format(token)}}
+    return headers</code></pre>
+</details>
+</dd>
+<dt id="src.core.api.reddit_api.RedditApi.generate_params_for_reddit_api_req"><code class="name flex">
+<span>def <span class="ident">generate_params_for_reddit_api_req</span></span>(<span>self, after: Optional[str], before: Optional[str], count: Optional[int], limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]) ‑> Dict[str, str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a dictionary of parameters to be used in a Reddit API request.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>after</code></strong> :&ensp;<code>str</code> or <code>None</code></dt>
+<dd>The fullname of the post to start after.</dd>
+<dt><strong><code>before</code></strong> :&ensp;<code>str</code> or <code>None</code></dt>
+<dd>The fullname of the post to start before.</dd>
+<dt><strong><code>count</code></strong> :&ensp;<code>int</code> or <code>None</code></dt>
+<dd>The number of items in the listing to skip.</dd>
+<dt><strong><code>limit</code></strong> :&ensp;<code>int</code> or <code>None</code></dt>
+<dd>The maximum number of items to return.</dd>
+<dt><strong><code>show</code></strong> :&ensp;<code>str</code> or <code>None</code></dt>
+<dd>The types of items to show.</dd>
+<dt><strong><code>sr_detail</code></strong> :&ensp;<code>bool</code> or <code>None</code></dt>
+<dd>Whether to return details about the subreddit.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A dictionary containing the specified parameters for a Reddit API request.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_params_for_reddit_api_req(
+    self, after: Optional[str], before: Optional[str], count: Optional[int],
+    limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]
+) -&gt; Dict[str, str]:
+    &#34;&#34;&#34;
+    Generate a dictionary of parameters to be used in a Reddit API request.
+
+    Args:
+        after (str or None): The fullname of the post to start after.
+        before (str or None): The fullname of the post to start before.
+        count (int or None): The number of items in the listing to skip.
+        limit (int or None): The maximum number of items to return.
+        show (str or None): The types of items to show.
+        sr_detail (bool or None): Whether to return details about the subreddit.
+
+    Returns:
+        A dictionary containing the specified parameters for a Reddit API request.
+    &#34;&#34;&#34;
+    params = {
+        &#34;after&#34;: after if after is not None else &#34;&#34;,
+        &#34;before&#34;: before if before is not None else &#34;&#34;,
+        &#34;count&#34;: count if count is not None else &#34;&#34;,
+        &#34;limit&#34;: limit if limit is not None else &#34;&#34;,
+        &#34;show&#34;: show if show is not None else &#34;&#34;,
+        &#34;sr_detail&#34;: sr_detail if sr_detail is not None else &#34;&#34;,
+    }
+
+    return params</code></pre>
+</details>
+</dd>
+<dt id="src.core.api.reddit_api.RedditApi.generate_reddit_api_token"><code class="name flex">
+<span>def <span class="ident">generate_reddit_api_token</span></span>(<span>self, verbose: bool = False) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a Reddit API token using the user's credentials.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>verbose</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Whether to log additional debug information. Defaults to False.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>TokenErrorException</code></dt>
+<dd>If the request to obtain the token fails.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>The generated Reddit API token.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_reddit_api_token(self, verbose: bool = False) -&gt; str:
+    &#34;&#34;&#34;Generate a Reddit API token using the user&#39;s credentials.
+
+    Args:
+        verbose (bool, optional): Whether to log additional debug information. Defaults to False.
+
+    Raises:
+        TokenErrorException: If the request to obtain the token fails.
+
+    Returns:
+        str: The generated Reddit API token.
+    &#34;&#34;&#34;
+
+    auth = requests.auth.HTTPBasicAuth(self.client_id, self.secret_token)
+    data = {
+        &#34;grant_type&#34;: &#34;password&#34;,
+        &#34;username&#34;: self.username,
+        &#34;password&#34;: self.password,
+    }
+    headers = self.main_constants.reddit_headers
+
+    res = requests.post(
+        &#34;https://www.reddit.com/api/v1/access_token&#34;,
+        auth=auth,
+        data=data,
+        headers=headers,
+    )
+
+    if not res.ok:
+        if verbose:
+            logger.exception(&#34;Request failed with code {}&#34;.format(res.status_code))
+        raise TokenErrorException(&#34;Failed to obtain Reddit API token&#34;)
+
+    token = res.json()[&#34;access_token&#34;]
+    msg = &#34;Generated Reddit API token: {}&#34;.format(token)
+    logger.exception(msg)
+    return token</code></pre>
+</details>
+</dd>
+<dt id="src.core.api.reddit_api.RedditApi.get_logged_user_profile"><code class="name flex">
+<span>def <span class="ident">get_logged_user_profile</span></span>(<span>self, verbose: bool) ‑> Optional[Dict]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieve the logged-in user's profile information.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>verbose</code></strong> :&ensp;<code>bool</code></dt>
+<dd>If True, prints the API request information and response.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Union[Dict, None]</code></dt>
+<dd>Returns a dictionary of the user profile information if successful,</dd>
+</dl>
+<p>otherwise returns None.</p>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>UserNotFoundException</code></dt>
+<dd>If the user profile is unavailable or could not be reached.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_logged_user_profile(self, verbose: bool) -&gt; Union[Dict, None]:
+    &#34;&#34;&#34;
+    Retrieve the logged-in user&#39;s profile information.
+
+    Args:
+        verbose (bool): If True, prints the API request information and response.
+
+    Returns:
+        Union[Dict, None]: Returns a dictionary of the user profile information if successful,
+        otherwise returns None.
+
+    Raises:
+        UserNotFoundException: If the user profile is unavailable or could not be reached.
+    &#34;&#34;&#34;
+    # Generating the URL leading to the desired subreddit
+    url = &#34;https://oauth.reddit.com/api/v1/me&#34;
+    token = self.generate_reddit_api_token(verbose)
+    headers = {**self.main_constants.reddit_headers, **{&#34;Authorization&#34;: &#34;bearer {}&#34;.format(token)}}
+
+    response = None
+
+    try:
+        res = requests.get(url, headers=headers)
+
+        if res.ok:
+            response = res.json()
+
+    except UserNotFoundException as exc:
+        msg = (
+            &#34;Your user profile is unavailable or couldn&#39;t be reached at this moment&#34;
+        )
+        logging.exception(msg)
+        raise UserNotFoundException(msg) from exc
+
+    return response</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.core.api" href="index.html">src.core.api</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.core.api.reddit_api.RedditApi" href="#src.core.api.reddit_api.RedditApi">RedditApi</a></code></h4>
+<ul class="">
+<li><code><a title="src.core.api.reddit_api.RedditApi.generate_headers" href="#src.core.api.reddit_api.RedditApi.generate_headers">generate_headers</a></code></li>
+<li><code><a title="src.core.api.reddit_api.RedditApi.generate_params_for_reddit_api_req" href="#src.core.api.reddit_api.RedditApi.generate_params_for_reddit_api_req">generate_params_for_reddit_api_req</a></code></li>
+<li><code><a title="src.core.api.reddit_api.RedditApi.generate_reddit_api_token" href="#src.core.api.reddit_api.RedditApi.generate_reddit_api_token">generate_reddit_api_token</a></code></li>
+<li><code><a title="src.core.api.reddit_api.RedditApi.get_logged_user_profile" href="#src.core.api.reddit_api.RedditApi.get_logged_user_profile">get_logged_user_profile</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

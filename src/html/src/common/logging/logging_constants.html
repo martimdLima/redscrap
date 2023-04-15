@@ -1,0 +1,1413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.common.logging.logging_constants API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.common.logging.logging_constants</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from datetime import time
+from common.StringBuilder import StringBuilder      # type: ignore
+
+string_builder = StringBuilder()
+
+
+class LoggingConstantsNamespace:
+    &#34;&#34;&#34;
+    A class representing a namespace for various constants used throughout the
+    application.
+
+    Attributes:
+    - PROVIDERS (dict): a dictionary mapping shortening service names to their
+      respective API endpoints.
+    - TRACE_LEVEL (str): a constant string representing the TRACE logging
+      level.
+    - TRACE_SEVERITY_LEVEL (int): an integer representing the severity
+      level for TRACE logging.
+    - DEBUG_LEVEL (str): a constant string representing the DEBUG
+      logging level.
+    - DEBUG_SEVERITY_LEVEL (int): an integer representing the severity
+      level for DEBUG logging.
+    - INFO_LEVEL (str): a constant string representing the INFO
+      logging level.
+    - INFO_SEVERITY_LEVEL (int): an integer representing the severity
+      level for INFO logging.
+    - SUCCESS_LEVEL (str): a constant string representing the SUCCESS
+      logging level.
+    - SUCCESS_SEVERITY_LEVEL (int): an integer representing the severity
+      level for SUCCESS logging.
+    - WARNING_LEVEL (str): a constant string representing the WARNING
+      logging level.
+    - WARNING_SEVERITY_LEVEL (int): an integer representing the severity
+      level for WARNING logging.
+    - ERROR_LEVEL (str): a constant string representing the ERROR
+      logging level.
+    - ERROR_SEVERITY_LEVEL (int): an integer representing the severity
+      level for ERROR logging.
+    - CRITICAL_LEVEL (str): a constant string representing the CRITICAL
+      logging level.
+    - CRITICAL_SEVERITY_LEVEL (int): an integer representing the severity
+    level for CRITICAL logging.
+    - BUG (str): a constant string representing a bug emoji.
+    - ROBOT (str): a constant string representing a robot emoji.
+    - ROCKET (str): a constant string representing a rocket emoji.
+    - RED_ALARM (str): a constant string representing a red alarm emoji.
+    - RED_CIRCLE (str): a constant string representing a red circle emoji.
+    - GREEN_CIRCLE (str): a constant string representing a green circle emoji.
+    - WARNING (str): a constant string representing a warning emoji.
+    - LIGHTNING_BOLT (str): a constant string representing a lightning bolt
+      emoji.
+    - SKULL (str): a constant string representing a skull emoji.
+    - CHECK_MARK (str): a constant string representing a check mark emoji.
+    - CROSS (str): a constant string representing a cross emoji.
+    - INFO (str): a constant string representing an info icon.
+    - DEFAULT_LOG_FORMAT (str): a default logging format string.
+    - DEFAULT_LOG_FORMAT2 (str): a secondary default logging format string.
+    - DEFAULT_LOG_FILE_LEVEL (str): a default logging level for file output.
+    - DEFAULT_LOG_STDOUT_LEVEL (str): a default logging level for stdout
+      output.
+    - DEFAULT_LOG_COLORIZING (bool): a boolean indicating whether to colorize
+      log output.
+    - DEFAULT_LOG_ROTATION (float): a default log file rotation size in bytes.
+    - DEFAULT_LOG_RETENTION (str): a default log file retention period.
+    - DEFAULT_LOG_COMPRESSION (str): a default log file compression format.
+    - DEFAULT_LOG_DELAY (bool): a boolean indicating whether to delay logging
+      until the process is fully initialized.
+    - DEFAULT_LOG_MODE (str): a default file logging mode.
+    - DEFAULT_LOG_BUFFERING (int): a default file logging buffering level.
+    - DEFAULT_LOG_ENCODING (str): a default file logging encoding.
+    - DEFAULT_LOG_SERIALIZE (bool): a boolean indicating whether to serialize
+      log messages.
+    - DEFAULT_LOG_BACKTRACE (bool): a boolean indicating whether to include
+      backtraces in log messages.
+    - DEFAULT_LOG_DIAGNOSE (bool): a boolean indicating whether to diagnose
+      issues with logging.
+    - DEFAULT_LOG_ENQUEUE (bool): a boolean indicating whether to diagnose
+      issues with logging.
+    - DEFAULT_LOG_CATCH (bool): a boolean indicating whether to diagnose
+      issues with logging.
+    &#34;&#34;&#34;
+
+    #
+    # Logging Constants ################################################################
+    #
+
+    @property
+    def log_filename(self):
+        return &#34;redscrap.log&#34;
+
+    @property
+    def trace_level(self):
+        return &#34;TRACE&#34;
+
+    @property
+    def trace_severity_level(self):
+        return 5
+
+    @property
+    def debug_level(self):
+        return &#34;DEBUG&#34;
+
+    @property
+    def debug_severity_level(self):
+        return 10
+
+    @property
+    def info_level(self):
+        return &#34;INFO&#34;
+
+    @property
+    def info_severity_level(self):
+        return 20
+
+    @property
+    def success_level(self):
+        return &#34;SUCCESS&#34;
+
+    @property
+    def success_severity_level(self):
+        return 25
+
+    @property
+    def warning_level(self):
+        return &#34;WARNING&#34;
+
+    @property
+    def warning_severity_level(self):
+        return 30
+
+    @property
+    def error_level(self):
+        return &#34;ERROR&#34;
+
+    @property
+    def error_severity_level(self):
+        return 40
+
+    @property
+    def critical_level(self):
+        return &#34;CRITICAL&#34;
+
+    @property
+    def critical_severity_level(self):
+        return 50
+
+    @property
+    def bug_symbol(self):
+        return &#34;🐞&#34;
+
+    @property
+    def robot_symbol(self):
+        return &#34;🤖&#34;
+
+    @property
+    def rocket_symbol(self):
+        return &#34;🚀&#34;
+
+    @property
+    def red_alarm_symbol(self):
+        return &#34;🚨&#34;
+
+    @property
+    def red_circle_symbol(self):
+        return &#34;🔴&#34;
+
+    @property
+    def green_circle_symbol(self):
+        return &#34;🟢&#34;
+
+    @property
+    def warning_symbol(self):
+        return &#34;⚠️&#34;
+
+    @property
+    def lightning_bolt_symbol(self):
+        return &#34;⚡&#34;
+
+    @property
+    def skull_symbol(self):
+        return &#34;☠️&#34;
+
+    @property
+    def check_mark_symbol(self):
+        return &#34;✔️&#34;
+
+    @property
+    def cross_symbol(self):
+        return &#34;❌&#34;
+
+    @property
+    def info_symbol(self):
+        return &#34;🛈 &#34;
+
+    @property
+    def default_log_format(self):
+        log_format = (
+            &#34;&lt;green&gt;{time:YYYY-MM-DD HH:mm:ss.SSS}&lt;/green&gt; | &#34;
+            &#34;&lt;level&gt;{level.icon}&lt;/level&gt; | &#34;
+            &#34;&lt;cyan&gt;{name}&lt;/cyan&gt;:&lt;cyan&gt;{function}&lt;/cyan&gt;:&lt;cyan&gt;{line}&lt;/cyan&gt;&#34;
+            &#34; - &lt;level&gt;{message}&lt;/level&gt;&#34;
+        )
+        return log_format
+
+    @property
+    def default_log_format2(self):
+        return (
+            &#34;{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: &lt;8} | {level.icon}&#34;
+            &#34;| {name}:{function}:{line} | {message}&#34;
+        )
+
+    @property
+    def padding_log_format(self):
+        log_format = (
+            &#34;&lt;green&gt;{time:YYYY-MM-DD HH:mm:ss.SSS}&lt;/green&gt; | &#34;
+            &#34;&lt;level&gt;{level.icon}&lt;/level&gt; &lt;level&gt;{level: &lt;8}&lt;/level&gt; | &#34;
+            &#34;&lt;cyan&gt;{name}&lt;/cyan&gt;:&lt;cyan&gt;{function}&lt;/cyan&gt;:&lt;cyan&gt;{line}{extra[padding]}&lt;/cyan&gt; - &#34;
+            &#34;&lt;level&gt;{message}\n{exception}&lt;/level&gt;&#34;
+        )
+        return log_format
+
+    @property
+    def default_logger_format(self):
+        &#34;&#34;&#34;
+        Default logger format
+        &#34;&#34;&#34;
+        return &#34;%(asctime)s - %(levelname)-4s - %(name)-s - %(message)s&#34;
+
+    @property
+    def default_logger_date_format(self):
+        &#34;&#34;&#34;
+        Default logger date format
+        &#34;&#34;&#34;
+        return &#34;%d-%b-%Y %H:%M:%S&#34;
+
+    @property
+    def debug_mode_flag(self):
+        return True
+
+    @property
+    def default_log_rotation_time(self):
+        datetime = time(0, 0, 0)
+        return datetime
+
+    @property
+    def default_log_file_level(self):
+        return &#34;INFO&#34;
+
+    @property
+    def default_log_stdout_level(self):
+        return &#34;ERROR&#34;
+
+    @property
+    def default_log_colorizing(self):
+        return True
+
+    @property
+    def default_log_rotation(self):
+        return 5e8
+
+    @property
+    def default_log_retention(self):
+        return &#34;10 days&#34;
+
+    @property
+    def default_log_compression(self):
+        return &#34;zip&#34;
+
+    @property
+    def default_log_delay(self):
+        return False
+
+    @property
+    def default_log_mode(self):
+        return &#34;a&#34;
+
+    @property
+    def default_log_buffering(self):
+        return 1
+
+    @property
+    def default_log_encoding(self):
+        return &#34;utf8&#34;
+
+    @property
+    def default_log_serialize(self):
+        return True
+
+    @property
+    def default_log_backtrace(self):
+        return False
+
+    @property
+    def default_log_diagnose(self):
+        return False
+
+    @property
+    def default_log_enqueue(self):
+        return False
+
+    @property
+    def default_log_catch(self):
+        return False</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace"><code class="flex name class">
+<span>class <span class="ident">LoggingConstantsNamespace</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class representing a namespace for various constants used throughout the
+application.</p>
+<p>Attributes:
+- PROVIDERS (dict): a dictionary mapping shortening service names to their
+respective API endpoints.
+- TRACE_LEVEL (str): a constant string representing the TRACE logging
+level.
+- TRACE_SEVERITY_LEVEL (int): an integer representing the severity
+level for TRACE logging.
+- DEBUG_LEVEL (str): a constant string representing the DEBUG
+logging level.
+- DEBUG_SEVERITY_LEVEL (int): an integer representing the severity
+level for DEBUG logging.
+- INFO_LEVEL (str): a constant string representing the INFO
+logging level.
+- INFO_SEVERITY_LEVEL (int): an integer representing the severity
+level for INFO logging.
+- SUCCESS_LEVEL (str): a constant string representing the SUCCESS
+logging level.
+- SUCCESS_SEVERITY_LEVEL (int): an integer representing the severity
+level for SUCCESS logging.
+- WARNING_LEVEL (str): a constant string representing the WARNING
+logging level.
+- WARNING_SEVERITY_LEVEL (int): an integer representing the severity
+level for WARNING logging.
+- ERROR_LEVEL (str): a constant string representing the ERROR
+logging level.
+- ERROR_SEVERITY_LEVEL (int): an integer representing the severity
+level for ERROR logging.
+- CRITICAL_LEVEL (str): a constant string representing the CRITICAL
+logging level.
+- CRITICAL_SEVERITY_LEVEL (int): an integer representing the severity
+level for CRITICAL logging.
+- BUG (str): a constant string representing a bug emoji.
+- ROBOT (str): a constant string representing a robot emoji.
+- ROCKET (str): a constant string representing a rocket emoji.
+- RED_ALARM (str): a constant string representing a red alarm emoji.
+- RED_CIRCLE (str): a constant string representing a red circle emoji.
+- GREEN_CIRCLE (str): a constant string representing a green circle emoji.
+- WARNING (str): a constant string representing a warning emoji.
+- LIGHTNING_BOLT (str): a constant string representing a lightning bolt
+emoji.
+- SKULL (str): a constant string representing a skull emoji.
+- CHECK_MARK (str): a constant string representing a check mark emoji.
+- CROSS (str): a constant string representing a cross emoji.
+- INFO (str): a constant string representing an info icon.
+- DEFAULT_LOG_FORMAT (str): a default logging format string.
+- DEFAULT_LOG_FORMAT2 (str): a secondary default logging format string.
+- DEFAULT_LOG_FILE_LEVEL (str): a default logging level for file output.
+- DEFAULT_LOG_STDOUT_LEVEL (str): a default logging level for stdout
+output.
+- DEFAULT_LOG_COLORIZING (bool): a boolean indicating whether to colorize
+log output.
+- DEFAULT_LOG_ROTATION (float): a default log file rotation size in bytes.
+- DEFAULT_LOG_RETENTION (str): a default log file retention period.
+- DEFAULT_LOG_COMPRESSION (str): a default log file compression format.
+- DEFAULT_LOG_DELAY (bool): a boolean indicating whether to delay logging
+until the process is fully initialized.
+- DEFAULT_LOG_MODE (str): a default file logging mode.
+- DEFAULT_LOG_BUFFERING (int): a default file logging buffering level.
+- DEFAULT_LOG_ENCODING (str): a default file logging encoding.
+- DEFAULT_LOG_SERIALIZE (bool): a boolean indicating whether to serialize
+log messages.
+- DEFAULT_LOG_BACKTRACE (bool): a boolean indicating whether to include
+backtraces in log messages.
+- DEFAULT_LOG_DIAGNOSE (bool): a boolean indicating whether to diagnose
+issues with logging.
+- DEFAULT_LOG_ENQUEUE (bool): a boolean indicating whether to diagnose
+issues with logging.
+- DEFAULT_LOG_CATCH (bool): a boolean indicating whether to diagnose
+issues with logging.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LoggingConstantsNamespace:
+    &#34;&#34;&#34;
+    A class representing a namespace for various constants used throughout the
+    application.
+
+    Attributes:
+    - PROVIDERS (dict): a dictionary mapping shortening service names to their
+      respective API endpoints.
+    - TRACE_LEVEL (str): a constant string representing the TRACE logging
+      level.
+    - TRACE_SEVERITY_LEVEL (int): an integer representing the severity
+      level for TRACE logging.
+    - DEBUG_LEVEL (str): a constant string representing the DEBUG
+      logging level.
+    - DEBUG_SEVERITY_LEVEL (int): an integer representing the severity
+      level for DEBUG logging.
+    - INFO_LEVEL (str): a constant string representing the INFO
+      logging level.
+    - INFO_SEVERITY_LEVEL (int): an integer representing the severity
+      level for INFO logging.
+    - SUCCESS_LEVEL (str): a constant string representing the SUCCESS
+      logging level.
+    - SUCCESS_SEVERITY_LEVEL (int): an integer representing the severity
+      level for SUCCESS logging.
+    - WARNING_LEVEL (str): a constant string representing the WARNING
+      logging level.
+    - WARNING_SEVERITY_LEVEL (int): an integer representing the severity
+      level for WARNING logging.
+    - ERROR_LEVEL (str): a constant string representing the ERROR
+      logging level.
+    - ERROR_SEVERITY_LEVEL (int): an integer representing the severity
+      level for ERROR logging.
+    - CRITICAL_LEVEL (str): a constant string representing the CRITICAL
+      logging level.
+    - CRITICAL_SEVERITY_LEVEL (int): an integer representing the severity
+    level for CRITICAL logging.
+    - BUG (str): a constant string representing a bug emoji.
+    - ROBOT (str): a constant string representing a robot emoji.
+    - ROCKET (str): a constant string representing a rocket emoji.
+    - RED_ALARM (str): a constant string representing a red alarm emoji.
+    - RED_CIRCLE (str): a constant string representing a red circle emoji.
+    - GREEN_CIRCLE (str): a constant string representing a green circle emoji.
+    - WARNING (str): a constant string representing a warning emoji.
+    - LIGHTNING_BOLT (str): a constant string representing a lightning bolt
+      emoji.
+    - SKULL (str): a constant string representing a skull emoji.
+    - CHECK_MARK (str): a constant string representing a check mark emoji.
+    - CROSS (str): a constant string representing a cross emoji.
+    - INFO (str): a constant string representing an info icon.
+    - DEFAULT_LOG_FORMAT (str): a default logging format string.
+    - DEFAULT_LOG_FORMAT2 (str): a secondary default logging format string.
+    - DEFAULT_LOG_FILE_LEVEL (str): a default logging level for file output.
+    - DEFAULT_LOG_STDOUT_LEVEL (str): a default logging level for stdout
+      output.
+    - DEFAULT_LOG_COLORIZING (bool): a boolean indicating whether to colorize
+      log output.
+    - DEFAULT_LOG_ROTATION (float): a default log file rotation size in bytes.
+    - DEFAULT_LOG_RETENTION (str): a default log file retention period.
+    - DEFAULT_LOG_COMPRESSION (str): a default log file compression format.
+    - DEFAULT_LOG_DELAY (bool): a boolean indicating whether to delay logging
+      until the process is fully initialized.
+    - DEFAULT_LOG_MODE (str): a default file logging mode.
+    - DEFAULT_LOG_BUFFERING (int): a default file logging buffering level.
+    - DEFAULT_LOG_ENCODING (str): a default file logging encoding.
+    - DEFAULT_LOG_SERIALIZE (bool): a boolean indicating whether to serialize
+      log messages.
+    - DEFAULT_LOG_BACKTRACE (bool): a boolean indicating whether to include
+      backtraces in log messages.
+    - DEFAULT_LOG_DIAGNOSE (bool): a boolean indicating whether to diagnose
+      issues with logging.
+    - DEFAULT_LOG_ENQUEUE (bool): a boolean indicating whether to diagnose
+      issues with logging.
+    - DEFAULT_LOG_CATCH (bool): a boolean indicating whether to diagnose
+      issues with logging.
+    &#34;&#34;&#34;
+
+    #
+    # Logging Constants ################################################################
+    #
+
+    @property
+    def log_filename(self):
+        return &#34;redscrap.log&#34;
+
+    @property
+    def trace_level(self):
+        return &#34;TRACE&#34;
+
+    @property
+    def trace_severity_level(self):
+        return 5
+
+    @property
+    def debug_level(self):
+        return &#34;DEBUG&#34;
+
+    @property
+    def debug_severity_level(self):
+        return 10
+
+    @property
+    def info_level(self):
+        return &#34;INFO&#34;
+
+    @property
+    def info_severity_level(self):
+        return 20
+
+    @property
+    def success_level(self):
+        return &#34;SUCCESS&#34;
+
+    @property
+    def success_severity_level(self):
+        return 25
+
+    @property
+    def warning_level(self):
+        return &#34;WARNING&#34;
+
+    @property
+    def warning_severity_level(self):
+        return 30
+
+    @property
+    def error_level(self):
+        return &#34;ERROR&#34;
+
+    @property
+    def error_severity_level(self):
+        return 40
+
+    @property
+    def critical_level(self):
+        return &#34;CRITICAL&#34;
+
+    @property
+    def critical_severity_level(self):
+        return 50
+
+    @property
+    def bug_symbol(self):
+        return &#34;🐞&#34;
+
+    @property
+    def robot_symbol(self):
+        return &#34;🤖&#34;
+
+    @property
+    def rocket_symbol(self):
+        return &#34;🚀&#34;
+
+    @property
+    def red_alarm_symbol(self):
+        return &#34;🚨&#34;
+
+    @property
+    def red_circle_symbol(self):
+        return &#34;🔴&#34;
+
+    @property
+    def green_circle_symbol(self):
+        return &#34;🟢&#34;
+
+    @property
+    def warning_symbol(self):
+        return &#34;⚠️&#34;
+
+    @property
+    def lightning_bolt_symbol(self):
+        return &#34;⚡&#34;
+
+    @property
+    def skull_symbol(self):
+        return &#34;☠️&#34;
+
+    @property
+    def check_mark_symbol(self):
+        return &#34;✔️&#34;
+
+    @property
+    def cross_symbol(self):
+        return &#34;❌&#34;
+
+    @property
+    def info_symbol(self):
+        return &#34;🛈 &#34;
+
+    @property
+    def default_log_format(self):
+        log_format = (
+            &#34;&lt;green&gt;{time:YYYY-MM-DD HH:mm:ss.SSS}&lt;/green&gt; | &#34;
+            &#34;&lt;level&gt;{level.icon}&lt;/level&gt; | &#34;
+            &#34;&lt;cyan&gt;{name}&lt;/cyan&gt;:&lt;cyan&gt;{function}&lt;/cyan&gt;:&lt;cyan&gt;{line}&lt;/cyan&gt;&#34;
+            &#34; - &lt;level&gt;{message}&lt;/level&gt;&#34;
+        )
+        return log_format
+
+    @property
+    def default_log_format2(self):
+        return (
+            &#34;{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: &lt;8} | {level.icon}&#34;
+            &#34;| {name}:{function}:{line} | {message}&#34;
+        )
+
+    @property
+    def padding_log_format(self):
+        log_format = (
+            &#34;&lt;green&gt;{time:YYYY-MM-DD HH:mm:ss.SSS}&lt;/green&gt; | &#34;
+            &#34;&lt;level&gt;{level.icon}&lt;/level&gt; &lt;level&gt;{level: &lt;8}&lt;/level&gt; | &#34;
+            &#34;&lt;cyan&gt;{name}&lt;/cyan&gt;:&lt;cyan&gt;{function}&lt;/cyan&gt;:&lt;cyan&gt;{line}{extra[padding]}&lt;/cyan&gt; - &#34;
+            &#34;&lt;level&gt;{message}\n{exception}&lt;/level&gt;&#34;
+        )
+        return log_format
+
+    @property
+    def default_logger_format(self):
+        &#34;&#34;&#34;
+        Default logger format
+        &#34;&#34;&#34;
+        return &#34;%(asctime)s - %(levelname)-4s - %(name)-s - %(message)s&#34;
+
+    @property
+    def default_logger_date_format(self):
+        &#34;&#34;&#34;
+        Default logger date format
+        &#34;&#34;&#34;
+        return &#34;%d-%b-%Y %H:%M:%S&#34;
+
+    @property
+    def debug_mode_flag(self):
+        return True
+
+    @property
+    def default_log_rotation_time(self):
+        datetime = time(0, 0, 0)
+        return datetime
+
+    @property
+    def default_log_file_level(self):
+        return &#34;INFO&#34;
+
+    @property
+    def default_log_stdout_level(self):
+        return &#34;ERROR&#34;
+
+    @property
+    def default_log_colorizing(self):
+        return True
+
+    @property
+    def default_log_rotation(self):
+        return 5e8
+
+    @property
+    def default_log_retention(self):
+        return &#34;10 days&#34;
+
+    @property
+    def default_log_compression(self):
+        return &#34;zip&#34;
+
+    @property
+    def default_log_delay(self):
+        return False
+
+    @property
+    def default_log_mode(self):
+        return &#34;a&#34;
+
+    @property
+    def default_log_buffering(self):
+        return 1
+
+    @property
+    def default_log_encoding(self):
+        return &#34;utf8&#34;
+
+    @property
+    def default_log_serialize(self):
+        return True
+
+    @property
+    def default_log_backtrace(self):
+        return False
+
+    @property
+    def default_log_diagnose(self):
+        return False
+
+    @property
+    def default_log_enqueue(self):
+        return False
+
+    @property
+    def default_log_catch(self):
+        return False</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.bug_symbol"><code class="name">var <span class="ident">bug_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def bug_symbol(self):
+    return &#34;🐞&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.check_mark_symbol"><code class="name">var <span class="ident">check_mark_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def check_mark_symbol(self):
+    return &#34;✔️&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.critical_level"><code class="name">var <span class="ident">critical_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def critical_level(self):
+    return &#34;CRITICAL&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.critical_severity_level"><code class="name">var <span class="ident">critical_severity_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def critical_severity_level(self):
+    return 50</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.cross_symbol"><code class="name">var <span class="ident">cross_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def cross_symbol(self):
+    return &#34;❌&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.debug_level"><code class="name">var <span class="ident">debug_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def debug_level(self):
+    return &#34;DEBUG&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.debug_mode_flag"><code class="name">var <span class="ident">debug_mode_flag</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def debug_mode_flag(self):
+    return True</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.debug_severity_level"><code class="name">var <span class="ident">debug_severity_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def debug_severity_level(self):
+    return 10</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_backtrace"><code class="name">var <span class="ident">default_log_backtrace</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_backtrace(self):
+    return False</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_buffering"><code class="name">var <span class="ident">default_log_buffering</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_buffering(self):
+    return 1</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_catch"><code class="name">var <span class="ident">default_log_catch</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_catch(self):
+    return False</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_colorizing"><code class="name">var <span class="ident">default_log_colorizing</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_colorizing(self):
+    return True</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_compression"><code class="name">var <span class="ident">default_log_compression</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_compression(self):
+    return &#34;zip&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_delay"><code class="name">var <span class="ident">default_log_delay</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_delay(self):
+    return False</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_diagnose"><code class="name">var <span class="ident">default_log_diagnose</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_diagnose(self):
+    return False</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_encoding"><code class="name">var <span class="ident">default_log_encoding</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_encoding(self):
+    return &#34;utf8&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_enqueue"><code class="name">var <span class="ident">default_log_enqueue</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_enqueue(self):
+    return False</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_file_level"><code class="name">var <span class="ident">default_log_file_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_file_level(self):
+    return &#34;INFO&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_format"><code class="name">var <span class="ident">default_log_format</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_format(self):
+    log_format = (
+        &#34;&lt;green&gt;{time:YYYY-MM-DD HH:mm:ss.SSS}&lt;/green&gt; | &#34;
+        &#34;&lt;level&gt;{level.icon}&lt;/level&gt; | &#34;
+        &#34;&lt;cyan&gt;{name}&lt;/cyan&gt;:&lt;cyan&gt;{function}&lt;/cyan&gt;:&lt;cyan&gt;{line}&lt;/cyan&gt;&#34;
+        &#34; - &lt;level&gt;{message}&lt;/level&gt;&#34;
+    )
+    return log_format</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_format2"><code class="name">var <span class="ident">default_log_format2</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_format2(self):
+    return (
+        &#34;{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: &lt;8} | {level.icon}&#34;
+        &#34;| {name}:{function}:{line} | {message}&#34;
+    )</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_mode"><code class="name">var <span class="ident">default_log_mode</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_mode(self):
+    return &#34;a&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_retention"><code class="name">var <span class="ident">default_log_retention</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_retention(self):
+    return &#34;10 days&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_rotation"><code class="name">var <span class="ident">default_log_rotation</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_rotation(self):
+    return 5e8</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_rotation_time"><code class="name">var <span class="ident">default_log_rotation_time</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_rotation_time(self):
+    datetime = time(0, 0, 0)
+    return datetime</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_serialize"><code class="name">var <span class="ident">default_log_serialize</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_serialize(self):
+    return True</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_stdout_level"><code class="name">var <span class="ident">default_log_stdout_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_log_stdout_level(self):
+    return &#34;ERROR&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_logger_date_format"><code class="name">var <span class="ident">default_logger_date_format</span></code></dt>
+<dd>
+<div class="desc"><p>Default logger date format</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_logger_date_format(self):
+    &#34;&#34;&#34;
+    Default logger date format
+    &#34;&#34;&#34;
+    return &#34;%d-%b-%Y %H:%M:%S&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.default_logger_format"><code class="name">var <span class="ident">default_logger_format</span></code></dt>
+<dd>
+<div class="desc"><p>Default logger format</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def default_logger_format(self):
+    &#34;&#34;&#34;
+    Default logger format
+    &#34;&#34;&#34;
+    return &#34;%(asctime)s - %(levelname)-4s - %(name)-s - %(message)s&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.error_level"><code class="name">var <span class="ident">error_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def error_level(self):
+    return &#34;ERROR&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.error_severity_level"><code class="name">var <span class="ident">error_severity_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def error_severity_level(self):
+    return 40</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.green_circle_symbol"><code class="name">var <span class="ident">green_circle_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def green_circle_symbol(self):
+    return &#34;🟢&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.info_level"><code class="name">var <span class="ident">info_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def info_level(self):
+    return &#34;INFO&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.info_severity_level"><code class="name">var <span class="ident">info_severity_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def info_severity_level(self):
+    return 20</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.info_symbol"><code class="name">var <span class="ident">info_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def info_symbol(self):
+    return &#34;🛈 &#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.lightning_bolt_symbol"><code class="name">var <span class="ident">lightning_bolt_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def lightning_bolt_symbol(self):
+    return &#34;⚡&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.log_filename"><code class="name">var <span class="ident">log_filename</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def log_filename(self):
+    return &#34;redscrap.log&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.padding_log_format"><code class="name">var <span class="ident">padding_log_format</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def padding_log_format(self):
+    log_format = (
+        &#34;&lt;green&gt;{time:YYYY-MM-DD HH:mm:ss.SSS}&lt;/green&gt; | &#34;
+        &#34;&lt;level&gt;{level.icon}&lt;/level&gt; &lt;level&gt;{level: &lt;8}&lt;/level&gt; | &#34;
+        &#34;&lt;cyan&gt;{name}&lt;/cyan&gt;:&lt;cyan&gt;{function}&lt;/cyan&gt;:&lt;cyan&gt;{line}{extra[padding]}&lt;/cyan&gt; - &#34;
+        &#34;&lt;level&gt;{message}\n{exception}&lt;/level&gt;&#34;
+    )
+    return log_format</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.red_alarm_symbol"><code class="name">var <span class="ident">red_alarm_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def red_alarm_symbol(self):
+    return &#34;🚨&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.red_circle_symbol"><code class="name">var <span class="ident">red_circle_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def red_circle_symbol(self):
+    return &#34;🔴&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.robot_symbol"><code class="name">var <span class="ident">robot_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def robot_symbol(self):
+    return &#34;🤖&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.rocket_symbol"><code class="name">var <span class="ident">rocket_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def rocket_symbol(self):
+    return &#34;🚀&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.skull_symbol"><code class="name">var <span class="ident">skull_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def skull_symbol(self):
+    return &#34;☠️&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.success_level"><code class="name">var <span class="ident">success_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def success_level(self):
+    return &#34;SUCCESS&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.success_severity_level"><code class="name">var <span class="ident">success_severity_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def success_severity_level(self):
+    return 25</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.trace_level"><code class="name">var <span class="ident">trace_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def trace_level(self):
+    return &#34;TRACE&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.trace_severity_level"><code class="name">var <span class="ident">trace_severity_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def trace_severity_level(self):
+    return 5</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.warning_level"><code class="name">var <span class="ident">warning_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def warning_level(self):
+    return &#34;WARNING&#34;</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.warning_severity_level"><code class="name">var <span class="ident">warning_severity_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def warning_severity_level(self):
+    return 30</code></pre>
+</details>
+</dd>
+<dt id="src.common.logging.logging_constants.LoggingConstantsNamespace.warning_symbol"><code class="name">var <span class="ident">warning_symbol</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def warning_symbol(self):
+    return &#34;⚠️&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.common.logging" href="index.html">src.common.logging</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace" href="#src.common.logging.logging_constants.LoggingConstantsNamespace">LoggingConstantsNamespace</a></code></h4>
+<ul class="">
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.bug_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.bug_symbol">bug_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.check_mark_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.check_mark_symbol">check_mark_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.critical_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.critical_level">critical_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.critical_severity_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.critical_severity_level">critical_severity_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.cross_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.cross_symbol">cross_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.debug_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.debug_level">debug_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.debug_mode_flag" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.debug_mode_flag">debug_mode_flag</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.debug_severity_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.debug_severity_level">debug_severity_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_backtrace" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_backtrace">default_log_backtrace</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_buffering" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_buffering">default_log_buffering</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_catch" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_catch">default_log_catch</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_colorizing" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_colorizing">default_log_colorizing</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_compression" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_compression">default_log_compression</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_delay" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_delay">default_log_delay</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_diagnose" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_diagnose">default_log_diagnose</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_encoding" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_encoding">default_log_encoding</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_enqueue" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_enqueue">default_log_enqueue</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_file_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_file_level">default_log_file_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_format" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_format">default_log_format</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_format2" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_format2">default_log_format2</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_mode" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_mode">default_log_mode</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_retention" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_retention">default_log_retention</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_rotation" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_rotation">default_log_rotation</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_rotation_time" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_rotation_time">default_log_rotation_time</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_serialize" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_serialize">default_log_serialize</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_stdout_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_log_stdout_level">default_log_stdout_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_logger_date_format" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_logger_date_format">default_logger_date_format</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.default_logger_format" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.default_logger_format">default_logger_format</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.error_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.error_level">error_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.error_severity_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.error_severity_level">error_severity_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.green_circle_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.green_circle_symbol">green_circle_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.info_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.info_level">info_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.info_severity_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.info_severity_level">info_severity_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.info_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.info_symbol">info_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.lightning_bolt_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.lightning_bolt_symbol">lightning_bolt_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.log_filename" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.log_filename">log_filename</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.padding_log_format" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.padding_log_format">padding_log_format</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.red_alarm_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.red_alarm_symbol">red_alarm_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.red_circle_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.red_circle_symbol">red_circle_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.robot_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.robot_symbol">robot_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.rocket_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.rocket_symbol">rocket_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.skull_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.skull_symbol">skull_symbol</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.success_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.success_level">success_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.success_severity_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.success_severity_level">success_severity_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.trace_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.trace_level">trace_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.trace_severity_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.trace_severity_level">trace_severity_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.warning_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.warning_level">warning_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.warning_severity_level" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.warning_severity_level">warning_severity_level</a></code></li>
+<li><code><a title="src.common.logging.logging_constants.LoggingConstantsNamespace.warning_symbol" href="#src.common.logging.logging_constants.LoggingConstantsNamespace.warning_symbol">warning_symbol</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
