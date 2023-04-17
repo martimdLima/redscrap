@@ -1,11 +1,12 @@
 import glob
 import re
+from loguru import logger
 from pathlib import Path
 from typing import Dict, Tuple, List, Any
-import bs4
+from bs4 import BeautifulSoup, element
 import validators
 
-from common.common_constants import CommonConstants  # type: ignore
+from common.constants.common_constants import CommonConstants  # type: ignore
 from common.validations.url_validations import UrlValidations  # type: ignore
 
 
@@ -34,7 +35,7 @@ class ScraperHelper:
         self.validations = UrlValidations()
 
     # noinspection PyUnresolvedReferences
-    def construct_author_dict(self, div_ele: bs4.element.PageElement) -> Dict[str, str]:
+    def construct_author_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
         """
         Constructs a dictionary with the author's username and profile URL.
 
@@ -55,7 +56,7 @@ class ScraperHelper:
         return author
 
     # noinspection PyUnresolvedReferences
-    def construct_rating_dict(self, div_ele: bs4.element.PageElement) -> Dict[str, str]:
+    def construct_rating_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
         """
         Constructs a dictionary with the comment's rating scores.
 
@@ -86,7 +87,7 @@ class ScraperHelper:
         return rating
 
     # noinspection PyUnresolvedReferences
-    def construct_thread_rating_dict(self, div_ele: bs4.element.PageElement) -> Dict[str, str]:
+    def construct_thread_rating_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
         """
         Constructs a dictionary with the thread's rating scores.
 
@@ -118,7 +119,7 @@ class ScraperHelper:
         return rating
 
     # noinspection PyUnresolvedReferences
-    def construct_time_dict(self, div_ele: bs4.element.PageElement) -> Dict[str, str]:
+    def construct_time_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
         """
         Constructs a dictionary with the time information of the comment or thread.
 
@@ -141,7 +142,7 @@ class ScraperHelper:
         return time
 
     # noinspection PyUnresolvedReferences
-    def define_children_fields(self, div_ele: bs4.element.PageElement) -> Tuple[bool, int]:
+    def define_children_fields(self, div_ele: element.PageElement) -> Tuple[bool, int]:
         """
         Defines the number of children and whether a comment or thread has children.
 
@@ -168,7 +169,7 @@ class ScraperHelper:
 
     # noinspection PyUnresolvedReferences
 
-    def construct_urls_list(self, div_ele: bs4.element.PageElement) -> List[str]:
+    def construct_urls_list(self, div_ele: element.PageElement) -> List[str]:
         """
         Constructs a list of URLs from the div element that contains the URLs.
 
@@ -218,3 +219,45 @@ class ScraperHelper:
         image_files = glob.glob(str(directory) + "/*.jpg") + glob.glob(str(directory) + "/*.png") \
                       + glob.glob(str(directory) + "/*.gif")
         return image_files
+
+    def define_threads_based_on_search_parameter(self, scrape_mode, request, subreddit_or_user):
+        threads = None
+        soup: BeautifulSoup = BeautifulSoup(request.text, "html.parser")
+
+        match scrape_mode:
+            case "subreddit":
+                threads_list_element = soup.find(
+                    "div", attrs={"class": "sitetable linklisting"})
+                threads = threads_list_element.find_all(
+                    "div", attrs={"data-subreddit-prefixed": "r/{}".format(subreddit_or_user)})
+            case "user":
+                threads_list_element = soup.find("div", attrs={"class": "sitetable linklisting"})
+                threads = threads_list_element.find_all("div", attrs={"data-author": subreddit_or_user})
+
+        return threads
+
+    def process_thread_images(self, thread_img_ele, thread_images):
+        if thread_img_ele is not None:
+            thread_image_a_tags = thread_img_ele.find_all("a", attrs={"class", "may-blank"})
+            thread_iframe_tag = thread_img_ele.find("iframe", attrs={"class", "media-embed"})
+
+            if thread_image_a_tags is not None and len(thread_image_a_tags) >= 1:
+                for thread_image_a_tag in thread_image_a_tags:
+                    logger.debug(thread_image_a_tag.attrs["href"])
+                    if self.validations.validate_if_url_is_a_valid_img_link(thread_image_a_tag.attrs["href"],
+                                                                            self.constants.possible_urls):
+                        thread_images.append(thread_image_a_tag.attrs["href"])
+
+                    img_tag = thread_img_ele.find("img", attrs={"class", "preview"})
+
+                    if img_tag is not None:
+                        logger.debug(img_tag.attrs["src"])
+                        if self.validations.validate_if_url_is_a_valid_img_link(
+                                img_tag.attrs["src"], self.constants.possible_urls):
+                            thread_images.append(img_tag.attrs["src"])
+
+            if thread_iframe_tag is not None:
+                logger.debug(thread_iframe_tag.attrs["src"])
+                if self.validations.validate_image_url(self.constants.possible_urls,
+                                                       thread_iframe_tag.attrs["src"]):
+                    thread_images.append(thread_iframe_tag.attrs["src"])

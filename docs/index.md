@@ -77,13 +77,6 @@ redscrap will accept a Python module file, package directory or an import path.
     SUBREDDITS_TO_SCRAPE
     REDDIT_USER_TO_SCRAPE
 
-
-
-
-
-
-
-
 See `redscrap --help` for more command-line switches and the [documentation]
 for more usage examples.
 
@@ -100,4 +93,7 @@ Features
 
 Development
 -----------
-Check [contributing.md](contributing.md) for hacking details.
+Check [contributing.md](contributing.md) for hacking details.   
+
+
+Copyright (c) Martim Lima. Released under the MIT License. See [LICENSE.md](license.md) for details.

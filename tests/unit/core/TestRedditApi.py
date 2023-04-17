@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from common.exceptions import TokenErrorException, SubredditNotFoundException, UserNotFoundException      # type: ignore
+from common.exceptions.main_exceptions import TokenErrorException, SubredditNotFoundException, UserNotFoundException      # type: ignore
 from core.api.reddit_api import RedditApi       # type: ignore
 from common.validations.reddit_api_validations import RedditApiValidations
 

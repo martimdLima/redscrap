@@ -3,9 +3,9 @@ from loguru import logger        # type: ignore
 import re
 import requests      # type: ignore
 
-from common.exceptions import SubredditNotFoundException         # type: ignore
+from common.exceptions.main_exceptions import SubredditNotFoundException         # type: ignore
 from common.logging.logging_setup import LoggingSetup        # type: ignore
-from common.common_constants import CommonConstants      # type: ignore
+from common.constants.common_constants import CommonConstants      # type: ignore
 from common.logging.utils.loguru_wrappers import logger_wraps        # type: ignore
 from core.api.reddit_api import RedditApi        # type: ignore
 
@@ -58,10 +58,12 @@ class ParameterValidations:
         sanitized_string = input_str.replace(" ", "")
 
         # Replace consecutive commas or semicolons with a single comma
-        sanitized_string = re.sub(r"[,;]+", ",", sanitized_string)
+        sanitized_string = re.sub(self.main_constants.replace_consecutive_commas_or_semicolons_regex,
+                                  ",", sanitized_string)
 
         # Remove any remaining empty groups
-        sanitized_string = re.sub(r"(^,)|(,$)|(^;)|(;$)|,{2,}", "", sanitized_string)
+        sanitized_string = re.sub(self.main_constants.remove_empty_groups_from_comma_or_semicolon_separated_string
+                                  , "", sanitized_string)
 
         # Check if the string contains any special characters
         pattern = self.main_constants.validate_and_split_string_regex
@@ -139,10 +141,8 @@ class ParameterValidations:
         Returns:
             bool: True if the user exists, False otherwise.
         """
-        url: str = "https://www.reddit.com/user/{}/about.json".format(reddit_user)
-        headers: dict[str, str] = {
-            "User-Agent": "Mozilla/5.0:com.martimdlima.redscrappy:v0.0.1 (by /u/mdlima__)"
-        }
+        url: str = "{}/user/{}/about.json".format(self.main_constants.reddit_url, reddit_user)
+        headers: dict[str, str] = self.main_constants.reddit_headers
 
         response = requests.get(url, headers=headers)
 

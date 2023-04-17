@@ -4,7 +4,7 @@ import validators  # type: ignore
 from loguru import logger  # type: ignore
 
 from common.logging.logging_setup import LoggingSetup  # type: ignore
-from common.common_constants import CommonConstants  # type: ignore
+from common.constants.common_constants import CommonConstants  # type: ignore
 
 logging_setup = LoggingSetup()
 constants = CommonConstants()

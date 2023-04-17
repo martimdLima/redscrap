@@ -1,6 +1,6 @@
 import loguru
 
-from common.logging.logging_constants import LoggingConstants      # type: ignore
+from common.constants.logging_constants import LoggingConstants      # type: ignore
 
 logging_constants = LoggingConstants()
 

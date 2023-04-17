@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock, patch
 from common.validations.reddit_api_validations import RedditApiValidations
-from common.exceptions import SubredditNotFoundException
+from common.exceptions.main_exceptions import SubredditNotFoundException
 
 reddit_api_validations = RedditApiValidations()
 

@@ -4,7 +4,7 @@ from logging import handlers
 import colorama     # type: ignore
 from colorama import Fore, Back, Style
 
-from common.logging.logging_constants import LoggingConstants      # type: ignore
+from common.constants.logging_constants import LoggingConstants      # type: ignore
 
 logging_constants = LoggingConstants()
 

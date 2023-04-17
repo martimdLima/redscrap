@@ -5,15 +5,14 @@ import requests  # type: ignore
 from loguru import logger  # type: ignore
 from bs4 import BeautifulSoup, ResultSet
 
-from common.exceptions import TokenErrorException  # type: ignore
+from common.exceptions.main_exceptions import TokenErrorException  # type: ignore
 from common.logging.logging_setup import LoggingSetup  # type: ignore
-from common.common_constants import CommonConstants  # type: ignore
-from common.logging.utils.loguru_wrappers import logger_wraps
-#from common.logging.utils.loguru_wrappers import logger_wraps  # type: ignore
+from common.constants.common_constants import CommonConstants  # type: ignore
+from common.logging.utils.loguru_wrappers import logger_wraps   # type: ignore
 from common.validations.url_validations import UrlValidations  # type: ignore
-from common.request_manager import RequestManager  # type: ignore
-from common.image_downloader import ImageDownloader  # type: ignore
-from common.io_operations import IOOperations  # type: ignore
+from common.io_operations.request_manager import RequestManager  # type: ignore
+from common.io_operations.image_downloader import ImageDownloader  # type: ignore
+from common.io_operations.io_operations import IOOperations  # type: ignore
 from core.scraper.comment_scraper import CommentScraper  # type: ignore
 from core.api.reddit_api import RedditApi  # type: ignore
 from core.scraper.scraper_helper import ScraperHelper  # type: ignore
@@ -97,15 +96,7 @@ class ThreadScraper:
 
             soup: BeautifulSoup = BeautifulSoup(req.text, "html.parser")
 
-            if scrape_mode == "subreddit":
-                soup: BeautifulSoup = BeautifulSoup(req.text, "html.parser")
-                threads_list_element = soup.find(
-                    "div", attrs={"class": "sitetable linklisting"})
-                threads = threads_list_element.find_all(
-                    "div", attrs={"data-subreddit-prefixed": "r/{}".format(subreddit_or_user)})
-            else:
-                threads_list_element = soup.find("div", attrs={"class": "sitetable linklisting"})
-                threads = threads_list_element.find_all("div", attrs={"data-author": subreddit_or_user})
+            threads = self.scraper_helper.define_threads_based_on_search_parameter(scrape_mode, req, subreddit_or_user)
 
             max_count = int(max_counter)
 
@@ -117,12 +108,9 @@ class ThreadScraper:
 
                         thread_details_path = thread.attrs["data-permalink"]
                         thread_url = self.constants.old_reddit_url + thread_details_path
-
-                        thread_comments, img_urls = self.scrape_single_thread(
-                            thread_details_path, verbose
-                        )
-
+                        thread_comments, img_urls = self.scrape_single_thread(thread_details_path, verbose)
                         current_thread = "{}".format(thread_url)
+
                         thread_img_urls[current_thread] = {
                             "author": self.scraper_helper.construct_author_dict(thread),
                             "datetime": self.scraper_helper.construct_time_dict(thread),
@@ -197,34 +185,10 @@ class ThreadScraper:
 
             thread_img_ele = soup.find("div", attrs={"class", "expando"})
 
-            if thread_img_ele is not None:
-                thread_image_a_tags = thread_img_ele.find_all("a", attrs={"class", "may-blank"})
-                thread_iframe_tag = thread_img_ele.find("iframe", attrs={"class", "media-embed"})
-
-                if thread_image_a_tags is not None and len(thread_image_a_tags) >= 1:
-                    for thread_image_a_tag in thread_image_a_tags:
-                        logging.debug(thread_image_a_tag.attrs["href"])
-                        if self.validations.validate_if_url_is_a_valid_img_link(
-                                thread_image_a_tag.attrs["href"], self.constants.possible_urls):
-                            thread_images.append(thread_image_a_tag.attrs["href"])
-
-                        img_tag = thread_img_ele.find("img", attrs={"class", "preview"})
-
-                        if img_tag is not None:
-                            logging.debug(img_tag.attrs["src"])
-                            if self.validations.validate_if_url_is_a_valid_img_link(
-                                    img_tag.attrs["src"], self.constants.possible_urls):
-                                thread_images.append(img_tag.attrs["src"])
-
-                if thread_iframe_tag is not None:
-                    logging.debug(thread_iframe_tag.attrs["src"])
-                    if self.validations.validate_image_url(
-                            self.constants.possible_urls, thread_iframe_tag.attrs["src"]):
-                        thread_images.append(thread_iframe_tag.attrs["src"])
+            self.scraper_helper.process_thread_images(thread_img_ele, thread_images)
+            thread_comments, img_urls = self.comment_scrapper.scrape_comments(soup)
 
             thread_images = list(set(thread_images))
-
-            thread_comments, img_urls = self.comment_scrapper.scrape_comments(soup)
 
             # Remove all elements from thread_images that contain the value "crop=smart"
             thread_images = [x for x in thread_images if "crop=smart" not in x]

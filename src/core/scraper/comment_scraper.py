@@ -7,8 +7,8 @@ from loguru import logger  # type: ignore
 import validators  # type: ignore
 
 from common.logging.logging_setup import LoggingSetup  # type: ignore
-from common.common_constants import CommonConstants  # type: ignore
-from common.image_downloader import ImageDownloader  # type: ignore
+from common.constants.common_constants import CommonConstants  # type: ignore
+from common.io_operations.image_downloader import ImageDownloader  # type: ignore
 from common.logging.utils.loguru_wrappers import logger_wraps  # type: ignore
 from common.validations.url_validations import UrlValidations  # type: ignore
 from core.scraper.scraper_helper import ScraperHelper
@@ -39,6 +39,7 @@ class CommentScraper:
         self.image_downloader = ImageDownloader()
         self.scraper_helper = ScraperHelper()
         self.processed_comments = []
+        self.img_urls = []
 
     # noinspection PyUnresolvedReferences
     @logger_wraps()
@@ -71,47 +72,22 @@ class CommentScraper:
         """
 
         comments: List[Dict[str, any]] = []
-        img_urls: List[str] = []
+        self.img_urls: List[str] = []
         self.processed_comments: List[str] = []
 
         comment_area: bs4.element.Tag = soup.find("div", attrs={"class": "commentarea"})
-        comments_link_listing: bs4.element.Tag = comment_area.find("div", attrs={"class", "sitetable"})
+        comments_link_listing = comment_area.find("div", attrs={"class", "sitetable"})
 
         for comment_ele in comments_link_listing:
-            c_ele: bs4.element.PageElement = comment_ele
+            c_ele: bs4.element.Tag = comment_ele
             if "thing" in c_ele.attrs["class"]:
                 if c_ele.attrs["data-permalink"] not in self.processed_comments:
-                    comment = {"text": c_ele.find("div", class_="md").text.strip(),
-                               "author": self.scraper_helper.construct_author_dict(c_ele),
-                               "rating": self.scraper_helper.construct_rating_dict(c_ele),
-                               "datetime": self.scraper_helper.construct_time_dict(c_ele),
-                               "url": c_ele.attrs["data-permalink"]
-                               }
-
-                    comment_has_children, comment_num_children = self.scraper_helper.define_children_fields(c_ele)
-
-                    comment["hasChildren"] = comment_has_children
-                    comment["numChildren"] = comment_num_children
-
-                    urls = self.scraper_helper.construct_urls_list(c_ele)
-                    img_urls = img_urls + urls
-                    comment["urls"] = urls
-
-                    comment["replies"] = []
-                    child_div = c_ele.find("div", attrs={"class", "child"})
-                    reply_divs = child_div.find_all("div", attrs={"class", "comment"})
-
-                    self.processed_comments.append(c_ele.attrs["data-permalink"])
-
-                    if reply_divs:
-                        replies, img_urls = self.scrape_replies(reply_divs)
-                        processed_replies: List[Dict[str, Any]] = self.scraper_helper.remove_empty_lists(replies)
-                        comment["replies"] = processed_replies
+                    comment = self.process_comment(c_ele)
                     comments.append(comment)
 
         logger.debug("Processed Replies: {}".format(len(self.processed_comments)))
 
-        return comments, list(set(img_urls))
+        return comments, list(set(self.img_urls))
 
     # noinspection PyUnresolvedReferences
     @logger_wraps()
@@ -146,30 +122,54 @@ class CommentScraper:
 
         for reply_div in reply_divs:
             if reply_div.attrs["data-permalink"] not in self.processed_comments:
-                reply = {"text": reply_div.find("div", class_="md").text.strip(),
-                         "author": self.scraper_helper.construct_author_dict(reply_div),
-                         "rating": self.scraper_helper.construct_rating_dict(reply_div),
-                         "datetime": self.scraper_helper.construct_time_dict(reply_div),
-                         "url": reply_div.attrs["data-permalink"]}
-
-                reply_has_children, reply_num_children = self.scraper_helper.define_children_fields(reply_div)
-                reply["hasChildren"] = reply_has_children
-                reply["numChildren"] = reply_num_children
-
-                urls = self.scraper_helper.construct_urls_list(reply_div)
-                reply["urls"] = urls
-                img_urls = img_urls + urls
-                reply["replies"] = []
-
-                self.processed_comments.append(reply_div.attrs["data-permalink"])
-
-                nested_reply_divs = reply_div.find_all('div', class_='comment')
-                if nested_reply_divs:
-                    processed_replies, img_urls = self.scrape_replies(nested_reply_divs)
-                    post_processed_replies: List[Dict[str, Any]] = \
-                        self.scraper_helper.remove_empty_lists(processed_replies)
-                    reply['replies'] = post_processed_replies
-
+                reply = self.process_reply(reply_div)
                 replies.append(reply)
 
         return replies, list(set(img_urls))
+
+    def process_comment(self, comment_element: bs4.element.Tag):
+        comment_has_children, comment_num_children = self.scraper_helper.define_children_fields(comment_element)
+        urls = self.scraper_helper.construct_urls_list(comment_element)
+        self.img_urls = self.img_urls + urls
+
+        comment = {"text": comment_element.find("div", class_="md").text.strip(),
+                   "author": self.scraper_helper.construct_author_dict(comment_element),
+                   "rating": self.scraper_helper.construct_rating_dict(comment_element),
+                   "datetime": self.scraper_helper.construct_time_dict(comment_element),
+                   "url": comment_element.attrs["data-permalink"], "hasChildren": comment_has_children,
+                   "numChildren": comment_num_children, "urls": urls, "replies": []}
+
+        child_div = comment_element.find("div", attrs={"class", "child"})
+        reply_divs = child_div.find_all("div", attrs={"class", "comment"})
+
+        self.processed_comments.append(comment_element.attrs["data-permalink"])
+
+        if reply_divs:
+            replies, img_urls = self.scrape_replies(reply_divs)
+            processed_replies: List[Dict[str, Any]] = self.scraper_helper.remove_empty_lists(replies)
+            comment["replies"] = processed_replies
+
+        return comment
+
+    def process_reply(self, reply_element: bs4.element.Tag):
+        reply_has_children, reply_num_children = self.scraper_helper.define_children_fields(reply_element)
+        urls = self.scraper_helper.construct_urls_list(reply_element)
+        self.img_urls = self.img_urls + urls
+
+        reply = {"text": reply_element.find("div", class_="md").text.strip(),
+                 "author": self.scraper_helper.construct_author_dict(reply_element),
+                 "rating": self.scraper_helper.construct_rating_dict(reply_element),
+                 "datetime": self.scraper_helper.construct_time_dict(reply_element),
+                 "url": reply_element.attrs["data-permalink"], "hasChildren": reply_has_children,
+                 "numChildren": reply_num_children, "urls": urls, "replies": []}
+
+        self.processed_comments.append(reply_element.attrs["data-permalink"])
+
+        nested_reply_divs = reply_element.find_all('div', class_='comment')
+        if nested_reply_divs:
+            processed_replies, img_urls = self.scrape_replies(nested_reply_divs)
+            post_processed_replies: List[Dict[str, Any]] = \
+                self.scraper_helper.remove_empty_lists(processed_replies)
+            reply['replies'] = post_processed_replies
+
+        return reply

@@ -4,12 +4,12 @@ from typing import Any, Optional, List, Iterable
 from loguru import logger  # type: ignore
 from bs4 import ResultSet
 
-from common.exceptions import MissingRequiredParameter
-from common.image_downloader import ImageDownloader  # type: ignore
-from common.io_operations import IOOperations  # type: ignore
+from common.exceptions.main_exceptions import MissingRequiredParameter
+from common.io_operations.image_downloader import ImageDownloader  # type: ignore
+from common.io_operations.io_operations import IOOperations  # type: ignore
 from common.logging.loguru_setup import LoguruSetup  # type: ignore
-from common.logging.logging_constants import LoggingConstants  # type: ignore
-from common.common_constants import CommonConstants  # type: ignore
+from common.constants.logging_constants import LoggingConstants  # type: ignore
+from common.constants.common_constants import CommonConstants  # type: ignore
 from common.validations.parameter_validations import ParameterValidations  # type: ignore
 from common.validations.reddit_api_validations import RedditApiValidations  # type: ignore
 from core.api.reddit_api import RedditApi  # type: ignore
