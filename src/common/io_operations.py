@@ -43,7 +43,7 @@ class IOOperations:
         self.logging_funcs = LoggingSetup()
         self.constants = CommonConstants()
 
-    def validate_path(self, path):
+    def validate_path_is_dir_and_exists(self, path):
         if os.path.exists(path):
             if os.path.isfile(path):
                 logger.debug("Valid file path but not directory")
@@ -55,8 +55,7 @@ class IOOperations:
                 logger.debug("Valid path, but not a file or directory")
                 is_valid = False
         else:
-            logger.error("Error: Invalid Path:", path)
-            raise OSError("Error: Invalid Path:", path)
+            is_valid = False
 
         return is_valid
 
@@ -76,11 +75,13 @@ class IOOperations:
             logger.debug(msg)
 
     def init_directories(self, output):
-        output_directory = None
 
         if output is not None:
-            if self.validate_path(output):
+            validate_path_is_dir_and_exists = self.validate_path_is_dir_and_exists(output)
+            if validate_path_is_dir_and_exists:
                 logger.debug("Provided output parameter: {} is VALID".format(output))
+                output_directory = output
+            else:
                 output_directory = output
         else:
             # Check if the Documents folder exists in the user's home directory. If not attempt to create it
@@ -103,11 +104,15 @@ class IOOperations:
 
             output_directory = os.path.join(docs_folder, "output")
 
-        user_reports = os.path.join(output_directory, "reports/users")
-        subreddit_reports = os.path.join(output_directory, "reports/subreddits")
-        subreddit_downloads_directory = os.path.join(output_directory, "downloads/subreddit")
-        user_downloads_directory = os.path.join(output_directory, "downloads/subreddit")
-        logs = os.path.join(output_directory, "logs")
+        user_reports = os.path.join(output_directory,
+                                    self.constants.user_reports_default_output_directory)
+        subreddit_reports = os.path.join(output_directory,
+                                         self.constants.subreddits_reports_default_output_directory)
+        subreddit_downloads_directory = os.path.join(output_directory,
+                                                     self.constants.subreddits_img_downloads_default_output_directory)
+        user_downloads_directory = os.path.join(output_directory,
+                                                self.constants.user_img_downloads_default_output_directory)
+        logs = os.path.join(output_directory, self.constants.logs_default_output_directory)
 
         self.init_directory(output_directory)
         self.init_directory(user_reports)
@@ -220,71 +225,46 @@ class IOOperations:
                     dynamic_ncols=True) as pbar:
 
                 for file_path in Path(input_dir).glob("*.*"):
-                    try:
-                        with Image.open(file_path) as img:
-                            width, height = img.size
-                            mimetype, _ = mimetypes.guess_type(str(file_path))
-                            # checks if img path has a mimetype, and it starts with image/.*
-                            if mimetype and mimetype.startswith("image/"):
-                                # match the resolution to the resolutions in the resolutions dict
-                                matching_key = next(
-                                    (resolution for resolution in self.constants.resolutions.keys()
-                                     if resolution[0] <= width <= resolution[2] and
-                                     resolution[1] <= height <= resolution[3]), None)
-
-                                # If any of resolutions match, save the img to the corresponding folder, if it doesn't
-                                # save the image to an "other" folder
-                                if matching_key:
-                                    matching_value = self.constants.resolutions[matching_key]
-
-                                    msg = "The corresponding resolution for the matching resolution {} is {}."\
-                                        .format(matching_key, matching_value)
-                                    logger.debug(msg)
-
-                                    self.create_output_folder_and_move_files(
-                                        file_path, output_dir, matching_value, mimetype)
-                                else:
-                                    logger.debug("The resolution is not in the dictionary.")
-
-                                    self.create_output_folder_and_move_files(file_path, output_dir, "other", mimetype)
-
-                    except IOError as exc:
-                        logger.error("Error occurred while processing %s: %s", file_path, exc)
+                    self.sort_file(file_path, output_dir)
                     pbar.update(1)
 
         else:
             for file_path in Path(input_dir).glob("*.*"):
-                try:
-                    with Image.open(file_path) as img:
-                        width, height = img.size
-                        mimetype, _ = mimetypes.guess_type(str(file_path))
-                        # checks if img path has a mimetype, and it starts with image/.*
-                        if mimetype and mimetype.startswith("image/"):
-                            # match the resolution to the resolutions in the resolutions dict
-                            matching_key = next((resolution for resolution in self.constants.resolutions.keys() if
-                                                 resolution[0] <= width <= resolution[2] and resolution[1] <= height <=
-                                                 resolution[3]), None)
-
-                            # If any of resolutions match, save the img to the corresponding folder, if it doesn't
-                            # save the image to an "other" folder
-                            if matching_key:
-                                matching_value = self.constants.resolutions[matching_key]
-
-                                msg = "The corresponding resolution for the matching resolution {} is {}." \
-                                    .format(matching_key, matching_value)
-                                logger.debug(msg)
-
-                                self.create_output_folder_and_move_files(
-                                    file_path, output_dir, matching_value, mimetype)
-                            else:
-                                logger.debug("The resolution is not in the dictionary.")
-
-                                self.create_output_folder_and_move_files(file_path, output_dir, "other", mimetype)
-
-                except IOError as exc:
-                    logger.error("Error occurred while processing %s: %s", file_path, exc)
+                self.sort_file(file_path, output_dir)
 
         logger.debug("[7] FINISHED FILE SORTING STEP")
 
         # if remove flag is passed delete the original files
         self.delete_original_files(input_dir, remove, verbose)
+
+    def sort_file(self, file_path: Path, output_dir: Path):
+        try:
+            with Image.open(file_path) as img:
+                width, height = img.size
+                mimetype, _ = mimetypes.guess_type(str(file_path))
+                # checks if img path has a mimetype, and it starts with image/.*
+                if mimetype and mimetype.startswith("image/"):
+                    # match the resolution to the resolutions in the resolutions dict
+                    matching_key = next(
+                        (resolution for resolution in self.constants.resolutions.keys()
+                         if resolution[0] <= width <= resolution[2] and
+                         resolution[1] <= height <= resolution[3]), None)
+
+                    # If any of resolutions match, save the img to the corresponding folder, if it doesn't
+                    # save the image to an "other" folder
+                    if matching_key:
+                        matching_value = self.constants.resolutions[matching_key]
+
+                        msg = "The corresponding resolution for the matching resolution {} is {}." \
+                            .format(matching_key, matching_value)
+                        logger.debug(msg)
+
+                        self.create_output_folder_and_move_files(
+                            file_path, output_dir, matching_value, mimetype)
+                    else:
+                        logger.debug("The resolution is not in the dictionary.")
+
+                        self.create_output_folder_and_move_files(file_path, output_dir, "other", mimetype)
+
+        except IOError as exc:
+            logger.error("Error occurred while processing %s: %s", file_path, exc)

@@ -32,7 +32,7 @@ class LoguruSetup:
         level: str = constants.default_log_file_level,
         log_format: str = constants.default_log_format,
         colorize: bool = constants.default_log_colorizing,
-        rotation: str = constants.default_log_rotation,
+        rotation: float = constants.default_log_rotation,
         retention: str = constants.default_log_retention,
         compression: str = constants.default_log_compression,
         delay: bool = constants.default_log_delay,
@@ -71,6 +71,9 @@ class LoguruSetup:
             enqueue (bool, optional): whether to enqueue the logging. Defaults to constants.DEFAULT_LOG_ENQUEUE.
             catch (bool, optional): whether to catch the logging. Defaults to constants.DEFAULT_LOG_CATCH.
             debug (bool, optional): whether to include debug messages. Defaults to False.
+
+        Returns:
+            None
         """
         logger.remove()
 

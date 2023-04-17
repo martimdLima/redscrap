@@ -48,7 +48,7 @@ class ThreadScraper:
 
     @logger_wraps()
     def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
-                       max_counter: Optional[int] = None
+                       max_counter: Optional[int]
                        ) -> Dict[
         str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]]:
         """
@@ -59,7 +59,7 @@ class ThreadScraper:
             sort (str): The method to sort the threads, such as "hot" or "top".
             scrape_mode (str): The mode in which to scrape threads, either "subreddit" or "user".
             verbose (bool): A flag indicating whether to log verbose output.
-            max_counter (Optional[int], optional): The maximum number of threads to scrape. Defaults to None.
+            max_counter (Optional[int], optional): The maximum number of threads to scrape.
 
         Returns:
             Dict[str, Union[ Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]],
@@ -107,7 +107,7 @@ class ThreadScraper:
                 threads_list_element = soup.find("div", attrs={"class": "sitetable linklisting"})
                 threads = threads_list_element.find_all("div", attrs={"data-author": subreddit_or_user})
 
-            max_count = (int(max_counter) if max_counter is not None else len(threads))
+            max_count = int(max_counter)
 
             while full is not True:
                 for thread in threads:
@@ -148,7 +148,11 @@ class ThreadScraper:
 
                 try:
                     next_button = soup.find("span", class_="next-button")
-                    next_page_link = next_button.find("a").attrs["href"]  # type: ignore
+                    if next_button is not None:
+                        next_page_link = next_button.find("a").attrs["href"]  # type: ignore
+                    else:
+                        full = True
+                        break
 
                     req = requests.get(next_page_link, headers=self.constants.user_agent, timeout=10)
                     soup: BeautifulSoup = BeautifulSoup(req.text, "html.parser")

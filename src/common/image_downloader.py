@@ -89,7 +89,7 @@ class ImageDownloader:
             output_directory.mkdir(parents=True)
 
         # Make a GET request to the specified URL using httpx.
-        transport = httpx.HTTPTransport(retries=0)
+        transport = httpx.HTTPTransport(retries=3)
         client = httpx.Client(transport=transport)
 
         failed_urls = subreddits_img_list
@@ -110,55 +110,13 @@ class ImageDownloader:
                     response = client.get(url)
 
                     if response.status_code == 200:
-                        # Raise an exception if the HTTP request fails.
-
-                        # set the output file path
-                        output_file = output_directory / Path(urlparse(url).path).name
-
-                        msg = "Response: {}".format(self.constants.check_mark_symbol)
-                        logger.debug(msg)
-
-                        failed_urls.remove(url)
-                        downloaded_urls.append(url)
-
-                        # If the response is ok and the output file doesn't exist, save it to it's destination
-                        if not output_file.exists():
-                            with open(output_file, "wb") as ifile:
-                                ifile.write(response.content)
-                                msg = "{} - Downloaded {} to target folder {}".format(
-                                    self.constants.check_mark_symbol, url, output_file)
-                                logger.debug(msg)
-                        else:
-                            msg = "{} - Skipping: {} already exists in the target folder {}".format(
-                                self.constants.cross_symbol, url, output_directory)
-                            logger.debug(msg)
+                        self.download_img_url(url, response.content, output_directory, failed_urls, downloaded_urls)
             else:
                 for url in subreddits_img_list:
                     response = client.get(url)
 
                     if response.status_code == 200:
-                        # Raise an exception if the HTTP request fails.
-
-                        # set the output file path
-                        output_file = output_directory / Path(urlparse(url).path).name
-
-                        msg = "Response: {}".format(self.constants.check_mark_symbol)
-                        logger.debug(msg)
-
-                        failed_urls.remove(url)
-                        downloaded_urls.append(url)
-
-                        # If the response is ok and the output file doesn't exist, save it to it's destination
-                        if not output_file.exists():
-                            with open(output_file, "wb") as ifile:
-                                ifile.write(response.content)
-                                msg = "{} - Downloaded {} to target folder {}".format(
-                                    self.constants.check_mark_symbol, url, output_file)
-                                logger.debug(msg)
-                        else:
-                            msg = "{} - Skipping: {} already exists in the target folder {}".format(
-                                self.constants.cross_symbol, url, output_directory)
-                            logger.debug(msg)
+                        self.download_img_url(url, response.content, output_directory, failed_urls, downloaded_urls)
 
         finally:
             client.close()
@@ -166,6 +124,30 @@ class ImageDownloader:
         self.generate_download_report(output_directory, subreddits_img_list, failed_urls, verbose)
 
         logger.debug("[6] FINISHED IMAGE DOWNLOAD STEP")
+
+    def download_img_url(self, url: str, payload, output_directory: Path, failed_urls, downloaded_urls) -> None:
+        # Raise an exception if the HTTP request fails.
+
+        # set the output file path
+        output_file = output_directory / Path(urlparse(url).path).name
+
+        msg = "Response: {}".format(self.constants.check_mark_symbol)
+        logger.debug(msg)
+
+        failed_urls.remove(url)
+        downloaded_urls.append(url)
+
+        # If the response is ok and the output file doesn't exist, save it to it's destination
+        if not output_file.exists():
+            with open(output_file, "wb") as ifile:
+                ifile.write(payload)
+                msg = "{} - Downloaded {} to target folder {}".format(
+                    self.constants.check_mark_symbol, url, output_file)
+                logger.debug(msg)
+        else:
+            msg = "{} - Skipping: {} already exists in the target folder {}".format(
+                self.constants.cross_symbol, url, output_directory)
+            logger.debug(msg)
 
     @logger_wraps()
     def generate_download_report(self, output_dir: Path, subreddits_img_list: List[str], failed_urls: List[str],

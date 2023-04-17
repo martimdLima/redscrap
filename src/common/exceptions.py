@@ -31,3 +31,12 @@ class UserNotFoundException(Exception):
 
     def __init__(self, message: str):
         super().__init__(message)
+
+
+class MissingRequiredParameter(Exception):
+    """
+    Raises a custom exception with a message informing the user about missing required parameters
+    """
+
+    def __init__(self, message: str):
+        super().__init__(message)

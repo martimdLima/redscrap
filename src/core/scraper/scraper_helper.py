@@ -205,7 +205,7 @@ class ScraperHelper:
                 result.append(elem)
         return result
 
-    def generate_list_of_img_files_in_dir(self, directory: Path) -> List[str]:
+    def get_list_of_img_files_in_dir(self, directory: Path) -> List[str]:
         """Generate a list of image files in a directory.
 
         Args:

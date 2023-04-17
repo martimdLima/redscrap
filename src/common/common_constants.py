@@ -5,7 +5,8 @@ import os
 
 
 class CommonConstants:
-    """A class that contains constants used throughout the application.
+    """
+    A class that contains constants used throughout the application.
 
     Attributes:
         old_reddit_url (str): Old reddit base url.
@@ -18,7 +19,71 @@ class CommonConstants:
         invalid_urls (list): Invalid possible url prefixes that may appear during scraping.
         match_url (str): Regex that match urls in the format https://subdomain.domain.
         domain_regex (str): Regex for validating domains.
+
+    Properties:
+        logs_default_output_directory (str): Logs default output directory.
+        user_reports_default_output_directory (str): User reports default output directory.
+        subreddits_reports_default_output_directory (str): Subreddits reports default output directory.
+        user_img_downloads_default_output_directory (str): User image downloads default output directory.
+        subreddits_img_downloads_default_output_directory (str): Subreddits default output directory.
+        client_id (str): User API key.
+        secret_token (str): User API secret.
+        username (str): User Reddit username.
+        password (str): User Reddit password.
+        user_subreddits_list (str): Subreddit user list. A string of comma-separated subreddits.
+        user_profile_to_scrape (str): Subreddit user list. A string of comma-separated subreddits.
+        user_subreddits_sort_method (str): Subreddit user list sort method. A string of comma-separated subreddits.
+        reddit_headers (dict): A dictionary containing the user agent header information.
+        check_mark_symbol (str): Check mark symbol.
+        cross_symbol (str): Cross symbol.
+        reddit_url (str): New Reddit base URL.
+        old_reddit_url (str): Old Reddit base URL.
+        reddit_api_base_url (str): Reddit API base URL.
+        output_path (Path): Output path for subreddits.
+        resolutions (defaultdict): a dictionary containing a tuple of integers representing a resolution as the key and the
+        corresponding resolution label as the value.
+        user_agent (str): User agent information for Reddit.
     """
+
+    @property
+    def logs_default_output_directory(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+        return "logs"
+
+    @property
+    def user_reports_default_output_directory(self):
+        """
+        Returns:
+            (str): User reports default output directory.
+        """
+        return "reports/users"
+
+    @property
+    def subreddits_reports_default_output_directory(self):
+        """
+        Returns:
+            (str): Subreddits reports default output directory.
+        """
+        return "reports/subreddits"
+
+    @property
+    def user_img_downloads_default_output_directory(self):
+        """
+        Returns:
+            (str): user image downloads default output directory.
+        """
+        return "downloads/user"
+
+    @property
+    def subreddits_img_downloads_default_output_directory(self):
+        """
+        Returns:
+            (str): subreddits default output directory.
+        """
+        return "downloads/subreddit"
 
     @property
     def client_id(self):
@@ -63,7 +128,20 @@ class CommonConstants:
             (str): Subreddit user list. A string of comma separated subreddits.
         """
 
-        return os.environ.get("SUBREDDIT_USER_LIST")
+        return os.environ.get("SUBREDDITS_TO_SCRAPE")
+
+    @property
+    def user_profile_to_scrape(self):
+        """
+        Returns:
+            (str): Subreddit user list. A string of comma separated subreddits.
+        """
+
+        return os.environ.get("REDDIT_USER_TO_SCRAPE")
+
+    @property
+    def user_num_threads_to_scrape(self):
+        return os.environ.get("NUM_THREADS_TO_SCRAPE")
 
     @property
     def user_subreddits_sort_method(self):

@@ -4,6 +4,7 @@ from typing import Any, Optional, List, Iterable
 from loguru import logger  # type: ignore
 from bs4 import ResultSet
 
+from common.exceptions import MissingRequiredParameter
 from common.image_downloader import ImageDownloader  # type: ignore
 from common.io_operations import IOOperations  # type: ignore
 from common.logging.loguru_setup import LoguruSetup  # type: ignore
@@ -65,6 +66,9 @@ class MainHelper:
             export_mode (str): The export mode, which can be "single", "multiple", or "user".
             threads_list (List[dict]): A list of dictionaries containing thread information.
             verbose (Optional[bool]): Whether to print verbose output.
+
+        Returns:
+            None
         """
 
         detailed_report = ""
@@ -98,12 +102,25 @@ class MainHelper:
         Returns:
             None
         """
+        user_reddit_profile_to_scrape = self.main_constants.user_profile_to_scrape
+
+        if reddit_user is None and user_reddit_profile_to_scrape is not None:
+            reddit_user = user_reddit_profile_to_scrape
+        elif (reddit_user is not None and user_reddit_profile_to_scrape is not None or reddit_user is not None
+              and user_reddit_profile_to_scrape is None):
+            reddit_user = reddit_user
+        else:
+            msg = "Missing reddit username. If you want to scrape a user profile you must provide a reddit user"
+            raise MissingRequiredParameter(msg)
+
         # validate reddit user
         is_user_valid = self.reddit_api_validations.validate_reddit_user(reddit_user, verbose)
 
         if is_user_valid:
             # Scrape user submissions
-            user_threads = self.thread_scraper.scrape_threads(reddit_user, sort, "user", verbose, number_results)
+            user_threads = self.thread_scraper.scrape_threads(
+                reddit_user, sort, "user", verbose,
+                number_results if number_results is not None else self.main_constants.user_num_threads_to_scrape)
 
             # Downloads scraped img urls
             self.image_downloader.download_img_url_list(
@@ -111,7 +128,7 @@ class MainHelper:
 
             img_output_dir = Path("{}/downloads/user/{}".format(output_directory, reddit_user))
 
-            image_files = self.scraper_helper.generate_list_of_img_files_in_dir(img_output_dir)
+            image_files = self.scraper_helper.get_list_of_img_files_in_dir(img_output_dir)
 
             # If the image list size is bigger than 0, sort the downloaded images by mime type and resolution
             if len(image_files) > 0:
@@ -141,6 +158,9 @@ class MainHelper:
             details (bool): If True, exports detailed information about each post to a JSON file.
             output_directory: (str): Directory to output the downloaded files and reports
             verbose (bool): If True, displays logging information during the scraping process.
+
+        Returns:
+            None
         """
 
         user_subreddits_list = self.main_constants.user_subreddits_list
@@ -150,12 +170,16 @@ class MainHelper:
         elif (subreddits is not None and user_subreddits_list is not None or subreddits is not None
               and user_subreddits_list is None):
             subreddits = subreddits
+        else:
+            msg = "Missing subreddits. If you want to scrape a subreddit or multiple subreddits, provide one or " \
+                  "multiple subreddits separated by a comma or semi-colo"
+            raise MissingRequiredParameter(msg)
 
         # Validate Args
         subreddits = self.parameter_validations.validate_subreddits_parameter(subreddits)
 
         # Validate Subreddit
-        self.reddit_api_validations.validate_subreddits_list(subreddits)
+        self.reddit_api_validations.validate_subreddits_list(subreddits, verbose)
 
         subreddits_detailed_information_dict: dict = {}
 
@@ -163,7 +187,8 @@ class MainHelper:
         for subreddit in subreddits:
             # Scrapes n number of threads for the given subreddits, according to provided parameter max_count
             subreddit_threads_list = self.thread_scraper.scrape_threads(
-                subreddit, sorting_type, "subreddit", verbose, number_results if number_results is not None else None)
+                subreddit, sorting_type, "subreddit", verbose,
+                number_results if number_results is not None else self.main_constants.user_num_threads_to_scrape)
 
             subreddits_detailed_information_dict = {**subreddits_detailed_information_dict,
                                                     **subreddit_threads_list}
