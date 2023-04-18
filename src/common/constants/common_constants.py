@@ -46,6 +46,73 @@ class CommonConstants:
     """
 
     @property
+    def click_scrape_subreddits_option_help_msg(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+
+        return "Scrape subreddits threads"
+
+    @property
+    def click_scrape_user_option_help_msg(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+
+        return "Scrape user threads"
+
+    @property
+    def click_number_of_threads_option_help_msg(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+
+        return "Number of threads to scrape"
+
+    @property
+    def click_filter_threads_option_help_msg(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+
+        return "Filter threads"
+
+    @property
+    def click_details_option_help_msg(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+
+        return "If enable outputs the detailed list of threads of each subreddit provided into an individual file"
+
+    @property
+    def click_sorting_filter_option_help_msg(self):
+        return "Thread sorting filter"
+
+    @property
+    def click_output_option_help_msg(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+
+        return "The directory to output the downloads"
+
+    @property
+    def click_verbose_option_help_msg(self):
+        """
+        Returns:
+            (str): Logs default output directory.
+        """
+
+        return "Enables verbose mode"
+
+    @property
     def logs_default_output_directory(self):
         """
         Returns:

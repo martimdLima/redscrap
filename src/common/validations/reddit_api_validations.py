@@ -16,16 +16,19 @@ class RedditApiValidations:
     A class that provides a number of methods to expose the reddit API
 
     Methods:
-        - def validate_subreddits_list(self, subreddits):
-            Validates a list of subreddits
-        - def validate_subreddit(self, subreddit):
-            Validates if a subreddit exists
+        - def validate_subreddits_list(self, subreddits): Validates a list of subreddits
+
+        - def validate_subreddit(self, subreddit): Validates if a subreddit exists
+
         - def check_if_subreddit_exists(self, token: str, subreddit: str) -> Optional[bool]:
-            Checks if the given username exists on Reddit API.
+            Checks if the given subreddits exists on Reddit API.
+
         - def validate_reddit_user(self, reddit_user: str, verbose: bool) -> Optional[bool]:
             Checks if the given username exists on Reddit API.
+
         - def validate_user(self, token: str, reddit_user: str) -> Optional[bool]:
             Checks if the given username exists on Reddit API.
+
         - def validate_user_v2(self, reddit_user: str) -> Optional[bool]:
             Checks if the given username exists on Reddit API.
     """

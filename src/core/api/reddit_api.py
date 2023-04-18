@@ -1,10 +1,8 @@
-import logging
 from typing import Optional, Dict, Union
 from loguru import logger       # type: ignore
 import requests     # type: ignore
 
-from common.exceptions.main_exceptions import SubredditNotFoundException, \
-    UserNotFoundException, TokenErrorException  # type: ignore
+from common.exceptions.main_exceptions import UserNotFoundException, TokenErrorException  # type: ignore
 from common.logging.logging_setup import LoggingSetup   # type: ignore
 from common.constants.common_constants import CommonConstants     # type: ignore
 
@@ -71,15 +69,16 @@ class RedditApi:
         headers = self.main_constants.reddit_headers
 
         res = requests.post(
-            "https://www.reddit.com/api/v1/access_token",
+            "{}/api/v1/access_token".format(self.main_constants.reddit_url),
             auth=auth,
             data=data,
-            headers=headers,
+            headers=headers
         )
 
         if not res.ok:
             if verbose:
-                logger.exception("Request failed with code {}".format(res.status_code))
+                msg = "Request failed with code {}".format(res.status_code)
+                logger.exception(msg)
             raise TokenErrorException("Failed to obtain Reddit API token")
 
         token = res.json()["access_token"]
@@ -102,7 +101,7 @@ class RedditApi:
             UserNotFoundException: If the user profile is unavailable or could not be reached.
         """
         # Generating the URL leading to the desired subreddit
-        url = "https://oauth.reddit.com/api/v1/me"
+        url = "{}/api/v1/me".format(self.main_constants.reddit_api_base_url)
         token = self.generate_reddit_api_token(verbose)
         headers = {**self.main_constants.reddit_headers, **{"Authorization": "bearer {}".format(token)}}
 
@@ -115,10 +114,8 @@ class RedditApi:
                 response = res.json()
 
         except UserNotFoundException as exc:
-            msg = (
-                "Your user profile is unavailable or couldn't be reached at this moment"
-            )
-            logging.exception(msg)
+            msg = "Your user profile is unavailable or couldn't be reached at this moment"
+            logger.exception(msg)
             raise UserNotFoundException(msg) from exc
 
         return response

@@ -98,9 +98,6 @@ class MainHelper:
             verbose (Optional[bool]): Whether to print verbose output.
             output_directory: (str): Directory to output the downloaded files and reports
             number_results (int): The number of results to scrape.
-
-        Returns:
-            None
         """
         user_reddit_profile_to_scrape = self.main_constants.user_profile_to_scrape
 
@@ -149,7 +146,6 @@ class MainHelper:
         Scrape posts and comments from a subreddit.
 
         Args:
-
             subreddits (List[str], optional): A list of subreddits to scrape. If None, the user's subreddits will
                     be used.
             sorting_type (str): A string indicating how to sort the posts. Valid values: 'hot', 'new', 'top',
@@ -158,9 +154,6 @@ class MainHelper:
             details (bool): If True, exports detailed information about each post to a JSON file.
             output_directory: (str): Directory to output the downloaded files and reports
             verbose (bool): If True, displays logging information during the scraping process.
-
-        Returns:
-            None
         """
 
         user_subreddits_list = self.main_constants.user_subreddits_list

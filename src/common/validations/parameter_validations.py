@@ -1,4 +1,6 @@
 from typing import List, Optional
+
+import click
 from loguru import logger        # type: ignore
 import re
 import requests      # type: ignore
