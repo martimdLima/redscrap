@@ -90,7 +90,3 @@ Features
 * Sorts all the downloaded images by mimetype and resolution. Example: $HOME/Documents/output/downloads/subreddit/wallpaper/720p/jpeg/h5e3wklys2ua1.jpg
 * Uses tqdm to display a dynamic progress bar to display the downloading and sorting processes
 * Generates a detailed report of all the subreddits or user threads and their respective comments by chronological order
-
-Development
------------
-Check [contributing.md](contributing.md) for hacking details.
