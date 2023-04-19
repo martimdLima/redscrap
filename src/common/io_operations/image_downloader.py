@@ -3,7 +3,6 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import List
 from urllib.parse import urlparse
-import requests  # type: ignore
 from loguru import logger  # type: ignore
 from tqdm import tqdm
 import httpx
@@ -118,11 +117,16 @@ class ImageDownloader:
                         pbar.update(1)
             else:
                 for url in subreddits_img_list:
-                    response = client.get(url)
+                    try:
+                        response = client.get(url, timeout=10.0)  # Set a 10-second timeout
 
-                    if response.status_code == 200:
-                        self.download_img_url(url, response.content, output_directory)
-
+                        if response.status_code == 200:
+                            self.download_img_url(url, response.content, output_directory)
+                            downloaded_urls.append(url)
+                        else:
+                            failed_urls.append(url)
+                    except httpx.TimeoutException:
+                        failed_urls.append(url)  # Add the URL to the failed_urls list if the request times out.
         finally:
             client.close()
 
@@ -133,14 +137,12 @@ class ImageDownloader:
     @contextmanager
     def download_img_url(self, url: str, payload: bytes, output_directory: Path):
         """
+        Downloads an image from a URL to a specified directory.
 
         Args:
-            url:
-            payload:
-            output_directory:
-
-        Returns:
-            None
+            url (str): The URL of the image to download.
+            payload (bytes): The image file data.
+            output_directory (Path): The output directory where the image will be saved.
         """
         # set the output file path
         output_file = output_directory / Path(urlparse(url).path).name

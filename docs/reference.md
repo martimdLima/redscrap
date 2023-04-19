@@ -94,7 +94,7 @@
       show_source: false
       heading_level: 4
 
-:::src.common.io_operations.request_manager
+:::src.common.io_operations.request_factory
     options:
       show_source: false
       heading_level: 4

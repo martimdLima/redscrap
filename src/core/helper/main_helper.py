@@ -33,7 +33,6 @@ class MainHelper:
         scrape_subreddit(subreddits: Optional[List[str]], sorting_type: str, number_results: Optional[int],
             details: bool, verbose: bool) -> None:
             Scrapes posts and comments from a subreddit.
-
     """
 
     def __init__(self) -> None:
@@ -63,10 +62,10 @@ class MainHelper:
 
         Args:
             output_directory (str): Directory to output thread detailed information
-            user_or_subreddit (str): The name of the user or subreddit to export data for.
-            export_mode (str): The export mode, which can be "single", "multiple", or "user".
-            threads_list (List[dict]): A list of dictionaries containing thread information.
-            verbose (Optional[bool]): Whether to print verbose output.
+            user_or_subreddit (str): The name of the user or subreddit to export data for
+            export_mode (str): The export mode, which can be "single", "multiple", or "user"
+            threads_list (List[dict]): A list of dictionaries containing thread information
+            verbose (Optional[bool]): Whether to print verbose output
 
         Returns:
             None
@@ -200,19 +199,14 @@ class MainHelper:
                 str(img_output_dir) + "/*.gif")
 
             if len(image_files) > 0:
-                self.io_operations.sort_by_mime_type_and_resolution(
-                    img_output_dir,
-                    img_output_dir,
-                    True,
-                    verbose,
-                )
+                self.io_operations.sort_by_mime_type_and_resolution(img_output_dir, img_output_dir, True, verbose)
 
         if details:
-            self.export_threads_detailed_information(subreddits, "single",
-                                                     subreddits_detailed_information_dict, output_directory, verbose)
+            self.export_threads_detailed_information(subreddits, "single", subreddits_detailed_information_dict,
+                                                     output_directory, verbose)
         else:
-            self.export_threads_detailed_information(subreddits, "multiple",
-                                                     subreddits_detailed_information_dict, output_directory, verbose)
+            self.export_threads_detailed_information(subreddits, "multiple", subreddits_detailed_information_dict,
+                                                     output_directory, verbose)
 
         logger.info("Finished scraping threads for subreddits: {}".format(" ".join(map(str, subreddits)))) \
             if verbose else None

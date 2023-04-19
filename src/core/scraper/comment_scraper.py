@@ -27,6 +27,7 @@ class CommentScraper:
 
     Methods:
         def scrape_comments(soup): Scrape comments from the given comments' element.
+
         def scrape_replies(reply_divs): Scrapes the replies from the given reply divs and returns a list of dictionaries
         representing each reply.
     """
@@ -41,7 +42,6 @@ class CommentScraper:
         self.processed_comments: List[str] = []
         self.img_urls: List[str] = []
 
-    # noinspection PyUnresolvedReferences
     @logger_wraps()
     def scrape_comments(self, soup) -> Tuple[List[Dict[str, Any]], List[str]]:
         """
@@ -89,7 +89,6 @@ class CommentScraper:
 
         return comments, list(set(self.img_urls))
 
-    # noinspection PyUnresolvedReferences
     @logger_wraps()
     def scrape_replies(self, reply_divs: List[Any]) -> Tuple[List[Dict[str, Any]], List[str]]:
         """
@@ -132,7 +131,7 @@ class CommentScraper:
         urls = self.scraper_helper.construct_urls_list(comment_element)
         self.img_urls = self.img_urls + urls
 
-        comment = {"text": comment_element.find("div", class_="md").text.strip(),   #type: ignore
+        comment = {"text": comment_element.find("div", class_="md").text.strip(),   # type: ignore
                    "author": self.scraper_helper.construct_author_dict(comment_element),
                    "rating": self.scraper_helper.construct_rating_dict(comment_element),
                    "datetime": self.scraper_helper.construct_time_dict(comment_element),
@@ -140,7 +139,7 @@ class CommentScraper:
                    "numChildren": comment_num_children, "urls": urls, "replies": []}
 
         child_div = comment_element.find("div", attrs={"class", "child"})
-        reply_divs = child_div.find_all("div", attrs={"class", "comment"})      #type: ignore
+        reply_divs = child_div.find_all("div", attrs={"class", "comment"})      # type: ignore
 
         self.processed_comments.append(comment_element.attrs["data-permalink"])
 

@@ -1,12 +1,11 @@
 from typing import Optional, List
 from loguru import logger       # type: ignore
-import requests     # type: ignore
 import json
 
 from common.exceptions.main_exceptions import SubredditNotFoundException, UserNotFoundException, TokenErrorException  # type: ignore
 from common.logging.logging_setup import LoggingSetup   # type: ignore
 from common.constants.common_constants import CommonConstants       # type: ignore
-from common.io_operations.request_manager import RequestManager       # type: ignore
+from common.io_operations.request_factory import RequestFactory       # type: ignore
 from core.api.reddit_api import RedditApi       # type: ignore
 
 
@@ -32,11 +31,10 @@ class RedditApiValidations:
             Checks if the given username exists on Reddit API.
     """
 
-
     def __init__(self):
         self.logging_setup = LoggingSetup()
         self.main_constants = CommonConstants()
-        self.request_manager = RequestManager()
+        self.request_factory = RequestFactory()
         self.reddit_api = RedditApi(self.main_constants.client_id, self.main_constants.secret_token,
                                     self.main_constants.username, self.main_constants.password)
 
@@ -77,9 +75,9 @@ class RedditApiValidations:
 
         # add authorization to our headers dictionary
         url = "{}/r/{}/about".format(self.main_constants.reddit_api_base_url, subreddit)
-        token = self.reddit_api.generate_reddit_api_token(verbose)
+        token = self.reddit_api.generate_reddit_api_token()
         headers = self.reddit_api.generate_headers(token)
-        res = self.request_manager.request_page(url, headers)
+        res = self.request_factory.get(url, headers=headers)
 
         is_valid: bool = False
         if res.status_code == 200:
@@ -123,9 +121,9 @@ class RedditApiValidations:
 
         url: str = "{}/api/username_available.json?user={}".format(
             self.main_constants.reddit_api_base_url, reddit_user)
-        token = self.reddit_api.generate_reddit_api_token(verbose)
+        token = self.reddit_api.generate_reddit_api_token()
         headers = self.reddit_api.generate_headers(token)
-        res = self.request_manager.request_page(url, headers)
+        res = self.request_factory.get(url, headers=headers)
 
         exists: bool = False
 

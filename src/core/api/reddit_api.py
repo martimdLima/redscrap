@@ -1,10 +1,10 @@
 from typing import Optional, Dict, Union
 from loguru import logger       # type: ignore
-import requests     # type: ignore
 
 from common.exceptions.main_exceptions import UserNotFoundException, TokenErrorException  # type: ignore
 from common.logging.logging_setup import LoggingSetup   # type: ignore
 from common.constants.common_constants import CommonConstants     # type: ignore
+from common.io_operations.request_factory import RequestFactory     # type: ignore
 
 
 class RedditApi:
@@ -28,6 +28,7 @@ class RedditApi:
     def __init__(self, client_id, secret_token, username, password):
         self.logging_setup = LoggingSetup()
         self.main_constants = CommonConstants()
+        self.request_factory = RequestFactory()
         self.client_id = client_id
         self.secret_token = secret_token
         self.username = username
@@ -46,12 +47,8 @@ class RedditApi:
         headers: dict[str, str] = {**self.main_constants.reddit_headers, **{"Authorization": "bearer {}".format(token)}}
         return headers
 
-    # noinspection PyUnresolvedReferences
-    def generate_reddit_api_token(self, verbose: Optional[bool]) -> str:
+    def generate_reddit_api_token(self) -> str:
         """Generate a Reddit API token using the user's credentials.
-
-        Args:
-            verbose (Optional[bool]): Whether to log additional debug information. Defaults to False.
 
         Raises:
             TokenErrorException: If the request to obtain the token fails.
@@ -60,38 +57,16 @@ class RedditApi:
             str: The generated Reddit API token.
         """
 
-        auth = requests.auth.HTTPBasicAuth(self.client_id, self.secret_token)
-        data = {
-            "grant_type": "password",
-            "username": self.username,
-            "password": self.password,
-        }
-        headers = self.main_constants.reddit_headers
-
-        res = requests.post(
-            "{}/api/v1/access_token".format(self.main_constants.reddit_url),
-            auth=auth,
-            data=data,
-            headers=headers
-        )
-
-        if not res.ok:
-            if verbose:
-                msg = "Request failed with code {}".format(res.status_code)
-                logger.exception(msg)
-            raise TokenErrorException("Failed to obtain Reddit API token")
-
-        token = res.json()["access_token"]
+        response = self.request_factory.get_access_token(self.client_id, self.secret_token, self.username,
+                                                         self.password, self.main_constants)
+        token = response["access_token"]
         msg = "Generated Reddit API token: {}".format(token)
-        logger.exception(msg)
+        logger.info(msg)
         return token
 
-    def get_logged_user_profile(self, verbose: Optional[bool]) -> Union[Dict, None]:
+    def get_logged_user_profile(self) -> Union[Dict, None]:
         """
         Retrieve the logged-in user's profile information.
-
-        Args:
-            verbose (Optional[bool]): If True, prints the API request information and response.
 
         Returns:
             Union[Dict, None]: Returns a dictionary of the user profile information if successful,
@@ -102,15 +77,15 @@ class RedditApi:
         """
         # Generating the URL leading to the desired subreddit
         url = "{}/api/v1/me".format(self.main_constants.reddit_api_base_url)
-        token = self.generate_reddit_api_token(verbose)
+        token = self.generate_reddit_api_token()
         headers = {**self.main_constants.reddit_headers, **{"Authorization": "bearer {}".format(token)}}
 
         response = None
 
         try:
-            res = requests.get(url, headers=headers)
+            res = self.request_factory.get(url, headers=headers)
 
-            if res.ok:
+            if res:
                 response = res.json()
 
         except UserNotFoundException as exc:
@@ -120,10 +95,9 @@ class RedditApi:
 
         return response
 
-    def generate_params_for_reddit_api_req(
-        self, after: Optional[str], before: Optional[str], count: Optional[int],
-        limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]
-    ) -> Dict[str, object]:
+    def generate_params_for_reddit_api_req( self, after: Optional[str], before: Optional[str], count: Optional[int],
+                                            limit: Optional[int], show: Optional[str], sr_detail: Optional[bool]) \
+            -> Dict[str, object]:
         """
         Generate a dictionary of parameters to be used in a Reddit API request.
 

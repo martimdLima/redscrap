@@ -8,9 +8,6 @@ plugins:
 
 nav:
   - Redscrap Docs: index.md
-  - tutorials.md
-  - how-to-guides.md
+  - project_structure.md
   - reference.md
-  - explanation.md
-  - contributing.md
   - license.md

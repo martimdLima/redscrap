@@ -29,14 +29,17 @@ class IOOperations:
             Writes payload to a file with the given filename, using the specified operation mode. The file format is
             determined by the extension of the filename. output_post_detailed_information(payload): Writes all image
             URLs in payload to a JSON file named src/output/image_urls.json, sorted by subreddit and post.
+
         - def validate_directories(input_dir):
             Checks if the input_dir directory exists. If it does not exist, logs an
             error message and exits the program.
+
         - def sort_by_mime_type_and_resolution(input_dir: Path, output_dir: Path, remove: bool):
             Sorts all files in the input_dir directory by MIME type and resolution. The sorted files are copied to the
             corresponding folders in the output_dir directory, and original files are deleted if the remove flag is set
              to True.
-        -def delete_original_files(input_dir, remove): Deletes all original files in the input_dir directory if the
+
+        - def delete_original_files(input_dir, remove): Deletes all original files in the input_dir directory if the
         remove flag is set to True.
     """
 
@@ -148,9 +151,6 @@ class IOOperations:
             operation: The file operation mode ('w' for write, 'a' for append, etc.).
             filename: The path and filename of the file to write to.
             verbose: Boolean flag that controls the verbosity output
-
-        Returns:
-            None
         """
         logger.debug("[9] STARTED WRITING SUBREDDIT REPORT INFORMATION STEP")
 

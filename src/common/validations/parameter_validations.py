@@ -1,7 +1,5 @@
 import re
 from typing import List, Optional
-
-import requests  # type: ignore
 from loguru import logger  # type: ignore
 
 from common.constants.common_constants import CommonConstants  # type: ignore
@@ -9,6 +7,7 @@ from common.exceptions.main_exceptions import SubredditNotFoundException  # type
 from common.logging.logging_setup import LoggingSetup  # type: ignore
 from common.logging.utils.loguru_wrappers import logger_wraps  # type: ignore
 from core.api.reddit_api import RedditApi  # type: ignore
+from common.io_operations.request_factory import RequestFactory     # type: ignore
 
 
 class ParameterValidations:
@@ -31,6 +30,7 @@ class ParameterValidations:
         super().__init__()
         self.logging_setup = LoggingSetup()
         self.main_constants = CommonConstants()
+        self.request_factory = RequestFactory()
         self.reddit_api = RedditApi(self.main_constants.client_id, self.main_constants.secret_token,
                                     self.main_constants.username, self.main_constants.password)
 
@@ -118,7 +118,7 @@ class ParameterValidations:
         # add authorization to our headers dictionary
         headers = self.reddit_api.generate_headers(token)
 
-        res = requests.get(url, headers=headers)
+        res = self.request_factory.get(url, headers=headers)
         exists = None
         if res.status_code == 200:
             if res is False:
@@ -144,7 +144,7 @@ class ParameterValidations:
         url: str = "{}/user/{}/about.json".format(self.main_constants.reddit_url, reddit_user)
         headers: dict[str, str] = self.main_constants.reddit_headers
 
-        response = requests.get(url, headers=headers)
+        response = self.request_factory.get(url, headers=headers)
 
         if response.status_code == 200:
             logger.debug("USER EXISTS", True)

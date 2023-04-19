@@ -3,7 +3,6 @@ from pathlib import Path
 from loguru import logger  # type: ignore
 import click
 
-# import logging
 from common.io_operations.io_operations import IOOperations  # type: ignore
 from common.logging.loguru_setup import LoguruSetup  # type: ignore
 from common.constants.logging_constants import LoggingConstants  # type: ignore
@@ -14,11 +13,10 @@ logging_constants = LoggingConstants()
 constants = CommonConstants()
 io_operations = IOOperations()
 main_helper = MainHelper()
+main = click.Group(help="Reddit Scraper")
 
-main = click.Group(help="JSON tools")
 
-
-@main.command("user", help="")
+@main.command("user", help=constants.click_scrape_user_option_help_msg)
 @click.argument('reddit_user', type=str, nargs=-1)
 @click.option("-n", "--number_results", type=click.INT, help=constants.click_number_of_threads_option_help_msg)
 @click.option("-s", "--sorting_filter", type=click.Choice(["top", "hot", "new"]), default="hot",

@@ -25,7 +25,7 @@ redscrap will accept a Python module file, package directory or an import path.
 
     Usage: redscrap [OPTIONS] COMMAND [ARGS]...
     
-      JSON tools
+      Reddit Scraper
     
     Options:
       --help  Show this message and exit.
@@ -90,10 +90,6 @@ Features
 * Sorts all the downloaded images by mimetype and resolution. Example: $HOME/Documents/output/downloads/subreddit/wallpaper/720p/jpeg/h5e3wklys2ua1.jpg
 * Uses tqdm to display a dynamic progress bar to display the downloading and sorting processes
 * Generates a detailed report of all the subreddits or user threads and their respective comments by chronological order
-
-Development
------------
-Check [contributing.md](contributing.md) for hacking details.   
 
 
 Copyright (c) Martim Lima. Released under the MIT License. See [LICENSE.md](license.md) for details.
