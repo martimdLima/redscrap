@@ -1,15 +1,14 @@
+import re
 from typing import List, Optional
 
-import click
-from loguru import logger        # type: ignore
-import re
-import requests      # type: ignore
+import requests  # type: ignore
+from loguru import logger  # type: ignore
 
-from common.exceptions.main_exceptions import SubredditNotFoundException         # type: ignore
-from common.logging.logging_setup import LoggingSetup        # type: ignore
-from common.constants.common_constants import CommonConstants      # type: ignore
-from common.logging.utils.loguru_wrappers import logger_wraps        # type: ignore
-from core.api.reddit_api import RedditApi        # type: ignore
+from common.constants.common_constants import CommonConstants  # type: ignore
+from common.exceptions.main_exceptions import SubredditNotFoundException  # type: ignore
+from common.logging.logging_setup import LoggingSetup  # type: ignore
+from common.logging.utils.loguru_wrappers import logger_wraps  # type: ignore
+from core.api.reddit_api import RedditApi  # type: ignore
 
 
 class ParameterValidations:
@@ -26,7 +25,6 @@ class ParameterValidations:
 
             def validate_user_v2(self, reddit_user: str) -> Optional[bool]:
                 Checks if the given username exists on Reddit API.
-
     """
 
     def __init__(self) -> None:

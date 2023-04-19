@@ -1,10 +1,11 @@
 import glob
 import re
-from loguru import logger
 from pathlib import Path
-from typing import Dict, Tuple, List, Any
-from bs4 import BeautifulSoup, element
-import validators
+from typing import Dict, Tuple, List, Any, Union
+
+import validators  # type: ignore
+from bs4 import BeautifulSoup, Tag
+from loguru import logger
 
 from common.constants.common_constants import CommonConstants  # type: ignore
 from common.validations.url_validations import UrlValidations  # type: ignore
@@ -35,7 +36,7 @@ class ScraperHelper:
         self.validations = UrlValidations()
 
     # noinspection PyUnresolvedReferences
-    def construct_author_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
+    def construct_author_dict(self, div_ele: Tag) -> Dict[str, Union[str, List[str]]]:
         """
         Constructs a dictionary with the author's username and profile URL.
 
@@ -46,7 +47,7 @@ class ScraperHelper:
             A dictionary with the author's username and profile URL.
 
         """
-        author_el = div_ele.find("a", class_="author")
+        author_el: Tag = div_ele.find("a", class_="author")  # type: ignore
 
         author_username = author_el.text.strip()
         profile = author_el["href"]
@@ -56,7 +57,7 @@ class ScraperHelper:
         return author
 
     # noinspection PyUnresolvedReferences
-    def construct_rating_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
+    def construct_rating_dict(self, div_ele: Tag) -> Dict[str, str]:
         """
         Constructs a dictionary with the comment's rating scores.
 
@@ -68,9 +69,9 @@ class ScraperHelper:
         """
         rating = {}
 
-        score_dislikes = div_ele.find("span", attrs={"class": "dislikes"})
-        score_unvoted = div_ele.find("span", attrs={"class": "unvoted"})
-        score_likes = div_ele.find("span", attrs={"class": "likes"})
+        score_dislikes: Tag = div_ele.find("span", attrs={"class": "dislikes"})  # type: ignore
+        score_unvoted: Tag = div_ele.find("span", attrs={"class": "unvoted"})  # type: ignore
+        score_likes: Tag = div_ele.find("span", attrs={"class": "likes"})  # type: ignore
 
         if score_dislikes is not None:
             parent_comment_author_score_dislikes = score_dislikes.text
@@ -87,7 +88,7 @@ class ScraperHelper:
         return rating
 
     # noinspection PyUnresolvedReferences
-    def construct_thread_rating_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
+    def construct_thread_rating_dict(self, div_ele: Tag) -> Dict[str, str]:
         """
         Constructs a dictionary with the thread's rating scores.
 
@@ -100,9 +101,9 @@ class ScraperHelper:
         """
         rating = {}
 
-        score_dislikes = div_ele.find("div", attrs={"class": "dislikes"})
-        score_unvoted = div_ele.find("div", attrs={"class": "unvoted"})
-        score_likes = div_ele.find("div", attrs={"class": "likes"})
+        score_dislikes: Tag = div_ele.find("div", attrs={"class": "dislikes"})  # type: ignore
+        score_unvoted: Tag = div_ele.find("div", attrs={"class": "unvoted"})  # type: ignore
+        score_likes: Tag = div_ele.find("div", attrs={"class": "likes"})  # type: ignore
 
         if score_dislikes is not None:
             parent_comment_author_score_dislikes = score_dislikes.text
@@ -119,7 +120,7 @@ class ScraperHelper:
         return rating
 
     # noinspection PyUnresolvedReferences
-    def construct_time_dict(self, div_ele: element.PageElement) -> Dict[str, str]:
+    def construct_time_dict(self, div_ele: Tag) -> Dict[str, str]:
         """
         Constructs a dictionary with the time information of the comment or thread.
 
@@ -132,7 +133,7 @@ class ScraperHelper:
         """
         time = {}
 
-        time_el = div_ele.find("time", attrs={"class": ["live-timestamp"]})
+        time_el: Tag = div_ele.find("time", attrs={"class": ["live-timestamp"]})  # type: ignore
 
         if time_el is not None:
             time["time"] = time_el.attrs["title"]
@@ -142,7 +143,7 @@ class ScraperHelper:
         return time
 
     # noinspection PyUnresolvedReferences
-    def define_children_fields(self, div_ele: element.PageElement) -> Tuple[bool, int]:
+    def define_children_fields(self, div_ele: Tag) -> Tuple[bool, int]:
         """
         Defines the number of children and whether a comment or thread has children.
 
@@ -154,7 +155,7 @@ class ScraperHelper:
             children (an integer) if there are any.
 
         """
-        num_children_el = div_ele.find("a", attrs={"class": ["numchildren"]})
+        num_children_el: Tag = div_ele.find("a", attrs={"class": ["numchildren"]})  # type: ignore
 
         num_children = None
         has_children = None
@@ -169,7 +170,7 @@ class ScraperHelper:
 
     # noinspection PyUnresolvedReferences
 
-    def construct_urls_list(self, div_ele: element.PageElement) -> List[str]:
+    def construct_urls_list(self, div_ele: Tag) -> List[str]:
         """
         Constructs a list of URLs from the div element that contains the URLs.
 
@@ -220,26 +221,27 @@ class ScraperHelper:
                       + glob.glob(str(directory) + "/*.gif")
         return image_files
 
-    def define_threads_based_on_search_parameter(self, scrape_mode, request, subreddit_or_user):
-        threads = None
+    def define_threads_based_on_search_parameter(self, scrape_mode: str, request, subreddit_or_user):
+
         soup: BeautifulSoup = BeautifulSoup(request.text, "html.parser")
 
         match scrape_mode:
             case "subreddit":
-                threads_list_element = soup.find(
-                    "div", attrs={"class": "sitetable linklisting"})
-                threads = threads_list_element.find_all(
-                    "div", attrs={"data-subreddit-prefixed": "r/{}".format(subreddit_or_user)})
+                threads_list_element: Tag = soup.find(
+                    "div", attrs={"class": "sitetable linklisting"})  # type: ignore
+                subreddit_threads: List[Tag] = threads_list_element.find_all(
+                    "div", attrs={"data-subreddit-prefixed": "r/{}".format(subreddit_or_user)})  # type: ignore
+                return subreddit_threads
             case "user":
-                threads_list_element = soup.find("div", attrs={"class": "sitetable linklisting"})
-                threads = threads_list_element.find_all("div", attrs={"data-author": subreddit_or_user})
-
-        return threads
+                threads_list_element: Tag = soup.find("div", attrs={"class": "sitetable linklisting"})  # type: ignore
+                user_threads: List[Tag] = threads_list_element.find_all("div", attrs={
+                    "data-author": subreddit_or_user})  # type: ignore
+                return user_threads
 
     def process_thread_images(self, thread_img_ele, thread_images):
         if thread_img_ele is not None:
-            thread_image_a_tags = thread_img_ele.find_all("a", attrs={"class", "may-blank"})
-            thread_iframe_tag = thread_img_ele.find("iframe", attrs={"class", "media-embed"})
+            thread_image_a_tags: List[Tag] = thread_img_ele.find_all("a", attrs={"class", "may-blank"})  # type: ignore
+            thread_iframe_tag: Tag = thread_img_ele.find("iframe", attrs={"class", "media-embed"})  # type: ignore
 
             if thread_image_a_tags is not None and len(thread_image_a_tags) >= 1:
                 for thread_image_a_tag in thread_image_a_tags:

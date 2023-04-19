@@ -3,11 +3,10 @@ from loguru import logger       # type: ignore
 import requests     # type: ignore
 import json
 
-from common.exceptions.main_exceptions import SubredditNotFoundException, UserNotFoundException, \
-    TokenErrorException  # type: ignore
+from common.exceptions.main_exceptions import SubredditNotFoundException, UserNotFoundException, TokenErrorException  # type: ignore
 from common.logging.logging_setup import LoggingSetup   # type: ignore
-from common.constants.common_constants import CommonConstants     # type: ignore
-from common.io_operations.request_manager import RequestManager
+from common.constants.common_constants import CommonConstants       # type: ignore
+from common.io_operations.request_manager import RequestManager       # type: ignore
 from core.api.reddit_api import RedditApi       # type: ignore
 
 

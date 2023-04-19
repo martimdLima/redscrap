@@ -2,16 +2,16 @@ import typing
 from typing import List, Dict, Tuple, Any
 
 import bs4
-from bs4 import BeautifulSoup
-from loguru import logger  # type: ignore
 import validators  # type: ignore
+from bs4 import element
+from loguru import logger  # type: ignore
 
-from common.logging.logging_setup import LoggingSetup  # type: ignore
 from common.constants.common_constants import CommonConstants  # type: ignore
 from common.io_operations.image_downloader import ImageDownloader  # type: ignore
+from common.logging.logging_setup import LoggingSetup  # type: ignore
 from common.logging.utils.loguru_wrappers import logger_wraps  # type: ignore
 from common.validations.url_validations import UrlValidations  # type: ignore
-from core.scraper.scraper_helper import ScraperHelper
+from core.scraper.scraper_helper import ScraperHelper  # type: ignore
 
 
 class CommentScraper:
@@ -38,12 +38,12 @@ class CommentScraper:
         self.validations = UrlValidations()
         self.image_downloader = ImageDownloader()
         self.scraper_helper = ScraperHelper()
-        self.processed_comments = []
-        self.img_urls = []
+        self.processed_comments: List[str] = []
+        self.img_urls: List[str] = []
 
     # noinspection PyUnresolvedReferences
     @logger_wraps()
-    def scrape_comments(self, soup: BeautifulSoup) -> Tuple[List[Dict[str, any]], List[str]]:
+    def scrape_comments(self, soup) -> Tuple[List[Dict[str, Any]], List[str]]:
         """
         Scrape comments from the given comments' element.
 
@@ -71,15 +71,15 @@ class CommentScraper:
                     - A list of strings representing the URLs of any images found in the comments.
         """
 
-        comments: List[Dict[str, any]] = []
-        self.img_urls: List[str] = []
-        self.processed_comments: List[str] = []
+        comments: List[Dict[str, Any]] = []
+        self.img_urls = []
+        self.processed_comments = []
 
-        comment_area: bs4.element.Tag = soup.find("div", attrs={"class": "commentarea"})
+        comment_area = soup.find("div", attrs={"class": "commentarea"})
         comments_link_listing = comment_area.find("div", attrs={"class", "sitetable"})
 
         for comment_ele in comments_link_listing:
-            c_ele: bs4.element.Tag = comment_ele
+            c_ele: element.Tag = comment_ele
             if "thing" in c_ele.attrs["class"]:
                 if c_ele.attrs["data-permalink"] not in self.processed_comments:
                     comment = self.process_comment(c_ele)
@@ -127,12 +127,12 @@ class CommentScraper:
 
         return replies, list(set(img_urls))
 
-    def process_comment(self, comment_element: bs4.element.Tag):
+    def process_comment(self, comment_element: element.Tag):
         comment_has_children, comment_num_children = self.scraper_helper.define_children_fields(comment_element)
         urls = self.scraper_helper.construct_urls_list(comment_element)
         self.img_urls = self.img_urls + urls
 
-        comment = {"text": comment_element.find("div", class_="md").text.strip(),
+        comment = {"text": comment_element.find("div", class_="md").text.strip(),   #type: ignore
                    "author": self.scraper_helper.construct_author_dict(comment_element),
                    "rating": self.scraper_helper.construct_rating_dict(comment_element),
                    "datetime": self.scraper_helper.construct_time_dict(comment_element),
@@ -140,7 +140,7 @@ class CommentScraper:
                    "numChildren": comment_num_children, "urls": urls, "replies": []}
 
         child_div = comment_element.find("div", attrs={"class", "child"})
-        reply_divs = child_div.find_all("div", attrs={"class", "comment"})
+        reply_divs = child_div.find_all("div", attrs={"class", "comment"})      #type: ignore
 
         self.processed_comments.append(comment_element.attrs["data-permalink"])
 
@@ -151,7 +151,7 @@ class CommentScraper:
 
         return comment
 
-    def process_reply(self, reply_element: bs4.element.Tag):
+    def process_reply(self, reply_element):  # --check-untyped-defs
         reply_has_children, reply_num_children = self.scraper_helper.define_children_fields(reply_element)
         urls = self.scraper_helper.construct_urls_list(reply_element)
         self.img_urls = self.img_urls + urls
@@ -168,8 +168,7 @@ class CommentScraper:
         nested_reply_divs = reply_element.find_all('div', class_='comment')
         if nested_reply_divs:
             processed_replies, img_urls = self.scrape_replies(nested_reply_divs)
-            post_processed_replies: List[Dict[str, Any]] = \
-                self.scraper_helper.remove_empty_lists(processed_replies)
+            post_processed_replies = self.scraper_helper.remove_empty_lists(processed_replies)
             reply['replies'] = post_processed_replies
 
         return reply

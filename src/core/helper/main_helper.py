@@ -1,20 +1,21 @@
 import glob
 from pathlib import Path
-from typing import Any, Optional, List, Iterable
-from loguru import logger  # type: ignore
-from bs4 import ResultSet
+from typing import Any, Optional, List, Union
 
-from common.exceptions.main_exceptions import MissingRequiredParameter
+from bs4 import ResultSet
+from loguru import logger  # type: ignore
+
+from common.constants.common_constants import CommonConstants  # type: ignore
+from common.constants.logging_constants import LoggingConstants  # type: ignore
+from common.exceptions.main_exceptions import MissingRequiredParameter  # type: ignore
 from common.io_operations.image_downloader import ImageDownloader  # type: ignore
 from common.io_operations.io_operations import IOOperations  # type: ignore
 from common.logging.loguru_setup import LoguruSetup  # type: ignore
-from common.constants.logging_constants import LoggingConstants  # type: ignore
-from common.constants.common_constants import CommonConstants  # type: ignore
 from common.validations.parameter_validations import ParameterValidations  # type: ignore
 from common.validations.reddit_api_validations import RedditApiValidations  # type: ignore
 from core.api.reddit_api import RedditApi  # type: ignore
+from core.scraper.scraper_helper import ScraperHelper  # type: ignore
 from core.scraper.thread_scraper import ThreadScraper  # type: ignore
-from core.scraper.scraper_helper import ScraperHelper   # type: ignore
 
 
 class MainHelper:
@@ -53,7 +54,7 @@ class MainHelper:
         self.scraper_helper = ScraperHelper()
 
     def export_threads_detailed_information(self,
-                                            user_or_subreddit: str,
+                                            user_or_subreddit: Union[str, list[str]],
                                             export_mode: str,
                                             threads_list: dict[str, dict[str, dict[str, Any] | ResultSet | Any] | Any],
                                             output_directory: str,
@@ -71,21 +72,25 @@ class MainHelper:
             None
         """
 
-        detailed_report = ""
-
         match export_mode:
             case "single":
-                detailed_report = "{}/reports/subreddits/{}_{}_summary.{}".format(
-                    output_directory, self.main_constants.current_date, user_or_subreddit, "json")
+                for subreddit in user_or_subreddit:
+                    detailed_report = "{}/reports/subreddits/{}_{}_summary.{}".format(
+                        output_directory, self.main_constants.current_date, subreddit, "json")
+                    subreddit_threads_list = threads_list[subreddit]
+                    self.io_operations.write_detailed_post_information(
+                        subreddit_threads_list, "w", detailed_report, verbose)
             case "multiple":
+                filename = ' '.join(map(str, user_or_subreddit)).replace(" ", "_")
                 detailed_report = "{}/reports/subreddits/{}_{}_summary.{}".format(
-                    output_directory, self.main_constants.current_date, user_or_subreddit, "json")
+                    output_directory, self.main_constants.current_date, filename, "json")
+                self.io_operations.write_detailed_post_information(
+                    threads_list, "w", detailed_report, verbose)
             case "user":
                 detailed_report = "{}/reports/users/{}_{}_summary.{}".format(
                     output_directory, self.main_constants.current_date, user_or_subreddit, "json")
-
-        self.io_operations.write_detailed_post_information(
-            threads_list, "w", detailed_report, verbose)
+                self.io_operations.write_detailed_post_information(
+                    threads_list, "w", detailed_report, verbose)
 
     def scrape_user(self, reddit_user: str, sort: str, number_results: int, output_directory: str,
                     verbose: Optional[bool]) -> None:
@@ -140,7 +145,7 @@ class MainHelper:
 
         logger.info("Finished scraping threads for subreddits: {}".format(reddit_user)) if verbose else None
 
-    def scrape_subreddit(self, subreddits: Iterable[str], sorting_type: str, number_results: Optional[int],
+    def scrape_subreddit(self, subreddits: Union[str, List[str]], sorting_type: str, number_results: Optional[int],
                          details: bool, output_directory: str, verbose: bool) -> None:
         """
         Scrape posts and comments from a subreddit.
@@ -160,12 +165,12 @@ class MainHelper:
 
         if subreddits is None and user_subreddits_list is not None:
             subreddits = user_subreddits_list
-        elif (subreddits is not None and user_subreddits_list is not None or subreddits is not None
-              and user_subreddits_list is None):
+        elif subreddits is not None and user_subreddits_list is not None or subreddits is not None \
+                and user_subreddits_list is None:
             subreddits = subreddits
         else:
             msg = "Missing subreddits. If you want to scrape a subreddit or multiple subreddits, provide one or " \
-                  "multiple subreddits separated by a comma or semi-colo"
+                  "multiple subreddits separated by a comma or semi-colon"
             raise MissingRequiredParameter(msg)
 
         # Validate Args
@@ -176,9 +181,8 @@ class MainHelper:
 
         subreddits_detailed_information_dict: dict = {}
 
-        # Scrape posts and comments
+        # Scrape threads and comments, extract image urls and downloads them
         for subreddit in subreddits:
-            # Scrapes n number of threads for the given subreddits, according to provided parameter max_count
             subreddit_threads_list = self.thread_scraper.scrape_threads(
                 subreddit, sorting_type, "subreddit", verbose,
                 number_results if number_results is not None else self.main_constants.user_num_threads_to_scrape)
@@ -186,17 +190,15 @@ class MainHelper:
             subreddits_detailed_information_dict = {**subreddits_detailed_information_dict,
                                                     **subreddit_threads_list}
 
-            img_output_dir = Path("{}/downloads/subreddit/{}".format(output_directory, subreddit))
-
-            # Downloads scraped img urls
             self.image_downloader.download_img_url_list(
                 subreddit, subreddit_threads_list, "subreddit", output_directory, verbose)
+
+            img_output_dir = Path("{}/downloads/subreddit/{}".format(output_directory, subreddit))
 
             image_files = glob.glob(str(img_output_dir) + "/*.jpg") + glob.glob(
                 str(img_output_dir) + "/*.png") + glob.glob(
                 str(img_output_dir) + "/*.gif")
 
-            # If the image list size is bigger than 0, sort the downloaded images by mime type and resolution
             if len(image_files) > 0:
                 self.io_operations.sort_by_mime_type_and_resolution(
                     img_output_dir,
@@ -205,13 +207,11 @@ class MainHelper:
                     verbose,
                 )
 
-            # If the user wants to export all subreddit data to one file or multiple files, can pass the detail option
-            if details:
-                self.export_threads_detailed_information(subreddit, "single",
-                                                         subreddit_threads_list, output_directory, verbose)
-
-        if not details:
-            self.export_threads_detailed_information(' '.join(map(str, subreddits)).replace(" ", "_"), "multiple",
+        if details:
+            self.export_threads_detailed_information(subreddits, "single",
+                                                     subreddits_detailed_information_dict, output_directory, verbose)
+        else:
+            self.export_threads_detailed_information(subreddits, "multiple",
                                                      subreddits_detailed_information_dict, output_directory, verbose)
 
         logger.info("Finished scraping threads for subreddits: {}".format(" ".join(map(str, subreddits)))) \

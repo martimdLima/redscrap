@@ -7,12 +7,13 @@ import sys
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
-from loguru import logger       # type: ignore
-from tqdm import tqdm
-from PIL import Image       # type: ignore
 
-from common.constants.common_constants import CommonConstants     # type: ignore
-from common.logging.logging_setup import LoggingSetup       # type: ignore
+from PIL import Image  # type: ignore
+from loguru import logger  # type: ignore
+from tqdm import tqdm
+
+from common.constants.common_constants import CommonConstants  # type: ignore
+from common.logging.logging_setup import LoggingSetup  # type: ignore
 
 
 class IOOperations:
@@ -138,7 +139,8 @@ class IOOperations:
 
     #  @contextmanager decorator allows the image file to be opened and closed automatically
     @contextmanager
-    def write_detailed_post_information(self, payload: Any, operation: str, filename: str, verbose: bool) -> None:
+    def write_detailed_post_information(
+            self, payload: Any, operation: str, filename: str, verbose: bool):
         """Write payload to a file in the specified format.
 
         Args:

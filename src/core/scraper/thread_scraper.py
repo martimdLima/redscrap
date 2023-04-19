@@ -1,6 +1,6 @@
 import logging
 import time
-from typing import Any, Optional, Dict, Union
+from typing import Any, Optional, Dict, Union, List
 import requests  # type: ignore
 from loguru import logger  # type: ignore
 from bs4 import BeautifulSoup, ResultSet
@@ -47,7 +47,7 @@ class ThreadScraper:
 
     @logger_wraps()
     def scrape_threads(self, subreddit_or_user: str, sort: str, scrape_mode: str, verbose: bool,
-                       max_counter: Optional[int]
+                       max_counter: int
                        ) -> Dict[
         str, Union[Dict[str, Union[Dict[str, Any], Dict[str, Any], ResultSet[Any], Dict[str, Any], Any]], Any]]:
         """
@@ -143,9 +143,9 @@ class ThreadScraper:
                         break
 
                     req = requests.get(next_page_link, headers=self.constants.user_agent, timeout=10)
-                    soup: BeautifulSoup = BeautifulSoup(req.text, "html.parser")
+                    soup = BeautifulSoup(req.text, "html.parser")
                 except TokenErrorException as exc:
-                    self.logging_funcs.print_exception_log(str(exc), verbose)
+                    logger.exception(str(exc))
                     break
 
             threads_urls[subreddit_or_user] = thread_img_urls
@@ -181,7 +181,7 @@ class ThreadScraper:
             # and scraping the details required
             soup: BeautifulSoup = BeautifulSoup(req.text, "html.parser")
 
-            thread_images = []
+            thread_images: List[str] = []
 
             thread_img_ele = soup.find("div", attrs={"class", "expando"})
 

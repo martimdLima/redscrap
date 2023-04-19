@@ -1,12 +1,8 @@
-import asyncio
 import glob
 from contextlib import contextmanager
 from pathlib import Path
 from typing import List
 from urllib.parse import urlparse
-
-import aiofiles
-import aiohttp
 import requests  # type: ignore
 from loguru import logger  # type: ignore
 from tqdm import tqdm
@@ -97,7 +93,7 @@ class ImageDownloader:
         transport = httpx.HTTPTransport(retries=3)
         client = httpx.Client(transport=transport)
 
-        failed_urls = subreddits_img_list
+        failed_urls = []
         downloaded_urls = []
 
         subreddits_img_list = list(set(subreddits_img_list))
@@ -105,18 +101,19 @@ class ImageDownloader:
         try:
             if verbose:
                 # Wrapping the loop with tqdm and customize the appearance of the progress bar
-                with tqdm(
-                        total=len(subreddits_img_list),
-                        desc="Downloading images",
-                        ncols=100,
-                        colour="green",
-                        unit_scale=True,
-                        dynamic_ncols=True) as pbar:
+                with tqdm(total=len(subreddits_img_list), desc="Downloading images", ncols=100, colour="green",
+                          unit_scale=True, dynamic_ncols=True) as pbar:
                     for url in subreddits_img_list:
-                        response = client.get(url)
+                        try:
+                            response = client.get(url, timeout=10.0)  # Set a 10-second timeout
 
-                        if response.status_code == 200:
-                            self.download_img_url(url, response.read(), output_directory, failed_urls, downloaded_urls)
+                            if response.status_code == 200:
+                                self.download_img_url(url, response.read(), output_directory)
+                                downloaded_urls.append(url)
+                            else:
+                                failed_urls.append(url)
+                        except httpx.TimeoutException:
+                            failed_urls.append(url)  # Add the URL to the failed_urls list if the request times out.
 
                         pbar.update(1)
             else:
@@ -124,27 +121,32 @@ class ImageDownloader:
                     response = client.get(url)
 
                     if response.status_code == 200:
-                        self.download_img_url(url, response.content, output_directory, failed_urls, downloaded_urls)
+                        self.download_img_url(url, response.content, output_directory)
 
         finally:
             client.close()
 
-        self.generate_download_report(output_directory, subreddits_img_list, failed_urls, verbose)
+        self.generate_download_report(output_directory, subreddits_img_list, downloaded_urls, failed_urls, verbose)
 
         logger.debug("[6] FINISHED IMAGE DOWNLOAD STEP")
 
     @contextmanager
-    def download_img_url(self, url: str, payload, output_directory: Path, failed_urls, downloaded_urls) -> None:
-        # Raise an exception if the HTTP request fails.
+    def download_img_url(self, url: str, payload: bytes, output_directory: Path):
+        """
 
+        Args:
+            url:
+            payload:
+            output_directory:
+
+        Returns:
+            None
+        """
         # set the output file path
         output_file = output_directory / Path(urlparse(url).path).name
 
         msg = "Response: {}".format(self.constants.check_mark_symbol)
         logger.debug(msg)
-
-        failed_urls.remove(url)
-        downloaded_urls.append(url)
 
         # If the response is ok and the output file doesn't exist, save it to it's destination
         if not output_file.exists():
@@ -159,15 +161,16 @@ class ImageDownloader:
             logger.debug(msg)
 
     @logger_wraps()
-    def generate_download_report(self, output_dir: Path, subreddits_img_list: List[str], failed_urls: List[str],
-                                 verbose: bool):
+    def generate_download_report(self, output_dir: Path, subreddits_img_list: List[str],
+                                 downloaded_urls: List[str], failed_urls: List[str], verbose: bool):
         """
         Generates report for the downloading process of the subreddits images
 
         Args:
             output_dir (Path): Output path
             subreddits_img_list (List[str]): List of images scraped from the subreddit
-            failed_urls (List[str]): List of urls that failed the downloading process
+            failed_urls (List[str]): List of failed downloaded urls
+            downloaded_urls (List[str]): List of successfully downloaded urls
             verbose: (bool): controls the verbosity level
         """
         image_files = glob.glob(str(output_dir) + "/*.jpg") + glob.glob(str(output_dir) + "/*.png") + glob.glob(
@@ -181,94 +184,5 @@ class ImageDownloader:
         info_msg = "From {} urls scrapped, {} urls where downloaded successfully and {} urls failed download".format(
             total_url_list_length, downloaded_urls_length, failed_urls_length)
         logger.info(info_msg) if verbose else None
-        debug_msg = "Failed urls: {}".format(failed_urls)
+        debug_msg = "Successful urls: {}, \n Failed urls: {}".format(downloaded_urls, failed_urls)
         logger.debug(debug_msg)
-
-    async def download_img_url_v2(self, url: str, payload, output_directory: Path, failed_urls, downloaded_urls) -> None:
-        # Raise an exception if the HTTP request fails.
-
-        # set the output file path
-        output_file = output_directory / Path(urlparse(url).path).name
-
-        msg = "Response: {}".format(self.constants.check_mark_symbol)
-        logger.debug(msg)
-
-        failed_urls.remove(url)
-        downloaded_urls.append(url)
-
-        # If the response is ok and the output file doesn't exist, save it to it's destination
-        if not output_file.exists():
-            with open(output_file, "wb") as ifile:
-                ifile.write(payload)
-                msg = "{} - Downloaded {} to target folder {}".format(
-                    self.constants.check_mark_symbol, url, output_file)
-                logger.debug(msg)
-        else:
-            msg = "{} - Skipping: {} already exists in the target folder {}".format(
-                self.constants.cross_symbol, url, output_directory)
-            logger.debug(msg)
-
-    async def download_img_urls_async(self, subreddits_img_list: List[str], output_directory: Path,
-                                      verbose: bool) -> None:
-        """
-        Downloads the images from the URLs scrapped from the given subreddit.
-
-        Args:
-            subreddits_img_list (List[str]): list of subreddits images
-            output_directory (Path): Directory to output the downloaded images
-            verbose (bool): Whether to print verbose output.
-        """
-        logger.debug("[6] STARTING IMAGE DOWNLOAD STEP")
-        logger.info("Downloading scraped images") if verbose else None
-
-        if not output_directory.exists():
-            output_directory.mkdir(parents=True)
-
-        failed_urls = subreddits_img_list
-        downloaded_urls = []
-
-        subreddits_img_list = list(set(subreddits_img_list))
-
-        try:
-            if verbose:
-                # Wrapping the loop with tqdm and customize the appearance of the progress bar
-                with tqdm(
-                        total=len(subreddits_img_list),
-                        desc="Downloading images",
-                        ncols=100,
-                        colour="green",
-                        unit_scale=True,
-                        dynamic_ncols=True) as pbar:
-
-                    async with aiohttp.ClientSession() as session:
-                        tasks = []
-                        for url in subreddits_img_list:
-                            task = asyncio.ensure_future(
-                                self.download_img_url_v2(url, await self.get_img_from_url(session, url),
-                                                         output_directory, failed_urls, downloaded_urls))
-                            tasks.append(task)
-                        await asyncio.gather(*tasks)
-
-                        pbar.update(len(subreddits_img_list))
-            else:
-                async with aiohttp.ClientSession() as session:
-                    tasks = []
-                    for url in subreddits_img_list:
-                        task = asyncio.ensure_future(
-                            self.download_img_url_v2(url, await self.get_img_from_url(session, url), output_directory,
-                                                     failed_urls, downloaded_urls))
-                        tasks.append(task)
-                    await asyncio.gather(*tasks)
-
-        except Exception as e:
-            logger.exception(e)
-
-        self.generate_download_report(output_directory, subreddits_img_list, failed_urls, verbose)
-
-        logger.debug("[6] FINISHED IMAGE DOWNLOAD STEP")
-
-    async def get_img_from_url(self, session, url):
-        async with session.get(url) as resp:
-            if resp.status != 200:
-                raise ValueError('Failed to fetch image from URL: ' + url)
-            return await resp.read()

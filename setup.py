@@ -19,7 +19,7 @@ setup(
                      'and download them to a folder provided by the user or to a default folder '
                      '($HOME/Documents/output). A json file with the detailed information of the threads and comments '
                      'scraped is algo generated while the scraping process occurs.',
-    version=VERSION.get("__version__", "0.0.3"),
+    version=VERSION.get("__version__", "0.0.4"),
     package_dir={"": "src"},
     packages=find_namespace_packages(where="src", exclude=["tests"]),
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],

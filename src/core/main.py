@@ -1,4 +1,3 @@
-import asyncio
 import time
 from pathlib import Path
 from loguru import logger  # type: ignore
@@ -9,7 +8,7 @@ from common.io_operations.io_operations import IOOperations  # type: ignore
 from common.logging.loguru_setup import LoguruSetup  # type: ignore
 from common.constants.logging_constants import LoggingConstants  # type: ignore
 from common.constants.common_constants import CommonConstants  # type: ignore
-from core.helper.main_helper import MainHelper
+from core.helper.main_helper import MainHelper  # type: ignore
 
 logging_constants = LoggingConstants()
 constants = CommonConstants()
@@ -66,20 +65,7 @@ def main_scrape_user(number_results, sorting_filter, reddit_user, output, verbos
         sorting_filter, number_results, output_directory, verbose)
 
     elapsed = time.perf_counter() - s
-    logger.debug(f"{__file__} executed in {elapsed:0.2f} seconds.")
     logger.info(f"{__file__} executed in {elapsed:0.2f} seconds.")
-
-
-async def count():
-    print("test")
-    print("One")
-    await asyncio.sleep(1)
-    print("Two")
-    print("test")
-
-async def test_async():
-    print("test")
-    await asyncio.gather(count(), count(), count())
 
 
 @main.command("subreddits", help=constants.click_scrape_subreddits_option_help_msg)
@@ -132,7 +118,6 @@ def main_scrape_subreddits(number_results, sorting_filter, subreddits, details, 
         , sorting_filter, number_results, details, output_directory, verbose)
 
     elapsed = time.perf_counter() - s
-    logger.debug(f"{__file__} executed in {elapsed:0.2f} seconds.")
     logger.info(f"{__file__} executed in {elapsed:0.2f} seconds.")
 
 
