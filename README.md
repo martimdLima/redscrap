@@ -25,7 +25,7 @@ redscrap will accept a Python module file, package directory or an import path.
 
     Usage: redscrap [OPTIONS] COMMAND [ARGS]...
     
-      JSON tools
+      Reddit Scraper
     
     Options:
       --help  Show this message and exit.
